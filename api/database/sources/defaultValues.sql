@@ -1,4 +1,3 @@
--- Active: 1676666038170@@127.0.0.1@3306@sysrec
 INSERT INTO TipoUsuario (nombre) VALUES 
     ('Adminstrador'),
     ('Reclutador'),
