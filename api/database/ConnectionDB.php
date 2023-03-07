@@ -1,6 +1,9 @@
 <?php
-require_once('utils/Constants.php');
+require_once(dirname(__FILE__) . '/ConfigDB.php');
 
+/**
+ * Clase que realiza la conexion a la base de datos.
+ */
 class ConnectionDB
 {
     private $host;
@@ -11,10 +14,10 @@ class ConnectionDB
 
     public function __construct()
     {
-        $this->host = ConstantsDB::HOST;
-        $this->user = ConstantsDB::USER;
-        $this->password = ConstantsDB::PASSWORD;
-        $this->database = ConstantsDB::DATABASE;
+        $this->host = ConfigDB::HOST;
+        $this->user = ConfigDB::USER;
+        $this->password = ConfigDB::PASSWORD;
+        $this->database = ConfigDB::DATABASE;
         $this->connection = new mysqli($this->host, $this->user, $this->password, $this->database);
     }
 
@@ -24,7 +27,7 @@ class ConnectionDB
      * @param string $query consulta a parametrizar.
      * @return mysqli_stmt consulta parametrizada.
      */
-    public function getPrepare(string $query) : mysqli_stmt
+    public function getPrepare(string $query): mysqli_stmt
     {
         return $this->connection->prepare($query);
     }

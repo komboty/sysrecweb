@@ -1,6 +1,9 @@
 <?php
 
-class ConstantsDB
+/**
+ * Clase con la configuracion de la base de datos.
+ */
+class ConfigDB
 {
     const HOST = 'localhost';
     const USER = 'usalvadorap';
