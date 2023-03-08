@@ -49,21 +49,23 @@ class UsuarioDAO
             ->fetch_all(MYSQLI_ASSOC);
     }
 
-    // /**
-    //  * Obtiene un usuario registrado en la base de datos por su correo y contrasenia.
-    //  * 
-    //  * @param string $correo correo del usuario a obtener.
-    //  * @param string $contrasenia contrasenia del usuario a obtener.
-    //  * @return Usuario encontrado.
-    //  */
-    // public function getByCorreoAndContrasenia(string $correo, string $contrasenia)
-    // {
-    //     $query = 'SELECT * FROM Usuario'
-    //                 .' JOIN TipoUsuario ON Usuario.idTipoUsuario = TipoUsuario.id'
-    //                 .' WHERE correo = ? AND contrasenia = ?';        
-    //     $statement = $this->connectionDB->getPrepare($query);
-    //     $statement->bind_param('ss', $correo, $contrasenia);        
-    //     $result = $statement->execute();
-    //     print_r($result);
-    // }
+    /**
+     * Obtiene un usuario registrado en la base de datos por su correo y contrasenia.
+     * 
+     * @param string $correo correo del usuario a obtener.
+     * @param string $contrasenia contrasenia del usuario a obtener.
+     * @return Usuario encontrado.
+     */
+    public function getByCorreoAndContrasenia(string $correo, string $contrasenia)
+    {
+        $query = 'SELECT u.id, u.nombre, t.nombre as tipo, u.correo, u.telefono, u.edad, u.direccion FROM Usuario as u'
+            . ' JOIN TipoUsuario as t ON u.idTipoUsuario = t.id'
+            . ' WHERE u.correo = ? and u.contrasenia = ?';
+        $statement = $this->connectionDB->getPrepare($query);
+        $statement->bind_param('ss', $correo, $contrasenia);
+        $statement->execute();
+        return $statement
+            ->get_result()
+            ->fetch_assoc();
+    }
 }
