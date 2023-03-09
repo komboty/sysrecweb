@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
+    <title>SYSREC</title>
+    <!-- Icon -->
+    <link rel="icon" href="../../sources/images/logo_sysrec.png" type="image/x-icon" />
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="../../sources/MDB5-STANDARD-UI-KIT-Free-6.2.0/fonts/fontAwesome6/all.min.css" />
+    <!-- Google Fonts Roboto -->
+    <link rel="stylesheet" href="../../sources/MDB5-STANDARD-UI-KIT-Free-6.2.0/fonts/googleFontsRoboto/css.css" />
+    <!-- MDB CSS -->
+    <link rel="stylesheet" href="../../sources/MDB5-STANDARD-UI-KIT-Free-6.2.0/css/mdb.min.css" />
+    <!-- Login CSS -->
+    <link rel="stylesheet" href="login.css" />
+</head>
+
+<body>
+    <!-- Card Login -->
+    <section>
+        <div class="container py-5 h-100">
+            <div class="row d-flex justify-content-center align-items-center h-100">
+                <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+                    <div class="card shadow-3-strong" style="border-radius: 1rem;">
+                        <div class="text-center ">
+                            <img src="../../sources/images/logo_sysrec.png" class="card-img-top logo" alt="SYSREC" />
+                        </div>
+                        <div class="card-body p-5 text-center">
+                            <h3 class="mb-5">Iniciar Sesión</h3>
+                            <!-- Formulario -->
+                            <form class="d-grid gap-3 needs-validation" id="formLogin" novalidate>
+                                <div class="mb-1">
+                                    <div class="form-outline inputs">
+                                        <input type="email" id="inputEmail" class="form-control form-control-lg" required/>
+                                        <label class="form-label" for="inputEmail">Email</label>
+                                        <div class="invalid-feedback">Ingresa un dirección de correo correcta.</div>
+                                    </div>
+                                </div>
+                                <div class="mb-1">
+                                    <div class="form-outline inputs">
+                                        <input type="password" id="inputPass" class="form-control form-control-lg" required/>
+                                        <label class="form-label" for="inputPass">Password</label>
+                                        <div class="invalid-feedback">Ingresa una contraseña.</div>
+                                    </div>
+                                </div>
+                                <button class="btn btn-primary btn-lg btn-block" type="submit">Login</button>
+                            </form>
+                            <!-- Boton crear cuenta -->
+                            <hr class="my-4">
+                            <button class="btn btn-lg btn-block btn-secondary" type="submit">Crear cuenta</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- MDB JavaScript -->
+    <script type="text/javascript" src="../../sources/MDB5-STANDARD-UI-KIT-Free-6.2.0/js/mdb.min.js"></script>
+    <script type="text/javascript" src="../../sources/MDB5-STANDARD-UI-KIT-Free-6.2.0/js/utils.js"></script>
+    <!-- Login JavaScript -->
+    <script type="text/javascript" src="../../config.js"></script>
+    <script type="text/javascript" src="login.js"></script>
+</body>
+
+</html>
