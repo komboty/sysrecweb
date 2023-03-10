@@ -3,7 +3,7 @@ require_once(dirname(__FILE__) . '/GenericController.php');
 require_once(dirname(dirname(__FILE__)) . '/database/daos/UsuarioDAO.php');
 
 /**
- * Clase que recibe las peticiones del cliente.
+ * Clase que recibe las peticiones del cliente sobre Usuarios.
  */
 class UsuarioController extends GenericController
 {
@@ -18,28 +18,18 @@ class UsuarioController extends GenericController
     {
         // Si se quiere obtener un Usuario por su tipo.
         if (isset($parameters['tipo'])) {
-            $usuarios = $this->usuarioDAO->getByTipoUsuario($parameters['tipo']);
+            $response = $this->usuarioDAO->getByTipoUsuario($parameters['tipo']);
 
             // Si se quiere obtener todos los Usuarios.
         } else {
-            $usuarios = $this->usuarioDAO->getAll();
+            $response = $this->usuarioDAO->getAll();
         }
 
-        echo json_encode($usuarios);
+        echo json_encode($response);
     }
 
     protected function requestPost($body)
     {
-        // Si se quiere obtener un Usuario por su correo y contrasenia.
-        if (isset($body['correo']) && isset($body['contrasenia'])) {
-            $usuarios = $this->usuarioDAO->getByCorreoAndContrasenia($body['correo'], $body['contrasenia']);
-
-            // .
-        } else {
-            $usuarios = null;
-        }
-
-        echo json_encode($usuarios);
     }
 }
 

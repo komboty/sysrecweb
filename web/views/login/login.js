@@ -16,23 +16,37 @@ formLogin.addEventListener('submit', (event) => {
     const data = {
         'correo': correo.value,
         'contrasenia': contrasenia.value
-    }
+    };
 
-    // Se realiza la peticion al servidor.
-    fetch(API_URL.USUARIO_CONTROLLER, {
+    // Se realiza la peticion al servidor para loguearse.
+    fetch(API_URL.CONTROLLER_LOGIN, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(data)
         })
         .then(res => res.json())
-        .then(resJson => {
-            if (resJson === null) {
+        .then(usuario => {
+            // Si no se encontro el registro del usuario en el servidor, se manda error y termina el script.
+            if (usuario === null) {
                 Swal.fire({
                     title: 'Usuario no encontrado',
                     text: 'Por favor, verifique sus datos',
                     icon: 'error',
                     confirmButtonText: 'OK'
-                })
+                });
+                return;
             }
-        })
+
+            // Si se encontro el registro del usuario en el servidor, se redirige a su vista.
+            switch (usuario.tipo) {
+                case 'Desarrollador':
+                    window.location.replace(WEB_URL.VIEW_HOME_DESARROLLADOR);
+                    break;
+
+                case 'Reclutador':
+                    alert('WEB_URL.VIEW_HOME_RECLUTADOR')
+                        // window.location.replace(WEB_URL.VIEW_HOME_RECLUTADOR);
+                    break;
+            }
+        });
 });

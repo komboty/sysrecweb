@@ -2,18 +2,8 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-    <meta http-equiv="x-ua-compatible" content="ie=edge" />
-    <title>SYSREC</title>
-    <!-- Icon -->
-    <link rel="icon" href="../../sources/images/logo_sysrec.png" type="image/x-icon" />
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
-    <!-- Google Fonts Roboto -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" />
-    <!-- MDB CSS -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.2.0/mdb.min.css" />
+    <!-- CSSs -->
+    <?php require_once(dirname(dirname(__FILE__)) . '/shared/head.php'); ?>
     <!-- Login CSS -->
     <link rel="stylesheet" href="login.css" />
 </head>
@@ -57,14 +47,10 @@
             </div>
         </div>
     </section>
-
-    <!-- MDB JavaScript -->
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.2.0/mdb.min.js"></script>
-    <script type="text/javascript" src="../../sources/MDB5-STANDARD-UI-KIT-Free-6.2.0/js/utils.js"></script>
-    <!-- SweetAlert2 JavaScript -->
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    
+    <!-- JavaScripts -->
+    <?php require_once(dirname(dirname(__FILE__)) . '/shared/scripts.php'); ?>
     <!-- Login JavaScript -->
-    <script type="text/javascript" src="../../config.js"></script>
     <script type="text/javascript" src="login.js"></script>
 </body>
 
