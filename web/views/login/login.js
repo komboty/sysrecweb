@@ -19,7 +19,7 @@ formLogin.addEventListener('submit', (event) => {
     };
 
     // Se realiza la peticion al servidor para loguearse.
-    fetch(API_URL.CONTROLLER_LOGIN, {
+    fetch(API_URL.CONTROLLER_SESSION, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(data)
@@ -39,11 +39,11 @@ formLogin.addEventListener('submit', (event) => {
 
             // Si se encontro el registro del usuario en el servidor, se redirige a su vista.
             switch (usuario.tipo) {
-                case 'Desarrollador':
+                case CONST_USER.TIPO_DESARROLLADOR:
                     window.location.replace(WEB_URL.VIEW_HOME_DESARROLLADOR);
                     break;
 
-                case 'Reclutador':
+                case CONST_USER.TIPO_RECLUTADOR:
                     alert('WEB_URL.VIEW_HOME_RECLUTADOR')
                         // window.location.replace(WEB_URL.VIEW_HOME_RECLUTADOR);
                     break;

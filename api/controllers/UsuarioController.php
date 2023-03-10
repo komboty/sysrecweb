@@ -1,6 +1,7 @@
 <?php
 require_once(dirname(__FILE__) . '/GenericController.php');
 require_once(dirname(dirname(__FILE__)) . '/database/daos/UsuarioDAO.php');
+require_once(dirname(dirname(dirname(__FILE__))) . '/shared/Consts.php');
 
 /**
  * Clase que recibe las peticiones del cliente sobre Usuarios.
@@ -17,8 +18,8 @@ class UsuarioController extends GenericController
     protected function requestGet($parameters)
     {
         // Si se quiere obtener un Usuario por su tipo.
-        if (isset($parameters['tipo'])) {
-            $response = $this->usuarioDAO->getByTipoUsuario($parameters['tipo']);
+        if (isset($parameters[Consts::USER_KEY_TIPO])) {
+            $response = $this->usuarioDAO->getByTipoUsuario($parameters[Consts::USER_KEY_TIPO]);
 
             // Si se quiere obtener todos los Usuarios.
         } else {
@@ -30,6 +31,11 @@ class UsuarioController extends GenericController
 
     protected function requestPost($body)
     {
+    }
+
+    protected function requestDelete($body)
+    {
+        
     }
 }
 

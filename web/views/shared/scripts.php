@@ -6,4 +6,3 @@
 <!-- SYSREC JavaScript -->
 <script type="text/javascript" src="../../config.js"></script>
 <script type="text/javascript" src="../shared/utils.js"></script>
-<script type="text/javascript" src="../shared/menu/menu.js"></script>

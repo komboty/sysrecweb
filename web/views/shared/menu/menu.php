@@ -1,3 +1,10 @@
+<?php 
+// Constantes
+require_once(dirname(dirname(dirname(dirname(dirname(__FILE__))))) . '/shared/Consts.php'); 
+?>
+<!-- Menu JavaScript -->
+<script type="text/javascript" src="../shared/menu/menu.js"></script>
+
 <!-- Menu -->
 <nav class="navbar navbar-expand-lg navbar-light bg-white">
     <div class="container-fluid">
@@ -20,9 +27,20 @@
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#">
-                    <i class="fa fa-address-card"></i> Desarrolladores
+                        <i class="fa fa-address-card"></i> Desarrolladores
                     </a>
                 </li>
+                <?php
+                // Invitaciones de Desarrollador
+                if ($_SESSION[Consts::SESSION_KEY_USER][Consts::SESSION_USER_KEY_TIPO] == Consts::USER_TIPO_DESARROLLADOR) {
+                    echo '<li class="nav-item">
+                            <a class="nav-link" href="#">
+                                <i class="fas fa-envelope-square"></i> Invitaciones
+                            </a>
+                        </li>';
+                }
+
+                ?>
             </ul>
         </div>
 
@@ -30,9 +48,13 @@
         <div class="d-flex align-items-center">
             <!-- Perfil -->
             <div class="dropdown">
-                
+
                 <a class="dropdown-toggle d-flex align-items-center hidden-arrow" href="#" id="navbarDropdownMenuAvatar" role="button" data-mdb-toggle="dropdown" aria-expanded="false">
-                    <div id="nameUser" style="margin-right: .2em;"></div><i class="fas fa-user-circle"></i>
+                    <?php
+                    // Nombre del Usurio
+                    echo '<div style="margin-right: .2em;">' . explode("@", $_SESSION[Consts::SESSION_KEY_USER][Consts::SESSION_USER_KEY_CORREO])[0] . '</div>';
+                    ?>
+                    <i class="fas fa-user-circle"></i>
                 </a>
                 <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuAvatar">
                     <li>
@@ -46,7 +68,7 @@
                         </a>
                     </li>
                     <li>
-                        <a class="dropdown-item" href="#">
+                        <a class="dropdown-item" onclick="cerrarSesion()">
                             <i class="fas fa-sign-out-alt"></i> Cerrar sesión
                         </a>
                     </li>

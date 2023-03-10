@@ -9,6 +9,9 @@
 </head>
 
 <body>
+    <!-- Sesion -->
+    <?php require_once(dirname(dirname(__FILE__)) . '/shared/session/session.php'); ?>
+    
     <!-- Menu -->
     <?php require_once(dirname(dirname(__FILE__)) . '/shared/menu/menu.php'); ?>
 

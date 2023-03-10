@@ -5,11 +5,16 @@ const SERVER = {
 }
 
 const API_URL = {
-    'CONTROLLER_LOGIN': SERVER.HOST + SERVER.API_CONTROLLERS + '/LoginController.php',
+    'CONTROLLER_SESSION': SERVER.HOST + SERVER.API_CONTROLLERS + '/SessionController.php',
     'CONTROLLER_USUARIO': SERVER.HOST + SERVER.API_CONTROLLERS + '/UsuarioController.php'
 }
 
 const WEB_URL = {
     'VIEW_LOGIN': SERVER.HOST + SERVER.WEB_VIEWS + '/login/login.php',
     'VIEW_HOME_DESARROLLADOR': SERVER.HOST + SERVER.WEB_VIEWS + '/homeDesarrollador/homeDesarrollador.php'
+}
+
+const CONST_USER = {
+    'TIPO_DESARROLLADOR': 'Desarrollador',
+    'TIPO_RECLUTADOR': 'Reclutador'
 }

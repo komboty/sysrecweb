@@ -20,6 +20,13 @@ abstract class GenericController
     abstract protected function requestPost($body);
 
     /**
+     * Gestiona las peticiones del cliente tipo DELETE.
+     * 
+     * @param $body Cuerpo de una peticion DELETE.
+     */
+    abstract protected function requestDelete($body);
+
+    /**
      * Gestiona las peticiones del cliente segun su verbo.
      * 
      * @param $requestMethod Tipo de peticion.
@@ -35,6 +42,10 @@ abstract class GenericController
 
             case 'POST':
                 $this->requestPost($body);
+                break;
+
+            case 'DELETE':
+                $this->requestDelete($body);
                 break;
         }
     }
