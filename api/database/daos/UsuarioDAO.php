@@ -17,9 +17,9 @@ class UsuarioDAO
     /**
      * Obtiene todos los usuarios de la base de datos.
      * 
-     * @return Usuarios encontrados.
+     * @return array Usuarios encontrados.
      */
-    public function getAll()
+    public function getAll(): array
     {
         $query = 'SELECT u.id, u.nombre, t.nombre as tipo, u.correo, u.telefono, u.edad, u.direccion FROM Usuario as u'
             . ' JOIN TipoUsuario as t ON u.idTipoUsuario = t.id';
@@ -36,7 +36,7 @@ class UsuarioDAO
      * @param string $tipoUsuario Tipo de usuarios a obtener.
      * @return Usuarios encontrados.
      */
-    public function getByTipoUsuario(string $tipoUsuario)
+    public function getByTipoUsuario(string $tipoUsuario): array
     {
         $query = 'SELECT u.id, u.nombre, t.nombre as tipo, u.correo, u.telefono, u.edad, u.direccion FROM Usuario as u'
             . ' JOIN TipoUsuario as t ON u.idTipoUsuario = t.id'

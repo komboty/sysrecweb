@@ -27,7 +27,12 @@ formLogin.addEventListener('submit', (event) => {
         .then(res => res.json())
         .then(resJson => {
             if (resJson === null) {
-                alert('Nel papi')
+                Swal.fire({
+                    title: 'Usuario no encontrado',
+                    text: 'Por favor, verifique sus datos',
+                    icon: 'error',
+                    confirmButtonText: 'OK'
+                })
             }
         })
 });

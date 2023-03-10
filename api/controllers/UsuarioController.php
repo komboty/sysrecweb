@@ -1,42 +1,47 @@
 <?php
+require_once(dirname(__FILE__) . '/GenericController.php');
 require_once(dirname(dirname(__FILE__)) . '/database/daos/UsuarioDAO.php');
+
 /**
- * Archivo que recibe las peticiones del cliente.
+ * Clase que recibe las peticiones del cliente.
  */
-// header('Content-Type: application/json');
-// header('Access-Control-Allow-Origin: *');
-// header('Access-Control-Allow-Methods: POST');
-// header('Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Methods, Access-Control-Allow-Headers, Authorization, X-Requested-With');
+class UsuarioController extends GenericController
+{
+    private $usuarioDAO;
 
-switch ($_SERVER['REQUEST_METHOD']) {
-    case 'GET':
-        $usuarioDAO = new UsuarioDAO();
+    public function __construct()
+    {
+        $this->usuarioDAO = new UsuarioDAO();
+    }
 
+    protected function requestGet($parameters)
+    {
         // Si se quiere obtener un Usuario por su tipo.
-        if (isset($_GET['tipo'])) {
-            $usuarios = $usuarioDAO->getByTipoUsuario($_GET['tipo']);
+        if (isset($parameters['tipo'])) {
+            $usuarios = $this->usuarioDAO->getByTipoUsuario($parameters['tipo']);
 
             // Si se quiere obtener todos los Usuarios.
         } else {
-            $usuarios = $usuarioDAO->getAll();
+            $usuarios = $this->usuarioDAO->getAll();
         }
 
         echo json_encode($usuarios);
-        break;
+    }
 
-    case 'POST':
-        $usuarioDAO = new UsuarioDAO();
-        $json = json_decode(file_get_contents('php://input'), true);        
-
+    protected function requestPost($body)
+    {
         // Si se quiere obtener un Usuario por su correo y contrasenia.
-        if (isset($json['correo']) && isset($json['contrasenia'])) {            
-            $usuarios = $usuarioDAO->getByCorreoAndContrasenia($json['correo'], $json['contrasenia']);
+        if (isset($body['correo']) && isset($body['contrasenia'])) {
+            $usuarios = $this->usuarioDAO->getByCorreoAndContrasenia($body['correo'], $body['contrasenia']);
 
-            // Si se quiere obtener todos los Usuarios.
+            // .
         } else {
-            $usuarios = array();
+            $usuarios = null;
         }
 
         echo json_encode($usuarios);
-        break;
+    }
 }
+
+$usuarioController = new UsuarioController;
+$usuarioController->request($_SERVER['REQUEST_METHOD'], $_GET, json_decode(file_get_contents('php://input'), true));
