@@ -8,5 +8,5 @@ class ConfigDB
     const HOST = 'localhost';
     const USER = 'usalvadorap';
     const PASSWORD = 'uacm123';
-    const DATABASE = 'sysrec';
+    const NAME_DATABASE = 'sysrec';
 }

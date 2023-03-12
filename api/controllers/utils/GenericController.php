@@ -1,5 +1,5 @@
 <?php
-
+require_once(dirname(__FILE__) . '/UtilsController.php');
 /**
  * Clase abstracta que gestiona las peticiones del cliente.
  */
@@ -32,9 +32,17 @@ abstract class GenericController
      * @param $requestMethod Tipo de peticion.
      * @param $parameters Parametros de una peticion GET.
      * @param $body Cuerpo de una peticion.
+     * @param bool $checkSession True: Para que toda peticion verifique si existe una sesion del Usuario en el servidor.
      */
-    public function request($requestMethod, $parameters, $body)
+    public function request($requestMethod, $parameters, $body, bool $checkSession = true)
     {
+        // Se verifica si existe una sesion del Usuario en el servidor.
+        if ($checkSession && !UtilsController::isSessionUser()) {
+            header(UtilsController::HEADER_STATUS_UNAUTHORIZED);
+            return;
+        }
+
+        // Se reliza la peticion del cliente segun el verbo.
         switch ($requestMethod) {
             case 'GET':
                 $this->requestGet($parameters);

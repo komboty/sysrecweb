@@ -1,18 +1,19 @@
 <?php
-require_once(dirname(__FILE__) . '/GenericController.php');
-require_once(dirname(dirname(__FILE__)) . '/database/daos/UsuarioDAO.php');
+require_once(dirname(__FILE__) . '/utils/GenericController.php');
+require_once(dirname(dirname(__FILE__)) . '/database/daos/interfaces/IUsuarioDAO.php');
 require_once(dirname(dirname(dirname(__FILE__))) . '/shared/Consts.php');
+require_once(dirname(dirname(__FILE__)) . '/DependencyInjection.php');
 
 /**
  * Clase que recibe las peticiones del cliente sobre Usuarios.
  */
 class UsuarioController extends GenericController
 {
-    private $usuarioDAO;
+    private IUsuarioDAO $usuarioDAO;
 
-    public function __construct()
+    public function __construct(IUsuarioDAO $usuarioDAO)
     {
-        $this->usuarioDAO = new UsuarioDAO();
+        $this->usuarioDAO = $usuarioDAO;
     }
 
     protected function requestGet($parameters)
@@ -35,9 +36,10 @@ class UsuarioController extends GenericController
 
     protected function requestDelete($body)
     {
-        
     }
 }
 
-$usuarioController = new UsuarioController;
+// Se recibe las peticiones del cliente. 
+$dependencys = new DependencyInjection();
+$usuarioController = new UsuarioController($dependencys->getUsuarioDAO());
 $usuarioController->request($_SERVER['REQUEST_METHOD'], $_GET, json_decode(file_get_contents('php://input'), true));

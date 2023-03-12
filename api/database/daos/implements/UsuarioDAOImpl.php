@@ -1,26 +1,23 @@
 <?php
-require_once(dirname(dirname(__FILE__)) . '/ConnectionDB.php');
+require_once(dirname(dirname(__FILE__)) . '/interfaces/IUsuarioDAO.php');
+require_once(dirname(dirname(dirname(__FILE__))) . '/connection/IConnectionDB.php');
 
 /**
- * Clase que realiza consultas a la informacion de los Usuarios dentro de la base de datos.
+ * Clase que realiza las consultas a la tabla de Usuario de la base de datos.
  */
-class UsuarioDAO
+class UsuarioDAOImpl implements IUsuarioDAO
 {
     //Conexion a la base de datos.
-    private $connectionDB;
+    private IConnectionDB $connectionDB;
 
-    public function __construct()
+    public function __construct(IConnectionDB $connectionDB)
     {
-        $this->connectionDB = new ConnectionDB();
+        $this->connectionDB = $connectionDB;
     }
 
-    /**
-     * Obtiene todos los usuarios de la base de datos.
-     * 
-     * @return array Usuarios encontrados.
-     */
     public function getAll(): array
     {
+        $this->connectionDB->connectDB();
         $query = 'SELECT u.id, u.nombre, t.nombre as tipo, u.correo, u.telefono, u.edad, u.direccion FROM Usuario as u'
             . ' JOIN TipoUsuario as t ON u.idTipoUsuario = t.id';
         $statement = $this->connectionDB->getPrepare($query);
@@ -30,14 +27,9 @@ class UsuarioDAO
             ->fetch_all(MYSQLI_ASSOC);
     }
 
-    /**
-     * Obtiene todos los usuarios de la base de datos por su tipo.
-     * 
-     * @param string $tipoUsuario Tipo de usuarios a obtener.
-     * @return Usuarios encontrados.
-     */
     public function getByTipoUsuario(string $tipoUsuario): array
     {
+        $this->connectionDB->connectDB();
         $query = 'SELECT u.id, u.nombre, t.nombre as tipo, u.correo, u.telefono, u.edad, u.direccion FROM Usuario as u'
             . ' JOIN TipoUsuario as t ON u.idTipoUsuario = t.id'
             . ' WHERE t.nombre = ?';
@@ -49,15 +41,9 @@ class UsuarioDAO
             ->fetch_all(MYSQLI_ASSOC);
     }
 
-    /**
-     * Obtiene un usuario registrado en la base de datos por su correo y contrasenia.
-     * 
-     * @param string $correo correo del usuario a obtener.
-     * @param string $contrasenia contrasenia del usuario a obtener.
-     * @return Usuario encontrado.
-     */
     public function getByCorreoAndContrasenia(string $correo, string $contrasenia)
     {
+        $this->connectionDB->connectDB();
         $query = 'SELECT u.id, u.nombre, t.nombre as tipo, u.correo, u.telefono, u.edad, u.direccion FROM Usuario as u'
             . ' JOIN TipoUsuario as t ON u.idTipoUsuario = t.id'
             . ' WHERE u.correo = ? and u.contrasenia = ?';

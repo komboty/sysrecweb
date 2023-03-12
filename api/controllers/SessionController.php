@@ -1,58 +1,61 @@
 <?php
-require_once(dirname(__FILE__) . '/GenericController.php');
-require_once(dirname(dirname(__FILE__)) . '/database/daos/UsuarioDAO.php');
+require_once(dirname(__FILE__) . '/utils/GenericController.php');
+require_once(dirname(dirname(__FILE__)) . '/database/daos/interfaces/IUsuarioDAO.php');
+require_once(dirname(__FILE__) . '/utils/UtilsController.php');
 require_once(dirname(dirname(dirname(__FILE__))) . '/shared/Consts.php');
+require_once(dirname(dirname(__FILE__)) . '/DependencyInjection.php');
 
 /**
  * Clase que recibe las peticiones del cliente sobre su sesion.
  */
 class SessionController extends GenericController
 {
-    private $usuarioDAO;
+    private IUsuarioDAO $usuarioDAO;
 
-    public function __construct()
+    public function __construct(IUsuarioDAO $usuarioDAO)
     {
-        $this->usuarioDAO = new UsuarioDAO();
+        $this->usuarioDAO = $usuarioDAO;
     }
 
     protected function requestGet($parameters)
     {
-        session_start();
-        // Si existe sesion del Usuario en el servidor.
-        if (isset($_SESSION[Consts::SESSION_KEY_USER])) {
-            echo json_encode($_SESSION[Consts::SESSION_KEY_USER]);
-            return;
-        }
-
-        echo json_encode(null);
+        echo json_encode($_SESSION[Consts::SESSION_KEY_USER]);        
     }
 
     protected function requestPost($body)
-    {        
-        // Se busca el Usuario a loguearse.
-        if (isset($body[Consts::USER_KEY_CORREO]) && isset($body[Consts::USER_KEY_CONTRASENIA])) {
-            $usuario = $this->usuarioDAO->getByCorreoAndContrasenia($body[Consts::USER_KEY_CORREO], $body[Consts::USER_KEY_CONTRASENIA]);
-
-            // Si existe el Usuario en la base de datos, se inicia sesion en el servidor.
-            if (isset($usuario)) {
-                session_start();
-                $_SESSION[Consts::SESSION_KEY_USER] = $usuario;
-                $response = array(Consts::USER_KEY_TIPO => $usuario[Consts::USER_KEY_TIPO]);
-                echo json_encode($response);
-                return;
-            }
+    {
+        // Si no existen correo ni contrasenia en la peticion se manda error.     
+        if (!isset($body[Consts::USER_KEY_CORREO]) && !isset($body[Consts::USER_KEY_CONTRASENIA])) {
+            header(UtilsController::HEADER_STATUS_BAD_REQUEST);
+            return;
         }
 
-        // Si la peticion no tiene todos los datos o No existe el Usuario en la base de datos.
-        echo json_encode(null);
+        // Se busca el Usuario a loguearse.
+        $usuario = $this->usuarioDAO->getByCorreoAndContrasenia($body[Consts::USER_KEY_CORREO], $body[Consts::USER_KEY_CONTRASENIA]);
+
+        // Si no existe el Usuario en la base de datos.        
+        if (!isset($usuario)) {
+            header(UtilsController::HEADER_STATUS_NOT_FOUND);
+            return;
+        }
+
+        // Si existe el Usuario en la base de datos, se inicia sesion en el servidor.
+        session_start();
+        $_SESSION[Consts::SESSION_KEY_USER] = $usuario;
+        $response = array(Consts::USER_KEY_TIPO => $usuario[Consts::USER_KEY_TIPO]);
+        echo json_encode($response);
     }
 
     protected function requestDelete($body)
     {
-        session_start();
         session_destroy();
     }
 }
 
-$sessionController = new SessionController;
-$sessionController->request($_SERVER['REQUEST_METHOD'], $_GET, json_decode(file_get_contents('php://input'), true));
+// Se recibe las peticiones del cliente. 
+$dependencys = new DependencyInjection();
+$sessionController = new SessionController($dependencys->getUsuarioDAO());
+
+// Si se quiere loguear un Usuario se debe quitar la revision de sesion.
+$checkSession = !$_SERVER['REQUEST_METHOD'] == 'POST';
+$sessionController->request($_SERVER['REQUEST_METHOD'], $_GET, json_decode(file_get_contents('php://input'), true), $checkSession);
