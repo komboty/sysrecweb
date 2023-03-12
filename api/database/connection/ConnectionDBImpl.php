@@ -7,11 +7,11 @@ require_once(dirname(dirname(__FILE__)) . '/ConfigDB.php');
  */
 class ConnectionDBImpl implements IConnectionDB
 {
-    private string $host;
-    private string $user;
-    private string $password;
-    private string $nameDatabase;
-    private mysqli $connection;
+    private $host;
+    private $user;
+    private $password;
+    private $nameDatabase;
+    private $connection;
 
     public function __construct(string $host, string $user, string $password, $nameDatabase)
     {
@@ -24,6 +24,10 @@ class ConnectionDBImpl implements IConnectionDB
     public function connectDB(): mysqli
     {
         $this->connection = new mysqli($this->host, $this->user, $this->password, $this->nameDatabase);
+        if ($this->connection->connect_errno) {
+            echo 'ERROR en la base de datos: ';// . $this->connection->connect_error;
+            exit();
+        }
         return $this->connection;
     }
 

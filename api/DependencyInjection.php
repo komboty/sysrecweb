@@ -12,12 +12,12 @@ require_once(dirname(__FILE__) . '/database/ConfigDB.php');
 class DependencyInjection
 {
     // Data Base
-    private IConnectionDB $conexionBD;
+    private $conexionBD;
     // DAO's
-    private IUsuarioDAO $usuarioDAO;
+    private $usuarioDAO;
     // Services
-    private IUsuarioService $usuarioService;
-    private ISessionUser $sessionUser;
+    private $usuarioService;
+    private $sessionUser;
 
     public function __construct()
     {

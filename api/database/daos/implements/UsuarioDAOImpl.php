@@ -8,7 +8,7 @@ require_once(dirname(dirname(dirname(__FILE__))) . '/connection/IConnectionDB.ph
 class UsuarioDAOImpl implements IUsuarioDAO
 {
     //Conexion a la base de datos.
-    private IConnectionDB $connectionDB;
+    private $connectionDB;
 
     public function __construct(IConnectionDB $connectionDB)
     {

@@ -7,7 +7,7 @@ require_once(dirname(dirname(dirname(__FILE__))) . '/database/daos/interfaces/IU
  */
 class UsuarioServiceImpl implements IUsuarioService
 {
-    private IUsuarioDAO $usuarioDAO;
+    private $usuarioDAO;
 
     public function __construct(IUsuarioDAO $usuarioDAO)
     {
