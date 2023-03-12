@@ -19,5 +19,5 @@
     <!-- JavaScripts -->
     <?php require_once(dirname(dirname(__FILE__)) . '/shared/scripts.php'); ?>
     <!-- HomeDesarrollador JavaScript -->
-    <script type="text/javascript" src="homeDesarrollador.js"></script>
+    <!-- <script type="text/javascript" src="homeDesarrollador.js"></script> -->
 </body>

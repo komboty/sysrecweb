@@ -48,6 +48,7 @@ class SessionController extends GenericController
 
     protected function requestDelete($body)
     {
+        session_start(); // Se pone de nuevo si no, no se elimina la sesion.
         session_destroy();
     }
 }

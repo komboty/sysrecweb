@@ -18,3 +18,9 @@ const CONST_USER = {
     'TIPO_DESARROLLADOR': 'Desarrollador',
     'TIPO_RECLUTADOR': 'Reclutador'
 }
+
+const CONST_MESSAGE_ALERT = {
+    'ERROR': { 'TITLE': 'Error', 'TEXT': 'Por favor, intentelo más tarde' },
+    'USER_NOT_FOUND': { 'TITLE': 'Usuario no encontrado', 'TEXT': 'Por favor, verifique sus datos' },
+    'USER_NOT_SESSION': { 'TITLE': 'Tu sesión ha expirado ', 'TEXT': 'Por favor, vuelve a iniciar sesión' }
+}

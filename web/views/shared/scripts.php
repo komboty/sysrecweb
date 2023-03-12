@@ -4,5 +4,6 @@
 <!-- SweetAlert2 JavaScript -->
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <!-- SYSREC JavaScript -->
-<script type="text/javascript" src="../../config.js"></script>
-<script type="text/javascript" src="../shared/utils.js"></script>
+<script type="text/javascript" src="../../configWeb.js"></script>
+<script type="text/javascript" src="../shared/alert.js"></script>
+<!-- <script type="text/javascript" src="../shared/utils.js"></script> -->

@@ -24,20 +24,27 @@ formLogin.addEventListener('submit', (event) => {
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(data)
         })
-        .then(res => res.json())
-        .then(usuario => {
-            // Si no se encontro el registro del usuario en el servidor, se manda error y termina el script.
-            if (usuario === null) {
-                Swal.fire({
-                    title: 'Usuario no encontrado',
-                    text: 'Por favor, verifique sus datos',
-                    icon: 'error',
-                    confirmButtonText: 'OK'
-                });
-                return;
+        .then(response => {
+            // Si se encontro el registro del usuario en el servidor, continua el flujo.
+            if (response.status === 200) {
+                return response.json();
             }
 
-            // Si se encontro el registro del usuario en el servidor, se redirige a su vista.
+            // Si existio un error o no se encontro el registro del usuario en el servidor, 
+            // se manda error y termina el flujo.
+            let title = CONST_MESSAGE_ALERT.ERROR.TITLE;
+            let text = CONST_MESSAGE_ALERT.ERROR.TEXT;
+
+            if (response.status === 404) {
+                title = CONST_MESSAGE_ALERT.USER_NOT_FOUND.TITLE;
+                text = CONST_MESSAGE_ALERT.USER_NOT_FOUND.TEXT;
+            }
+
+            alertError(title, text);
+            throw new Error(title);
+        })
+        .then(usuario => {
+            // Dependiendo del tipo del usuario, se redirige a su vista.
             switch (usuario.tipo) {
                 case CONST_USER.TIPO_DESARROLLADOR:
                     window.location.replace(WEB_URL.VIEW_HOME_DESARROLLADOR);
@@ -48,5 +55,6 @@ formLogin.addEventListener('submit', (event) => {
                         // window.location.replace(WEB_URL.VIEW_HOME_RECLUTADOR);
                     break;
             }
-        });
+        })
+        .catch(error => error.message);
 });

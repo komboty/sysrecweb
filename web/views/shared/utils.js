@@ -14,5 +14,6 @@
 //             }
 //             // Si se encontro la sesion del usuario en el servidor.
 //             return sesion;
-//         });
+//         })
+//         .catch(error => error.message);
 // }
