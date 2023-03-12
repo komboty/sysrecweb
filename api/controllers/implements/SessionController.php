@@ -1,9 +1,9 @@
 <?php
-require_once(dirname(__FILE__) . '/utils/GenericController.php');
-require_once(dirname(dirname(__FILE__)) . '/database/daos/interfaces/IUsuarioDAO.php');
-require_once(dirname(__FILE__) . '/utils/UtilsController.php');
-require_once(dirname(dirname(dirname(__FILE__))) . '/shared/Consts.php');
-require_once(dirname(dirname(__FILE__)) . '/DependencyInjection.php');
+require_once(dirname(dirname(__FILE__)) . '/utils/GenericController.php');
+require_once(dirname(dirname(dirname(__FILE__))) . '/database/daos/interfaces/IUsuarioDAO.php');
+require_once(dirname(dirname(__FILE__))  . '/ConfigControllers.php');
+require_once(dirname(dirname(dirname(dirname(__FILE__)))) . '/shared/Consts.php');
+require_once(dirname(dirname(dirname(__FILE__)))  . '/DependencyInjection.php');
 
 /**
  * Clase que recibe las peticiones del cliente sobre su sesion.
@@ -19,14 +19,14 @@ class SessionController extends GenericController
 
     protected function requestGet($parameters)
     {
-        echo json_encode($_SESSION[Consts::SESSION_KEY_USER]);        
+        echo json_encode($_SESSION[Consts::SESSION_KEY_USER]);
     }
 
     protected function requestPost($body)
     {
         // Si no existen correo ni contrasenia en la peticion se manda error.     
         if (!isset($body[Consts::USER_KEY_CORREO]) && !isset($body[Consts::USER_KEY_CONTRASENIA])) {
-            header(UtilsController::HEADER_STATUS_BAD_REQUEST);
+            header(ConfigControllers::HEADER_STATUS_BAD_REQUEST);
             return;
         }
 
@@ -35,7 +35,7 @@ class SessionController extends GenericController
 
         // Si no existe el Usuario en la base de datos.        
         if (!isset($usuario)) {
-            header(UtilsController::HEADER_STATUS_NOT_FOUND);
+            header(ConfigControllers::HEADER_STATUS_NOT_FOUND);
             return;
         }
 
@@ -48,7 +48,6 @@ class SessionController extends GenericController
 
     protected function requestDelete($body)
     {
-        session_start(); // Se pone de nuevo si no, no se elimina la sesion.
         session_destroy();
     }
 }
@@ -58,5 +57,5 @@ $dependencys = new DependencyInjection();
 $sessionController = new SessionController($dependencys->getUsuarioDAO());
 
 // Si se quiere loguear un Usuario se debe quitar la revision de sesion.
-$checkSession = !$_SERVER['REQUEST_METHOD'] == 'POST';
+$checkSession = $_SERVER['REQUEST_METHOD'] != 'POST';
 $sessionController->request($_SERVER['REQUEST_METHOD'], $_GET, json_decode(file_get_contents('php://input'), true), $checkSession);

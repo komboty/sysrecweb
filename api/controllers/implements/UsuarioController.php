@@ -1,8 +1,8 @@
 <?php
-require_once(dirname(__FILE__) . '/utils/GenericController.php');
-require_once(dirname(dirname(__FILE__)) . '/database/daos/interfaces/IUsuarioDAO.php');
-require_once(dirname(dirname(dirname(__FILE__))) . '/shared/Consts.php');
-require_once(dirname(dirname(__FILE__)) . '/DependencyInjection.php');
+require_once(dirname(dirname(__FILE__)) . '/utils/GenericController.php');
+require_once(dirname(dirname(dirname(__FILE__))) . '/database/daos/interfaces/IUsuarioDAO.php');
+require_once(dirname(dirname(dirname(dirname(__FILE__)))) . '/shared/Consts.php');
+require_once(dirname(dirname(dirname(__FILE__))) . '/DependencyInjection.php');
 
 /**
  * Clase que recibe las peticiones del cliente sobre Usuarios.

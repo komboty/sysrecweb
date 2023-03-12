@@ -1,5 +1,6 @@
 <?php
 require_once(dirname(__FILE__) . '/UtilsController.php');
+require_once(dirname(dirname(__FILE__)) . '/ConfigControllers.php');
 /**
  * Clase abstracta que gestiona las peticiones del cliente.
  */
@@ -38,7 +39,7 @@ abstract class GenericController
     {
         // Se verifica si existe una sesion del Usuario en el servidor.
         if ($checkSession && !UtilsController::isSessionUser()) {
-            header(UtilsController::HEADER_STATUS_UNAUTHORIZED);
+            header(ConfigControllers::HEADER_STATUS_UNAUTHORIZED);
             return;
         }
 
