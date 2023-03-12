@@ -1,5 +1,5 @@
 const SERVER = {
-    'HOST': 'http://localhost',
+    'HOST': 'http://localhost', // 'https://sysrecweb.000webhostapp.com',
     'API_CONTROLLERS': '/sysrecweb/api/controllers/implements',
     'WEB_VIEWS': '/sysrecweb/web/views'
 }
