@@ -9,8 +9,8 @@ function cerrarSesion() {
             }
 
             // Si existio un error en el servidor se manda error y termina el flujo.
-            alertError(CONST_MESSAGE_ALERT.ERROR.TITLE, CONST_MESSAGE_ALERT.ERROR.TEXT);
-            throw new Error(CONST_MESSAGE_ALERT.ERROR.TITLE);
+            alertError(CONST_MSG_ALERT.ERROR.TITLE, CONST_MSG_ALERT.ERROR.TEXT);
+            throw new Error(CONST_MSG_ALERT.ERROR.TITLE);
         })
         .catch(error => error.message);
 }

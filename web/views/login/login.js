@@ -7,7 +7,7 @@ formLogin.addEventListener('submit', (event) => {
     const correo = document.getElementById('inputEmail');
     const contrasenia = document.getElementById('inputPass');
 
-    // Se validan los datos del formulario.
+    // Se validan los datos del formulario a que contengan un valor.
     if (correo.value === '' || contrasenia.value === '') {
         return;
     }
@@ -32,14 +32,8 @@ formLogin.addEventListener('submit', (event) => {
 
             // Si existio un error o no se encontro el registro del usuario en el servidor, 
             // se manda error y termina el flujo.
-            let title = CONST_MESSAGE_ALERT.ERROR.TITLE;
-            let text = CONST_MESSAGE_ALERT.ERROR.TEXT;
-
-            if (response.status === 404) {
-                title = CONST_MESSAGE_ALERT.USER_NOT_FOUND.TITLE;
-                text = CONST_MESSAGE_ALERT.USER_NOT_FOUND.TEXT;
-            }
-
+            let title = response.status === 404 ? CONST_MSG_ALERT.USER_NOT_FOUND.TITLE : CONST_MSG_ALERT.ERROR.TITLE;
+            let text = response.status === 404 ? CONST_MSG_ALERT.USER_NOT_FOUND.TEXT : CONST_MSG_ALERT.ERROR.TEXT;
             alertError(title, text);
             throw new Error(title);
         })

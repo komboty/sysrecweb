@@ -13,7 +13,7 @@ if (!isset($_SESSION[Consts::SESSION_KEY_USER])) {
 
 // Se reliza la peticion del cliente segun el verbo.
 switch ($_SERVER['REQUEST_METHOD']) {
-    
+
     case 'GET':
         $usuarioService = $dependencys->getUsuarioService();
 
@@ -27,5 +27,8 @@ switch ($_SERVER['REQUEST_METHOD']) {
         }
 
         echo json_encode($response);
+        break;
+
+    case 'POST':        
         break;
 }

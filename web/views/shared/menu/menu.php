@@ -62,7 +62,7 @@
                     </li>
                     <li>
                         <a class="dropdown-item" onclick="cerrarSesion()">
-                            <i class="fas fa-sign-out-alt"></i> Cerrar sesión
+                            <i class="fas fa-sign-out-alt"></i> Salir
                         </a>
                     </li>
                 </ul>

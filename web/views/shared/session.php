@@ -10,7 +10,7 @@ function verifyHome(string $tipoUsuario)
     if (!isset($_SESSION[Consts::SESSION_KEY_USER])) {
         require_once(dirname(__FILE__) . '/scripts.php');
         echo '<script type="text/javascript">
-                alertErrorRedirectLogin(CONST_MESSAGE_ALERT.USER_NOT_SESSION.TITLE, CONST_MESSAGE_ALERT.USER_NOT_SESSION.TEXT);
+                alertErrorRedirectLogin(CONST_MSG_ALERT.USER_NOT_SESSION.TITLE, CONST_MSG_ALERT.USER_NOT_SESSION.TEXT);
             </script>';
         die();
     }
@@ -18,7 +18,7 @@ function verifyHome(string $tipoUsuario)
     if ($_SESSION[Consts::SESSION_KEY_USER][Consts::SESSION_USER_KEY_TIPO] != $tipoUsuario) {
         require_once(dirname(__FILE__) . '/scripts.php');
         echo '<script type="text/javascript">
-                alertErrorRedirectLogin(CONST_MESSAGE_ALERT.PERMISSIONS_DENIED.TITLE, CONST_MESSAGE_ALERT.PERMISSIONS_DENIED.TEXT);
+                alertErrorRedirectLogin(CONST_MSG_ALERT.PERMISSIONS_DENIED.TITLE, CONST_MSG_ALERT.PERMISSIONS_DENIED.TEXT);
             </script>';
         die();
     }

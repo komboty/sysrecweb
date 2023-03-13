@@ -1,4 +1,9 @@
 .logo {
-    width: 30%;
+    width: 14%;
     margin-top: 2em;
+}
+
+.btn-outline-dark {
+    border-color: #ffffff;
+    color: #00000085;
 }
