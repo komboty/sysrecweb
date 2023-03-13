@@ -11,6 +11,7 @@ const API_URL = {
 
 const WEB_URL = {
     'VIEW_LOGIN': SERVER.HOST + SERVER.WEB_VIEWS + '/login/login.php',
+    'VIEW_REGISTRO': SERVER.HOST + SERVER.WEB_VIEWS + '/registro/registro.php',
     'VIEW_HOME_DESARROLLADOR': SERVER.HOST + SERVER.WEB_VIEWS + '/homeDesarrollador/homeDesarrollador.php'
 }
 

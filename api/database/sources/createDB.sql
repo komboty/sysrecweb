@@ -39,7 +39,6 @@ CREATE TABLE Usuario (
     contrasenia VARCHAR(255) NOT NULL,
     telefono VARCHAR(255) NOT NULL,
     edad int,
-    direccion VARCHAR(255),
     curriculum BLOB,
     PRIMARY KEY (id),
     FOREIGN KEY (idTipoUsuario) REFERENCES TipoUsuario(id),

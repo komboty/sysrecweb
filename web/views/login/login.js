@@ -49,3 +49,7 @@ formLogin.addEventListener('submit', (event) => {
         })
         .catch(error => error.message);
 });
+
+function crearCuenta() {
+    window.location.replace(WEB_URL.VIEW_REGISTRO);
+}

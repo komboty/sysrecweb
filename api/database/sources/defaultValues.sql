@@ -92,5 +92,5 @@ INSERT INTO Habilidad (idCategoriaHabilidad, nombre) VALUES
     (8, 'Español'),
     (8, 'Francés');
 
-INSERT INTO Usuario (idTipoUsuario, nombre, correo, contrasenia, telefono, edad, direccion, curriculum) VALUES 
-    (1, 'Admin', 'admin@gmail.com', '123', '5512131415', 30, 'Calle 1', NULL);
+INSERT INTO Usuario (idTipoUsuario, nombre, correo, contrasenia, telefono, edad, curriculum) VALUES 
+    (1, 'Admin', 'admin@gmail.com', '123', '5512131415', 30, NULL);
