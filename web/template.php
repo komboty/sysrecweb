@@ -1,19 +1,24 @@
+<?php session_start(); ?>
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
-    <!-- CSSs -->
-    <?php require_once(dirname(dirname(__FILE__)) . '/shared/head.php'); ?>
-    <!-- Login CSS -->
-    <link rel="stylesheet" href="login.css" />
+    <?php
+    // Cabecera y Estilos .
+    require_once(dirname(dirname(__FILE__)) . '/shared/head.php');
+    ?>
+    <!-- <link rel="stylesheet" href="homeDesarrollador.css" /> -->
 </head>
 
 <body>
-    <!-- Sesion -->
-    <?php require_once(dirname(dirname(__FILE__)) . '/shared/session/session.php'); ?>
-    
-    <!-- Menu -->
-    <?php require_once(dirname(dirname(__FILE__)) . '/shared/menu/menu.php'); ?>
+    <?php
+    // Verificacion de Sesion existen y su tipo de Usuario sea correcto.
+    require_once(dirname(dirname(__FILE__)) . '/shared/session.php');
+    verifyHome(Consts::USER_TIPO_DESARROLLADOR);
+
+    // Menu
+    require_once(dirname(dirname(__FILE__)) . '/shared/menu/menu.php');
+    ?>
 
     <!-- Start your project here-->
     <div class="container">
@@ -28,11 +33,11 @@
         </div>
     </div>
     <!-- End your project here-->
-    
-    <!-- JavaScripts -->
-    <?php require_once(dirname(dirname(__FILE__)) . '/shared/scripts.php'); ?>
-    <!-- Login JavaScript -->
-    <script type="text/javascript" src="login.js"></script>
-</body>
 
-</html>
+    <?php
+    // JavaScripts
+    require_once(dirname(dirname(__FILE__)) . '/shared/scripts.php');
+    ?>
+    <!-- HomeDesarrollador JavaScript -->
+    <!-- <script type="text/javascript" src="homeDesarrollador.js"></script> -->
+</body>

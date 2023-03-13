@@ -20,7 +20,8 @@ const CONST_USER = {
 }
 
 const CONST_MESSAGE_ALERT = {
-    'ERROR': { 'TITLE': 'Error', 'TEXT': 'Por favor, intentelo más tarde' },
+    'ERROR': { 'TITLE': 'Error', 'TEXT': 'Por favor, inténtalo más tarde' },
     'USER_NOT_FOUND': { 'TITLE': 'Usuario no encontrado', 'TEXT': 'Por favor, verifique sus datos' },
-    'USER_NOT_SESSION': { 'TITLE': 'Tu sesión ha expirado ', 'TEXT': 'Por favor, vuelve a iniciar sesión' }
+    'USER_NOT_SESSION': { 'TITLE': 'Tu sesión ha expirado', 'TEXT': 'Por favor, vuelve a iniciar sesión' },
+    'PERMISSIONS_DENIED': { 'TITLE': 'Error', 'TEXT': 'No cuentas con las credenciales necesarias' }
 }

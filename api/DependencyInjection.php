@@ -2,22 +2,21 @@
 require_once(dirname(__FILE__) . '/database/connection/IConnectionDB.php');
 require_once(dirname(__FILE__) . '/database/daos/interfaces/IUsuarioDAO.php');
 require_once(dirname(__FILE__) . '/services/interfaces/IUsuarioService.php');
-require_once(dirname(__FILE__) . '/services/interfaces/ISessionUser.php');
 require_once(dirname(__FILE__) . '/database/connection/ConnectionDBImpl.php');
 require_once(dirname(__FILE__) . '/database/daos/implements/UsuarioDAOImpl.php');
 require_once(dirname(__FILE__) . '/services/implements/UsuarioServiceImpl.php');
-require_once(dirname(__FILE__) . '/services/implements/SessionUserImpl.php');
 require_once(dirname(__FILE__) . '/database/ConfigDB.php');
 
 class DependencyInjection
 {
     // Data Base
     private $conexionBD;
+
     // DAO's
     private $usuarioDAO;
+    
     // Services
     private $usuarioService;
-    private $sessionUser;
 
     public function __construct()
     {
@@ -29,7 +28,6 @@ class DependencyInjection
 
         // Services
         $this->usuarioService = new UsuarioServiceImpl($this->usuarioDAO);
-        $this->sessionUser = new SessionUserImpl();
     }
 
     public function getConnectionDB(): IConnectionDB
@@ -45,10 +43,5 @@ class DependencyInjection
     public function getUsuarioService(): IUsuarioService
     {
         return $this->usuarioService;
-    }
-
-    public function getSessionUser(): ISessionUser
-    {
-        return $this->sessionUser;
     }
 }

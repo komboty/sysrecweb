@@ -4,8 +4,9 @@ require_once(dirname(dirname(__FILE__)) . '/ConfigControllers.php');
 require_once(dirname(dirname(dirname(dirname(__FILE__)))) . '/shared/Consts.php');
 
 $dependencys = new DependencyInjection();
-$sessionUser = $dependencys->getSessionUser();
+
 $body = json_decode(file_get_contents('php://input'), true);
+session_start();
 
 // Se reliza la peticion del cliente segun el verbo.
 switch ($_SERVER['REQUEST_METHOD']) {
@@ -27,17 +28,13 @@ switch ($_SERVER['REQUEST_METHOD']) {
             return;
         }
 
-        // Si existe el Usuario en la base de datos, se asigna a la sesion del servidor.
-        $sessionUser->set($usuario);
+        // Si existe el Usuario en la base de datos, se asigna a la sesion del servidor.        
+        $_SESSION[Consts::SESSION_KEY_USER] = $usuario;
         $response = array(Consts::USER_KEY_TIPO => $usuario[Consts::USER_KEY_TIPO]);
         echo json_encode($response);
         break;
 
-    case 'GET':
-        $sessionUser->get();
-        break;
-
     case 'DELETE':
-        $sessionUser->destroy();
+        session_destroy();
         break;
 }

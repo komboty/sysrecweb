@@ -4,9 +4,9 @@ require_once(dirname(dirname(__FILE__)) . '/ConfigControllers.php');
 require_once(dirname(dirname(dirname(dirname(__FILE__)))) . '/shared/Consts.php');
 
 $dependencys = new DependencyInjection();
-$sessionUser = $dependencys->getSessionUser();
 
-if (!$sessionUser->isSet()) {
+session_start();
+if (!isset($_SESSION[Consts::SESSION_KEY_USER])) {
     header(ConfigControllers::HEADER_STATUS_UNAUTHORIZED);
     return;
 }

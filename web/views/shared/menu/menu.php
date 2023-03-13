@@ -1,10 +1,3 @@
-<?php 
-// Constantes
-require_once(dirname(dirname(dirname(dirname(dirname(__FILE__))))) . '/shared/Consts.php'); 
-?>
-<!-- Menu JavaScript -->
-<script type="text/javascript" src="../shared/menu/menu.js"></script>
-
 <!-- Menu -->
 <nav class="navbar navbar-expand-lg navbar-light bg-white">
     <div class="container-fluid">
@@ -78,3 +71,10 @@ require_once(dirname(dirname(dirname(dirname(dirname(__FILE__))))) . '/shared/Co
 
     </div>
 </nav>
+
+<?php 
+// Constantes
+require_once(dirname(dirname(dirname(dirname(dirname(__FILE__))))) . '/shared/Consts.php'); 
+?>
+<!-- Menu JavaScript -->
+<script type="text/javascript" src="../shared/menu/menu.js"></script>

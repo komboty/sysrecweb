@@ -6,3 +6,10 @@ function alertError(title, text) {
         confirmButtonText: 'OK'
     });
 }
+
+function alertErrorRedirectLogin(title, text) {
+    alertError(title, text)
+        .then((result) => {
+            window.location.replace(WEB_URL.VIEW_LOGIN);
+        });
+}

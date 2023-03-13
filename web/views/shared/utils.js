@@ -17,3 +17,27 @@
 //         })
 //         .catch(error => error.message);
 // }
+
+/**
+ * Redirecciona a un Home segun el tipo de Usuario. Si no hay Home se redirecciona al login.
+ * 
+ * @param {string} tipoUsuario Tipo de Usuario.
+ */
+function redirectToHome(tipoUsuario) {
+
+    switch (tipoUsuario) {
+        case CONST_USER.TIPO_DESARROLLADOR:
+            window.location.replace(WEB_URL.VIEW_HOME_DESARROLLADOR);
+            break;
+
+        case CONST_USER.TIPO_RECLUTADOR:
+            alert('WEB_URL.VIEW_HOME_RECLUTADOR');
+            // window.location.replace(WEB_URL.VIEW_HOME_RECLUTADOR);
+            break;
+
+        default:
+            alert('WEB_URL.VIEW_LOGIN');
+            // window.location.replace(WEB_URL.VIEW_LOGIN);
+            break;
+    }
+}

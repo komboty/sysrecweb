@@ -44,17 +44,8 @@ formLogin.addEventListener('submit', (event) => {
             throw new Error(title);
         })
         .then(usuario => {
-            // Dependiendo del tipo del usuario, se redirige a su vista.
-            switch (usuario.tipo) {
-                case CONST_USER.TIPO_DESARROLLADOR:
-                    window.location.replace(WEB_URL.VIEW_HOME_DESARROLLADOR);
-                    break;
-
-                case CONST_USER.TIPO_RECLUTADOR:
-                    alert('WEB_URL.VIEW_HOME_RECLUTADOR')
-                        // window.location.replace(WEB_URL.VIEW_HOME_RECLUTADOR);
-                    break;
-            }
+            // Dependiendo del tipo del usuario, se redirige a su home.
+            redirectToHome(usuario.tipo);
         })
         .catch(error => error.message);
 });
