@@ -6,7 +6,7 @@ require_once(dirname(__FILE__) . '/IGenericDAO.php');
 interface IUsuarioDAO extends IGenericDAO
 {
     /**
-     * Obtiene todos los usuarios de la base de datos por su tipo.
+     * Obtiene todos los Usuarios de la base de datos por su tipo.
      * 
      * @param string $tipoUsuario Tipo de usuarios a obtener.
      * @return array Usuarios encontrados.
@@ -14,7 +14,7 @@ interface IUsuarioDAO extends IGenericDAO
     public function getByTipoUsuario(string $tipoUsuario): array;
 
     /**
-     * Obtiene un usuario registrado en la base de datos por su correo y contrasenia.
+     * Obtiene un Usuario registrado en la base de datos por su correo y contrasenia.
      * 
      * @param string $correo correo del usuario a obtener.
      * @param string $contrasenia contrasenia del usuario a obtener.

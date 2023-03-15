@@ -1,11 +1,18 @@
 <?php
-require_once(dirname(__FILE__) . '/database/connection/IConnectionDB.php');
-require_once(dirname(__FILE__) . '/database/daos/interfaces/IUsuarioDAO.php');
-require_once(dirname(__FILE__) . '/services/interfaces/IUsuarioService.php');
-require_once(dirname(__FILE__) . '/database/connection/ConnectionDBImpl.php');
-require_once(dirname(__FILE__) . '/database/daos/implements/UsuarioDAOImpl.php');
-require_once(dirname(__FILE__) . '/services/implements/UsuarioServiceImpl.php');
 require_once(dirname(__FILE__) . '/database/ConfigDB.php');
+
+require_once(dirname(__FILE__) . '/database/connection/IConnectionDB.php');
+require_once(dirname(__FILE__) . '/database/connection/ConnectionDBImpl.php');
+
+require_once(dirname(__FILE__) . '/database/daos/interfaces/IUsuarioDAO.php');
+require_once(dirname(__FILE__) . '/database/daos/implements/UsuarioDAOImpl.php');
+require_once(dirname(__FILE__) . '/services/interfaces/IUsuarioService.php');
+require_once(dirname(__FILE__) . '/services/implements/UsuarioServiceImpl.php');
+
+require_once(dirname(__FILE__) . '/database/daos/interfaces/IProyectoDAO.php');
+require_once(dirname(__FILE__) . '/database/daos/implements/ProyectoDAOImpl.php');
+require_once(dirname(__FILE__) . '/services/interfaces/IProyectoService.php');
+require_once(dirname(__FILE__) . '/services/implements/ProyectoServiceImpl.php');
 
 class DependencyInjection
 {
@@ -14,9 +21,11 @@ class DependencyInjection
 
     // DAO's
     private $usuarioDAO;
-    
+    private $proyectoDAO;
+
     // Services
     private $usuarioService;
+    private $proyectoService;
 
     public function __construct()
     {
@@ -25,9 +34,11 @@ class DependencyInjection
 
         // DAO's
         $this->usuarioDAO = new UsuarioDAOImpl($this->conexionBD);
+        $this->proyectoDAO = new ProyectoDAOImpl($this->conexionBD);
 
         // Services
         $this->usuarioService = new UsuarioServiceImpl($this->usuarioDAO);
+        $this->proyectoService = new ProyectoServiceImpl($this->proyectoDAO);
     }
 
     public function getConnectionDB(): IConnectionDB
@@ -43,5 +54,10 @@ class DependencyInjection
     public function getUsuarioService(): IUsuarioService
     {
         return $this->usuarioService;
+    }
+
+    public function getProyectoService(): IProyectoService
+    {
+        return $this->proyectoService;
     }
 }

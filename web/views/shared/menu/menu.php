@@ -13,26 +13,28 @@
             </a>
             <!-- Botones -->
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                <li class="nav-item">
-                    <a class="nav-link" href="#">
-                        <i class="fab fa-sketch"></i> Proyectos
+                <!-- <li class="nav-item">
+                    <a class="nav-link" onclick="onMisProyectos()">
+                        <i class="fab fa-sketch"></i> Mis Proyectos
                     </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">
-                        <i class="fa fa-address-card"></i> Desarrolladores
-                    </a>
-                </li>
+                </li> -->
                 <?php
-                // Invitaciones de Desarrollador
-                if ($_SESSION[Consts::SESSION_KEY_USER][Consts::SESSION_USER_KEY_TIPO] == Consts::USER_TIPO_DESARROLLADOR) {
-                    echo '<li class="nav-item">
-                            <a class="nav-link" href="#">
-                                <i class="fas fa-envelope-square"></i> Invitaciones
-                            </a>
-                        </li>';
-                }
+                // // Si el Usaurio es Reclutador
+                // if ($_SESSION[Consts::SESSION_KEY_USER][Consts::SESSION_USER_KEY_TIPO] == Consts::USER_TIPO_RECLUTADOR) {
+                //     echo '<li class="nav-item">
+                //             <a class="nav-link" href="#">
+                //                 <i class="fa fa-address-card"></i> Desarrolladores
+                //             </a>
+                //         </li>';
 
+                //     // Si el Usaurio es Desarrollador
+                // } elseif ($_SESSION[Consts::SESSION_KEY_USER][Consts::SESSION_USER_KEY_TIPO] == Consts::USER_TIPO_DESARROLLADOR) {
+                //     echo '<li class="nav-item">
+                //             <a class="nav-link" href="#">
+                //                 <i class="fas fa-envelope-square"></i> Invitaciones
+                //             </a>
+                //         </li>';
+                // }
                 ?>
             </ul>
         </div>
@@ -72,9 +74,9 @@
     </div>
 </nav>
 
-<?php 
+<?php
 // Constantes
-require_once(dirname(dirname(dirname(dirname(dirname(__FILE__))))) . '/shared/Consts.php'); 
+require_once(dirname(dirname(dirname(dirname(dirname(__FILE__))))) . '/shared/Consts.php');
 ?>
 <!-- Menu JavaScript -->
 <script type="text/javascript" src="../shared/menu/menu.js"></script>

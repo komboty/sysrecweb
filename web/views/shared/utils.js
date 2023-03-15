@@ -31,13 +31,11 @@ function redirectToHome(tipoUsuario) {
             break;
 
         case CONST_USER.TIPO_RECLUTADOR:
-            alert('WEB_URL.VIEW_HOME_RECLUTADOR');
-            // window.location.replace(WEB_URL.VIEW_HOME_RECLUTADOR);
+            window.location.replace(WEB_URL.VIEW_HOME_RECLUTADOR);
             break;
 
-        default:
-            alert('WEB_URL.VIEW_LOGIN');
-            // window.location.replace(WEB_URL.VIEW_LOGIN);
-            break;
+            // default:
+            //     window.location.replace(WEB_URL.VIEW_LOGIN);
+            //     break;
     }
 }

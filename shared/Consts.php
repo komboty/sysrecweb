@@ -20,4 +20,6 @@ class Consts
 
     const USER_TIPO_DESARROLLADOR = 'Desarrollador';
     const USER_TIPO_RECLUTADOR = 'Reclutador';
+
+    const GET_MIS_PROYECTOS = 'MisProyectos';
 }

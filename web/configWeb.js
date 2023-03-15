@@ -6,13 +6,19 @@ const SERVER = {
 
 const API_URL = {
     'CONTROLLER_SESSION': SERVER.HOST + SERVER.API_CONTROLLERS + '/SessionController.php',
-    'CONTROLLER_USUARIO': SERVER.HOST + SERVER.API_CONTROLLERS + '/UsuarioController.php'
+    'CONTROLLER_USUARIO': SERVER.HOST + SERVER.API_CONTROLLERS + '/UsuarioController.php',
+    'CONTROLLER_PROYECTO': SERVER.HOST + SERVER.API_CONTROLLERS + '/ProyectoController.php'
+}
+
+const API_URL_WHIT_PARAMS = {
+    'MIS_PROYECTOS': API_URL.CONTROLLER_PROYECTO + '?MisProyectos'
 }
 
 const WEB_URL = {
     'VIEW_LOGIN': SERVER.HOST + SERVER.WEB_VIEWS + '/login/login.php',
     'VIEW_REGISTRO': SERVER.HOST + SERVER.WEB_VIEWS + '/registro/registro.php',
-    'VIEW_HOME_DESARROLLADOR': SERVER.HOST + SERVER.WEB_VIEWS + '/homeDesarrollador/homeDesarrollador.php'
+    'VIEW_HOME_DESARROLLADOR': SERVER.HOST + SERVER.WEB_VIEWS + '/homeDesarrollador/homeDesarrollador.php',
+    'VIEW_HOME_RECLUTADOR': SERVER.HOST + SERVER.WEB_VIEWS + '/homeReclutador/homeReclutador.php'
 }
 
 const CONST_USER = {
@@ -21,7 +27,7 @@ const CONST_USER = {
 }
 
 const CONST_MSG_ALERT = {
-    // ERRORS
+    // ERRORs
     'ERROR': { 'TITLE': 'Error', 'TEXT': 'Por favor, inténtalo más tarde' },
     'PASS_NOT_EQUALS': { 'TITLE': 'Error', 'TEXT': 'Las contraseñas no coinciden' },
     'USER_NOT_FOUND': { 'TITLE': 'Usuario no encontrado', 'TEXT': 'Por favor, verifique sus datos' },

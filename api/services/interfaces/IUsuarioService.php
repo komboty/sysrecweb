@@ -6,7 +6,7 @@ require_once(dirname(__FILE__) . '/IGenericService.php');
 interface IUsuarioService extends IGenericService
 {
     /**
-     * Obtiene todos los usuarios por un tipo.
+     * Obtiene todos los Usuarios por un tipo.
      * 
      * @param string $tipoUsuario Tipo de usuarios a obtener.
      * @return array Usuarios.
@@ -14,7 +14,7 @@ interface IUsuarioService extends IGenericService
     public function getByTipoUsuario(string $tipoUsuario): array;
 
     /**
-     * Obtiene un usuario por su correo y contrasenia.
+     * Obtiene un Usuario por su correo y contrasenia.
      * 
      * @param string $correo correo del usuario a obtener.
      * @param string $contrasenia contrasenia del usuario a obtener.

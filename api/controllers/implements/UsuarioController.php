@@ -12,7 +12,7 @@ switch ($_SERVER['REQUEST_METHOD']) {
      *  Si se quiere obtener uno o varios Usuarios registrados en el sistema.
      */
     case 'GET':
-        // Se verifica que el usuario tenga una sesion activa, si no es asi, se manda "No autorizado".
+        // Se verifica que el Usuario tenga una sesion activa, si no es asi, se manda "No autorizado".
         session_start();
         if (!isset($_SESSION[Consts::SESSION_KEY_USER])) {
             header(ConfigControllers::HEADER_STATUS_UNAUTHORIZED);
