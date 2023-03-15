@@ -14,6 +14,11 @@ class UsuarioServiceImpl implements IUsuarioService
         $this->usuarioDAO = $usuarioDAO;
     }
 
+    public function save($usuario)
+    {
+        return $this->usuarioDAO->save($usuario);
+    }
+
     public function getAll(): array
     {
         return $this->usuarioDAO->getAll();

@@ -1,9 +1,12 @@
-function cerrarSesion() {
+/**
+ * Elimina la sesion de un Usuario.
+ */
+function onCerrarSesion() {
     fetch(API_URL.CONTROLLER_SESSION, {
             method: 'DELETE',
         })
         .then(response => {
-            // Si se encontro el registro del usuario en el servidor, continua el flujo.
+            // Si se elimino las sesion del Usuario en el servidor, se redirije al Login.
             if (response.status === 200) {
                 window.location.replace(WEB_URL.VIEW_LOGIN);
             }

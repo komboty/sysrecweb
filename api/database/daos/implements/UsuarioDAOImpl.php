@@ -15,6 +15,34 @@ class UsuarioDAOImpl implements IUsuarioDAO
         $this->connectionDB = $connectionDB;
     }
 
+    public function save($usuario)
+    {
+        $this->connectionDB->connectDB();
+        $query = 'INSERT INTO Usuario (idTipoUsuario, nombre, correo, contrasenia, telefono, edad, curriculum) VALUES'
+            . '((SELECT id FROM TipoUsuario WHERE nombre = ?), ?, ?, ?, ?, ?, ?)';
+        $statement = $this->connectionDB->getPrepare($query);
+        $statement->bind_param(
+            'ssssssb',
+            $usuario[Consts::USER_KEY_TIPO],
+            $usuario[Consts::USER_KEY_NOMBRE],
+            $usuario[Consts::USER_KEY_CORREO],
+            $usuario[Consts::USER_KEY_CONTRASENIA],
+            $usuario[Consts::USER_KEY_TELEFONO],
+            $usuario[Consts::USER_KEY_EDAD],
+            $usuario[Consts::USER_KEY_CURRICULUM]
+        );
+        // Si tiene curriculum se almacena en la base de datos.
+        if (isset($usuario[Consts::USER_KEY_CURRICULUM])) {
+            $statement->send_long_data(6, base64_decode($usuario[Consts::USER_KEY_CURRICULUM]));
+        }
+        // Si se registro correctamente el Usuario se regresa el id.
+        if ($statement->execute()) {
+            return $statement->insert_id;
+        }
+        // Si no se registro el Usuario en  la base de datos.
+        return null;
+    }
+
     public function getAll(): array
     {
         $this->connectionDB->connectDB();

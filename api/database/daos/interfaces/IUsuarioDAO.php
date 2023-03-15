@@ -1,17 +1,10 @@
 <?php
-
+require_once(dirname(__FILE__) . '/IGenericDAO.php');
 /**
  * Interface que define las consultas a la tabla de Usuario de la base de datos.
  */
-interface IUsuarioDAO
+interface IUsuarioDAO extends IGenericDAO
 {
-    /**
-     * Obtiene todos los usuarios de la base de datos.
-     * 
-     * @return array Usuarios encontrados.
-     */
-    public function getAll(): array;
-
     /**
      * Obtiene todos los usuarios de la base de datos por su tipo.
      * 

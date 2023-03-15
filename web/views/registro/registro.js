@@ -1,20 +1,17 @@
 const formRegistro = document.getElementById('formRegistro');
 const inputPass = document.getElementById('inputPass');
 const inputPass2 = document.getElementById('inputPass2');
-const classInputPass = inputPass.className;
 
-function isValidPass(event) {
-    const isIquals = inputPass.value === inputPass2.value
-    const verify = isIquals ? ' is-valid' : ' is-invalid';
-    inputPass2.className = classInputPass + verify + ' active';
-    return isIquals;
-}
+// Clase deafult para la contrasenia 2.
+const classInputPass2 = inputPass2.className;
 
+// Eventos para validar las contrasenias.
 inputPass.addEventListener('change', isValidPass);
 inputPass2.addEventListener('keyup', isValidPass);
 
-
-
+/**
+ * Envia los datos al servidor para registrar un Usuario.
+ */
 formRegistro.addEventListener('submit', (event) => {
     event.preventDefault();
 
@@ -27,13 +24,14 @@ formRegistro.addEventListener('submit', (event) => {
     const inputEdad = document.getElementById('inputEdad');
     const inputCV = document.getElementById('inputCV');
 
-    // Se validan los datos del formulario a que contengan un valor.
-    if (inputNombre.value === '' || inputEmail.value === '' || inputPass.value === '' ||
-        inputPass2.value === '' || inputTel.value === '') {
+
+    // Se verifica que los datos del formulario sean validos.
+    if (!(inputNombre.checkValidity() && inputEmail.checkValidity() && inputPass.checkValidity() &&
+            inputPass2.checkValidity() && inputTel.checkValidity() && inputEdad.checkValidity())) {
         return;
     }
 
-    // Si las contrasenias no son iguales.
+    // Si las contrasenias no son iguales, se manda error.
     if (!isValidPass()) {
         alertError(CONST_MSG_ALERT.PASS_NOT_EQUALS.TITLE, CONST_MSG_ALERT.PASS_NOT_EQUALS.TEXT);
         return;
@@ -46,42 +44,75 @@ formRegistro.addEventListener('submit', (event) => {
         'correo': inputEmail.value,
         'contrasenia': inputPass.value,
         'telefono': inputTel.value,
-        'edad': inputEdad.value ? inputEdad.value : null,
-        'curriculum': inputCV.value ? inputCV.value : null,
+        'edad': inputEdad.value ? inputEdad.value : null
     };
 
-    //     // Se realiza la peticion al servidor para loguearse.
-    //     fetch(API_URL.CONTROLLER_SESSION, {
-    //             method: 'POST',
-    //             headers: { 'Content-Type': 'application/json' },
-    //             body: JSON.stringify(data)
-    //         })
-    //         .then(response => {
-    //             // Si se encontro el registro del usuario en el servidor, continua el flujo.
-    //             if (response.status === 200) {
-    //                 return response.json();
-    //             }
+    new Promise((resolve, reject) => {
+            if (inputCV.files[0]) {
+                resolve(getBase64(inputCV.files[0]));
+            } else {
+                resolve(null);
+            }
+        })
+        .then(file => {
+            data.curriculum = file
+            return fetch(API_URL.CONTROLLER_USUARIO, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(data)
+            })
+        })
+        .then(response => {
+            // Si se encontro el registro del usuario en el servidor, continua el flujo.
+            if (response.status === 200) {
+                return response.json();
+            }
 
-    //             // Si existio un error o no se encontro el registro del usuario en el servidor, 
-    //             // se manda error y termina el flujo.
-    //             let title = CONST_MSG_ALERT.ERROR.TITLE;
-    //             let text = CONST_MSG_ALERT.ERROR.TEXT;
+            // Si existio un error, se manda error y termina el flujo.
+            alertError(CONST_MSG_ALERT.ERROR.TITLE, CONST_MSG_ALERT.ERROR.TEXT);
+            throw new Error(title);
+        })
+        .then(usuario => {
+            // Si se registro correctamente el usuario, se redirige al Login.
+            if (usuario.id) {
+                alertSuccessRedirectLogin(CONST_MSG_ALERT.SAVE_USER.TITLE, CONST_MSG_ALERT.SAVE_USER.TEXT);
+                return;
+            }
 
-    //             if (response.status === 404) {
-    //                 title = CONST_MSG_ALERT.USER_NOT_FOUND.TITLE;
-    //                 text = CONST_MSG_ALERT.USER_NOT_FOUND.TEXT;
-    //             }
+            // Si ocurrio un error.
+            alertError(CONST_MSG_ALERT.ERROR.TITLE, CONST_MSG_ALERT.ERROR.TEXT);
+        })
+        .catch(error => error);
+    // Se realiza la peticion al servidor para loguearse.
 
-    //             alertError(title, text);
-    //             throw new Error(title);
-    //         })
-    //         .then(usuario => {
-    //             // Dependiendo del tipo del usuario, se redirige a su home.
-    //             redirectToHome(usuario.tipo);
-    //         })
-    //         .catch(error => error.message);
 });
 
-function iniciarSesion() {
+/**
+ * Valida que las dos contrasenias sean iguales.
+ * 
+ * @param {*} event 
+ * @returns true si son iguales, false si son distintas.
+ */
+function isValidPass(event) {
+    const isIquals = inputPass.value === inputPass2.value
+    const verify = isIquals ? ' is-valid' : ' is-invalid';
+    inputPass2.className = classInputPass2 + verify + ' active';
+    return isIquals;
+}
+
+
+function getBase64(file) {
+    return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onload = () => resolve(reader.result.split(',')[1]);
+        reader.onerror = error => reject(error);
+    });
+}
+
+/**
+ * Redirecciona a la pagina de Login.
+ */
+function onIniciarSesion() {
     window.location.replace(WEB_URL.VIEW_LOGIN);
 }

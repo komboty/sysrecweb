@@ -42,7 +42,7 @@
                             </form>
                             <!-- Boton crear cuenta -->
                             <hr class="my-4">
-                            <button class="btn btn-lg btn-block btn-secondary" onclick="crearCuenta()">Crear cuenta <i class="fas fa-user-plus"></i></button>
+                            <button class="btn btn-lg btn-block btn-secondary" onclick="onCrearCuenta()">Crear cuenta <i class="fas fa-user-plus"></i></button>
                         </div>
                     </div>
                 </div>

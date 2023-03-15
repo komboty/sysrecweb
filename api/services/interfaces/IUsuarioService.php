@@ -1,17 +1,10 @@
 <?php
-
+require_once(dirname(__FILE__) . '/IGenericService.php');
 /**
  * Interface que define los servicios de un Usuario.
  */
-interface IUsuarioService
+interface IUsuarioService extends IGenericService
 {
-    /**
-     * Obtiene todos los usuarios.
-     * 
-     * @return array Usuarios.
-     */
-    public function getAll(): array;
-
     /**
      * Obtiene todos los usuarios por un tipo.
      * 

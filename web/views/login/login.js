@@ -1,5 +1,8 @@
 const formLogin = document.getElementById('formLogin');
 
+/**
+ * Envia los datos al servidor para logearse un Usuario.
+ */
 formLogin.addEventListener('submit', (event) => {
     event.preventDefault();
 
@@ -7,12 +10,12 @@ formLogin.addEventListener('submit', (event) => {
     const correo = document.getElementById('inputEmail');
     const contrasenia = document.getElementById('inputPass');
 
-    // Se validan los datos del formulario a que contengan un valor.
-    if (correo.value === '' || contrasenia.value === '') {
+    // Se verifica que los datos del formulario sean validos.
+    if (!(correo.checkValidity() && contrasenia.checkValidity())) {
         return;
     }
 
-    // // Si estan bien los datos se construte el json a enviar al servidor.
+    // Si estan bien los datos se construye el json a enviar al servidor.
     const data = {
         'correo': correo.value,
         'contrasenia': contrasenia.value
@@ -44,6 +47,9 @@ formLogin.addEventListener('submit', (event) => {
         .catch(error => error.message);
 });
 
-function crearCuenta() {
+/**
+ * Redirecciona a la pagina de crear cuenta.
+ */
+function onCrearCuenta() {
     window.location.replace(WEB_URL.VIEW_REGISTRO);
 }
