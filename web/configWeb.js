@@ -21,9 +21,12 @@ const WEB_URL = {
     'VIEW_HOME_RECLUTADOR': SERVER.HOST + SERVER.WEB_VIEWS + '/homeReclutador/homeReclutador.php'
 }
 
-const CONST_USER = {
+const CONST_SHARED = {
     'TIPO_DESARROLLADOR': 'Desarrollador',
-    'TIPO_RECLUTADOR': 'Reclutador'
+    'TIPO_RECLUTADOR': 'Reclutador',
+    'ESTADO_INVITACION_ENVIADA': 'Enviada',
+    'ESTADO_INVITACION_ACEPTADA': 'Aceptada',
+    'ESTADO_INVITACION_RECHAZADA': 'Rechazada',
 }
 
 const CONST_MSG_ALERT = {

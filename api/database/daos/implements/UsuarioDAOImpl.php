@@ -46,7 +46,7 @@ class UsuarioDAOImpl implements IUsuarioDAO
     public function getAll(): array
     {
         $this->connectionDB->connectDB();
-        $query = 'SELECT u.id, u.nombre, t.nombre as tipo, u.correo, u.telefono, u.edad, u.direccion FROM Usuario as u'
+        $query = 'SELECT u.id, u.nombre, t.nombre as tipo, u.correo, u.telefono, u.edad FROM Usuario as u'
             . ' JOIN TipoUsuario as t ON u.idTipoUsuario = t.id';
         $statement = $this->connectionDB->getPrepare($query);
         $statement->execute();
@@ -58,7 +58,7 @@ class UsuarioDAOImpl implements IUsuarioDAO
     public function getByTipoUsuario(string $tipoUsuario): array
     {
         $this->connectionDB->connectDB();
-        $query = 'SELECT u.id, u.nombre, t.nombre as tipo, u.correo, u.telefono, u.edad, u.direccion FROM Usuario as u'
+        $query = 'SELECT u.id, u.nombre, t.nombre as tipo, u.correo, u.telefono, u.edad FROM Usuario as u'
             . ' JOIN TipoUsuario as t ON u.idTipoUsuario = t.id'
             . ' WHERE t.nombre = ?';
         $statement = $this->connectionDB->getPrepare($query);
@@ -72,7 +72,7 @@ class UsuarioDAOImpl implements IUsuarioDAO
     public function getByCorreoAndContrasenia(string $correo, string $contrasenia)
     {
         $this->connectionDB->connectDB();
-        $query = 'SELECT u.id, u.nombre, t.nombre as tipo, u.correo, u.telefono, u.edad, u.direccion FROM Usuario as u'
+        $query = 'SELECT u.id, u.nombre, t.nombre as tipo, u.correo, u.telefono, u.edad FROM Usuario as u'
             . ' JOIN TipoUsuario as t ON u.idTipoUsuario = t.id'
             . ' WHERE u.correo = ? and u.contrasenia = ?';
         $statement = $this->connectionDB->getPrepare($query);

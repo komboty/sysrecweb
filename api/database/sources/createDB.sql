@@ -66,13 +66,6 @@ CREATE TABLE Invitacion (
     FOREIGN KEY (idProyecto) REFERENCES Proyecto(id)
 );
 
-CREATE TABLE UsuarioProyecto (    
-    idUsuario int NOT NULL,
-    idProyecto int NOT NULL,
-    FOREIGN KEY (idUsuario) REFERENCES Usuario(id),
-    FOREIGN KEY (idProyecto) REFERENCES Proyecto(id)
-);
-
 CREATE TABLE Calificacion (
     id int NOT NULL AUTO_INCREMENT,    
     idUsuario int NOT NULL,

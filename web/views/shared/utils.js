@@ -26,11 +26,11 @@
 function redirectToHome(tipoUsuario) {
 
     switch (tipoUsuario) {
-        case CONST_USER.TIPO_DESARROLLADOR:
+        case CONST_SHARED.TIPO_DESARROLLADOR:
             window.location.replace(WEB_URL.VIEW_HOME_DESARROLLADOR);
             break;
 
-        case CONST_USER.TIPO_RECLUTADOR:
+        case CONST_SHARED.TIPO_RECLUTADOR:
             window.location.replace(WEB_URL.VIEW_HOME_RECLUTADOR);
             break;
 

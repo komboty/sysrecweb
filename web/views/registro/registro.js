@@ -39,7 +39,7 @@ formRegistro.addEventListener('submit', (event) => {
 
     // Si estan bien los datos se construte el json a enviar al servidor.
     const data = {
-        'tipo': checkDeveloper.checked ? CONST_USER.TIPO_DESARROLLADOR : CONST_USER.TIPO_RECLUTADOR,
+        'tipo': checkDeveloper.checked ? CONST_SHARED.TIPO_DESARROLLADOR : CONST_SHARED.TIPO_RECLUTADOR,
         'nombre': inputNombre.value,
         'correo': inputEmail.value,
         'contrasenia': inputPass.value,

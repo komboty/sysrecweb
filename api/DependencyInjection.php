@@ -14,6 +14,11 @@ require_once(dirname(__FILE__) . '/database/daos/implements/ProyectoDAOImpl.php'
 require_once(dirname(__FILE__) . '/services/interfaces/IProyectoService.php');
 require_once(dirname(__FILE__) . '/services/implements/ProyectoServiceImpl.php');
 
+require_once(dirname(__FILE__) . '/database/daos/interfaces/IInvitacionDAO.php');
+require_once(dirname(__FILE__) . '/database/daos/implements/InvitacionDAOImpl.php');
+require_once(dirname(__FILE__) . '/services/interfaces/IInvitacionService.php');
+require_once(dirname(__FILE__) . '/services/implements/InvitacionServiceImpl.php');
+
 class DependencyInjection
 {
     // Data Base
@@ -22,10 +27,12 @@ class DependencyInjection
     // DAO's
     private $usuarioDAO;
     private $proyectoDAO;
+    private $invitacionDAO;
 
     // Services
     private $usuarioService;
     private $proyectoService;
+    private $invitacionService;
 
     public function __construct()
     {
@@ -35,10 +42,12 @@ class DependencyInjection
         // DAO's
         $this->usuarioDAO = new UsuarioDAOImpl($this->conexionBD);
         $this->proyectoDAO = new ProyectoDAOImpl($this->conexionBD);
+        $this->invitacionDAO = new InvitacionDAOImpl($this->conexionBD);
 
         // Services
         $this->usuarioService = new UsuarioServiceImpl($this->usuarioDAO);
-        $this->proyectoService = new ProyectoServiceImpl($this->proyectoDAO);
+        $this->proyectoService = new ProyectoServiceImpl($this->proyectoDAO, $this->invitacionDAO);
+        $this->invitacionService = new InvitacionServiceImpl($this->invitacionDAO);
     }
 
     public function getConnectionDB(): IConnectionDB
@@ -59,5 +68,10 @@ class DependencyInjection
     public function getProyectoService(): IProyectoService
     {
         return $this->proyectoService;
+    }
+
+    public function getInvitacionService(): IInvitacionService
+    {
+        return $this->invitacionService;
     }
 }
