@@ -19,7 +19,8 @@ const WEB_URL = {
     'VIEW_REGISTRO': SERVER.HOST + SERVER.WEB_VIEWS + '/registro/registro.php',
     'VIEW_HOME_DESARROLLADOR': SERVER.HOST + SERVER.WEB_VIEWS + '/homeDesarrollador/homeDesarrollador.php',
     'VIEW_HOME_RECLUTADOR': SERVER.HOST + SERVER.WEB_VIEWS + '/homeReclutador/homeReclutador.php',
-    'VIEW_MIS_PROYECTOS_RECLUTADOR': SERVER.HOST + SERVER.WEB_VIEWS + '/misProyectosReclutador/misProyectosReclutador.php'
+    'VIEW_MIS_PROYECTOS_RECLUTADOR': SERVER.HOST + SERVER.WEB_VIEWS + '/misProyectosReclutador/misProyectosReclutador.php',
+    'VIEW_CREAR_PROYECTO': SERVER.HOST + SERVER.WEB_VIEWS + '/crearProyecto/crearProyecto.php',
 }
 
 const CONST_SHARED = {

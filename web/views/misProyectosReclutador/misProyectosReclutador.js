@@ -1,5 +1,6 @@
 const badgeMisProyectos = document.getElementById('badgeMisProyectos');
 const bodyMisProyectos = document.getElementById('bodyMisProyectos');
+const cardLoad = document.getElementById('cardLoad');
 
 /**
  * Obtiene los Proyectos que tiene el Reclutador.
@@ -26,6 +27,7 @@ fetch(API_URL_WHIT_PARAMS.MIS_PROYECTOS, {
 
 function cleanScreen() {
     bodyMisProyectos.innerHTML = '';
+    cardLoad.innerHTML = '';
 }
 
 

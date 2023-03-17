@@ -14,7 +14,7 @@
             <!-- Botones -->
             <ul class="navbar-nav me-auto mb-2 mb-lg-0" id="btnMenu">
                 <li class="nav-item" style="cursor: pointer;">
-                    <a class="nav-link" onclick="onMisProyectos()">
+                    <a class="nav-link" onclick="onMisProyectos('<?php echo $_SESSION[Consts::SESSION_KEY_USER][Consts::SESSION_USER_KEY_TIPO]; ?>')">
                         <i class="fab fa-sketch fa-lg"></i>
                         <span class="badge rounded-pill badge-notification bg-dark" id="badgeMisProyectos"></span> Mis Proyectos
                     </a>
@@ -31,7 +31,7 @@
                     // Si el Usaurio es Desarrollador
                 } elseif ($_SESSION[Consts::SESSION_KEY_USER][Consts::SESSION_USER_KEY_TIPO] == Consts::USER_TIPO_DESARROLLADOR) {
                     echo '<li class="nav-item" style="cursor: pointer;">
-                            <a class="nav-link" onclick="onMisProyectos()">
+                            <a class="nav-link" onclick="on()">
                                 <i class="fas fa-envelope-square fa-lg"></i>
                                 <span class="badge rounded-pill badge-notification bg-dark" id="badgeInvitaciones"></span> Invitaciones
                             </a>
