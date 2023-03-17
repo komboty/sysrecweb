@@ -7,7 +7,7 @@
     // Cabecera y Estilos .
     require_once(dirname(dirname(__FILE__)) . '/shared/head.php');
     ?>
-    <!-- HomeReclutador CSS -->
+    <!-- Mis Proyectos Reclutador CSS -->
     <!-- <link rel="stylesheet" href="login.css" /> -->
 </head>
 
@@ -21,13 +21,20 @@
     require_once(dirname(dirname(__FILE__)) . '/shared/menu/menu.php');
     ?>
     
+    <section>
+        <div class="container py-3">
+            <!-- Mis Proyectos -->
+            <div class="row row-cols-1 row-cols-md-3 g-4" id="bodyMisProyectos"></div>            
+        </div>
+    </section>
+
 
     <?php
     // JavaScripts
     require_once(dirname(dirname(__FILE__)) . '/shared/scripts.php');
     ?>
-    <!-- HomeReclutador JavaScript -->
-    <script type="text/javascript" src="homeReclutador.js"></script>
+    <!-- Mis Proyectos Reclutador JavaScript -->
+    <script type="text/javascript" src="misProyectosReclutador.js"></script>
 </body>
 
 </html>

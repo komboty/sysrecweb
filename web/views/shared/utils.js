@@ -39,3 +39,12 @@ function redirectToHome(tipoUsuario) {
             //     break;
     }
 }
+
+/**
+ * Obtiene el numero de elementos de un array
+ * @param {array} array Array a obtener el numero de elementos.
+ * @returns Numero de elementos, si no tiene, se manada cadena vacia.
+ */
+function getLength(array) {
+    return array.length ? array.length : ''
+}
