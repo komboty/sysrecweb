@@ -1,6 +1,7 @@
 <?php
 // Constantes
 require_once(dirname(dirname(dirname(dirname(dirname(__FILE__))))) . '/shared/Consts.php');
+require_once(dirname(__FILE__) . '/ConstsMenu.php');
 ?>
 
 <!-- Menu -->
@@ -14,14 +15,15 @@ require_once(dirname(dirname(dirname(dirname(dirname(__FILE__))))) . '/shared/Co
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <!-- Icono -->
             <a class="navbar-brand mt-2 mt-lg-0" onclick="redirectToHome('<?php echo $_SESSION[Consts::SESSION_KEY_USER][Consts::SESSION_USER_KEY_TIPO]; ?>')" style="cursor: pointer;">
-                <img src="../../sources/images/logo_sysrec.png" height="45" alt="SYSREC Logo" />
+                <img src="../../sources/images/logo_sysrec.png" height="35" alt="SYSREC Logo" />
             </a>
             <!-- Botones -->
             <ul class="navbar-nav me-auto mb-2 mb-lg-0" id="btnMenu">
                 <li class="nav-item" style="cursor: pointer;">
                     <a class="nav-link" onclick="onMisProyectos('<?php echo $_SESSION[Consts::SESSION_KEY_USER][Consts::SESSION_USER_KEY_TIPO]; ?>')">
                         <i class="fab fa-sketch fa-lg"></i>
-                        <span class="badge rounded-pill badge-notification bg-dark" id="badgeMisProyectos"></span> Mis Proyectos
+                        <span class="badge rounded-pill badge-notification bg-dark" id="badgeMisProyectos"></span>
+                        <?php echo ConstsMenu::TITLE_MIS_PROYECTO; ?>
                     </a>
                 </li>
                 <?php
@@ -29,7 +31,12 @@ require_once(dirname(dirname(dirname(dirname(dirname(__FILE__))))) . '/shared/Co
                 if ($_SESSION[Consts::SESSION_KEY_USER][Consts::SESSION_USER_KEY_TIPO] == Consts::USER_TIPO_RECLUTADOR) {
                     echo '<li class="nav-item" style="cursor: pointer;">
                             <a class="nav-link" onclick="onCrearProyecto()">
-                                <i class="fas fa-plus-circle fa-lg"></i> Crear Proyecto
+                                <i class="fas fa-plus-circle fa-lg"></i> ' . ConstsMenu::TITLE_CREAR_PROYECTO . '
+                            </a>
+                        </li>
+                        <li class="nav-item" style="cursor: pointer;">
+                            <a class="nav-link" onclick="onInvitar()">
+                                <i class="fas fa-user-friends fa-lg"></i> ' . ConstsMenu::TITLE_INVITAR_PROYECTO . '
                             </a>
                         </li>';
 
@@ -38,7 +45,7 @@ require_once(dirname(dirname(dirname(dirname(dirname(__FILE__))))) . '/shared/Co
                     echo '<li class="nav-item" style="cursor: pointer;">
                             <a class="nav-link" onclick="on()">
                                 <i class="fas fa-envelope-square fa-lg"></i>
-                                <span class="badge rounded-pill badge-notification bg-dark" id="badgeInvitaciones"></span> Invitaciones
+                                <span class="badge rounded-pill badge-notification bg-dark" id="badgeInvitaciones"></span>  ' . ConstsMenu::TITLE_INVITACIONES . '
                             </a>
                         </li>';
                 }
@@ -73,6 +80,29 @@ require_once(dirname(dirname(dirname(dirname(dirname(__FILE__))))) . '/shared/Co
 
     </div>
 </nav>
+
+<?php
+function setBreadcrumb(string $url)
+{
+    if ($url != '') {
+        $itemBreadcrumb = '<li class="breadcrumb-item"><a><u>' . $url . '</u></a></li>';
+    }
+
+    echo '<nav class="navbar navbar-expand-lg navbar-light bg-white">
+            <div class="container-fluid">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item" onclick="redirectToHome(' . "'" . $_SESSION[Consts::SESSION_KEY_USER][Consts::SESSION_USER_KEY_TIPO] . "'" . ')" >
+                            <a href="#"><i class="fas fa-home"></i></a>
+                        </li>
+                        ' . $itemBreadcrumb . '
+                    </ol>
+                </nav>
+            </div>
+        </nav>';
+}
+?>
+
 
 <!-- Menu JavaScript -->
 <script type="text/javascript" src="../shared/menu/menu.js"></script>

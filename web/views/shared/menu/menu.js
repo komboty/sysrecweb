@@ -12,7 +12,7 @@ function onCerrarSesion() {
 }
 
 /**
- * Redirecciona a los Proyectos que tiene el Reclutador.
+ * Redirecciona a la pagina donde se muetran los Proyectos que tiene el Usuario.
  */
 function onMisProyectos(tipoUsuario) {
     switch (tipoUsuario) {
@@ -32,8 +32,15 @@ function onMisProyectos(tipoUsuario) {
 }
 
 /**
- * Redirecciona a crear un Proyecto.
+ * Redirecciona a la pagina para crear un Proyecto.
  */
 function onCrearProyecto() {
     window.location.replace(WEB_URL.VIEW_CREAR_PROYECTO);
+}
+
+/**
+ * Redirecciona a la pagina para Invitar un Usuario a un Proyecto.
+ */
+function onInvitar() {
+    window.location.replace(WEB_URL.VIEW_INVITAR_PROYECTO);
 }

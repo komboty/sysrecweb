@@ -12,7 +12,8 @@ const API_URL = {
 
 const API_URL_WHIT_PARAMS = {
     'MIS_PROYECTOS': API_URL.CONTROLLER_PROYECTO + '?MisProyectos',
-    'SESSION_USER': API_URL.CONTROLLER_SESSION + '?User'
+    'SESSION_USER': API_URL.CONTROLLER_SESSION + '?User',
+    'USER_TIPO': API_URL.CONTROLLER_USUARIO + '?tipo=',
 }
 
 const WEB_URL = {
@@ -22,6 +23,7 @@ const WEB_URL = {
     'VIEW_HOME_RECLUTADOR': SERVER.HOST + SERVER.WEB_VIEWS + '/homeReclutador/homeReclutador.php',
     'VIEW_MIS_PROYECTOS_RECLUTADOR': SERVER.HOST + SERVER.WEB_VIEWS + '/misProyectosReclutador/misProyectosReclutador.php',
     'VIEW_CREAR_PROYECTO': SERVER.HOST + SERVER.WEB_VIEWS + '/crearProyecto/crearProyecto.php',
+    'VIEW_INVITAR_PROYECTO': SERVER.HOST + SERVER.WEB_VIEWS + '/invitarProyecto/invitarProyecto.php',
 }
 
 const CONST_SHARED = {

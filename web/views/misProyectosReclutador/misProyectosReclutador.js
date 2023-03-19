@@ -53,52 +53,65 @@ function getHTMLProyecto(proyecto) {
     return '<div class="col">' +
         '<div class="card h-100 shadow-3-strong">' +
         '  <img src="../../sources/images/img_project.jpg" class="card-img-top"/>' +
-        // '  <h5 class="card-header">' + proyecto.nombre + '</h5>' +
+        // '  <h4 class="card-header">' + proyecto.nombre + '</h4>' +
         '  <div class="card-body">' +
-        '    <h5 class="card-title">' + proyecto.nombre + '</h5>' +
-        '      <p class="card-text">' + proyecto.descripcion + '</p>' +
-        '  </div>' +
-        '  <div class="accordion">' +
-        '    <div class="accordion-item">' +
-        '      <h2 class="accordion-header" id="heading1Invi' + proyecto.id + '">' +
-        '        <button class="accordion-button collapsed" type="button" data-mdb-toggle="collapse" data-mdb-target="#collapse1Invi' + proyecto.id + '" aria-expanded="false" aria-controls="collapse1Invi' + proyecto.id + '">' +
-        '          <a href="">' +
-        '            <i class="fas fa-envelope fa-lg"></i>' +
-        '            <span class="badge rounded-pill badge-notification bg-dark">' + getLength(invisEnviadas) + '</span>' +
-        '          </a>' +
-        '          <div class="container">Invitaciones sin respuesta</div>' +
-        '        </button>' +
-        '      </h2>' +
-        '      <div id="collapse1Invi' + proyecto.id + '" class="accordion-collapse collapse" aria-labelledby="heading1Invi' + proyecto.id + '">' +
-        '        <div class="accordion-body">' + getHTMLInvitaciones(invisEnviadas) + '</div>' +
+        '    <h4 class="card-title">' + proyecto.nombre + '</h4>' +
+        '    <p class="card-text"></p>' +
+        '    <div class="accordion">' +
+        '      <div class="accordion-item">' +
+        '        <h2 class="accordion-header" id="headingDesc' + proyecto.id + '">' +
+        '          <button class="accordion-button collapsed" type="button" data-mdb-toggle="collapse" data-mdb-target="#collapseDesc' + proyecto.id + '" aria-expanded="false" aria-controls="collapseDesc' + proyecto.id + '">' +
+        '            <a href="">' +
+        '              <i class="fas fa-info-circle"></i>' +
+        '            </a>' +
+        '            <div class="container">Descripción</div>' +
+        '          </button>' +
+        '        </h2>' +
+        '        <div id="collapseDesc' + proyecto.id + '" class="accordion-collapse collapse" aria-labelledby="headingDesc' + proyecto.id + '">' +
+        '          <div class="accordion-body">' + proyecto.descripcion + '</div>' +
+        '        </div>' +
         '      </div>' +
-        '    </div>' +
-        '    <div class="accordion-item">' +
-        '      <h2 class="accordion-header" id="heading2Invi' + proyecto.id + '">' +
-        '        <button class="accordion-button collapsed" type="button" data-mdb-toggle="collapse" data-mdb-target="#collapse2Invi' + proyecto.id + '" aria-expanded="false" aria-controls="collapse2Invi' + proyecto.id + '">' +
-        '          <a href="">' +
-        '            <i class="far fa-thumbs-up fa-lg"></i>' +
-        '            <span class="badge rounded-pill badge-notification bg-dark">' + getLength(invisAceptadas) + '</span>' +
-        '          </a>' +
-        '          <div class="container">Invitaciones Aceptadas</div>' +
-        '        </button>' +
-        '      </h2>' +
-        '      <div id="collapse2Invi' + proyecto.id + '" class="accordion-collapse collapse" aria-labelledby="heading2Invi' + proyecto.id + '">' +
-        '        <div class="accordion-body">' + getHTMLInvitaciones(invisAceptadas) + '</div>' +
+        '      <div class="accordion-item">' +
+        '        <h2 class="accordion-header" id="heading1Invi' + proyecto.id + '">' +
+        '          <button class="accordion-button collapsed" type="button" data-mdb-toggle="collapse" data-mdb-target="#collapse1Invi' + proyecto.id + '" aria-expanded="false" aria-controls="collapse1Invi' + proyecto.id + '">' +
+        '            <a href="">' +
+        '              <i class="fas fa-envelope fa-lg"></i>' +
+        '              <span class="badge rounded-pill badge-notification bg-dark">' + getLength(invisEnviadas) + '</span>' +
+        '            </a>' +
+        '            <div class="container">Invitaciones sin respuesta</div>' +
+        '          </button>' +
+        '        </h2>' +
+        '        <div id="collapse1Invi' + proyecto.id + '" class="accordion-collapse collapse" aria-labelledby="heading1Invi' + proyecto.id + '">' +
+        '          <div class="accordion-body">' + getHTMLInvitaciones(invisEnviadas) + '</div>' +
+        '        </div>' +
         '      </div>' +
-        '    </div>' +
-        '    <div class="accordion-item">' +
-        '      <h2 class="accordion-header" id="heading3Invi' + proyecto.id + '">' +
-        '        <button class="accordion-button collapsed" type="button" data-mdb-toggle="collapse" data-mdb-target="#collapse3Invi' + proyecto.id + '" aria-expanded="false" aria-controls="collapse3Invi' + proyecto.id + '">' +
-        '          <a href="">' +
-        '            <i class="far fa-thumbs-down fa-lg"></i>' +
-        '            <span class="badge rounded-pill badge-notification bg-dark">' + getLength(invisRechazadas) + '</span>' +
-        '          </a>' +
-        '          <div class="container">Invitaciones Rechazadas</div>' +
-        '        </button>' +
-        '      </h2>' +
-        '      <div id="collapse3Invi' + proyecto.id + '" class="accordion-collapse collapse" aria-labelledby="heading3Invi' + proyecto.id + '">' +
-        '        <div class="accordion-body">' + getHTMLInvitaciones(invisRechazadas) + '</div>' +
+        '      <div class="accordion-item">' +
+        '        <h2 class="accordion-header" id="heading2Invi' + proyecto.id + '">' +
+        '          <button class="accordion-button collapsed" type="button" data-mdb-toggle="collapse" data-mdb-target="#collapse2Invi' + proyecto.id + '" aria-expanded="false" aria-controls="collapse2Invi' + proyecto.id + '">' +
+        '            <a href="">' +
+        '              <i class="far fa-thumbs-up fa-lg"></i>' +
+        '              <span class="badge rounded-pill badge-notification bg-dark">' + getLength(invisAceptadas) + '</span>' +
+        '            </a>' +
+        '            <div class="container">Invitaciones Aceptadas</div>' +
+        '          </button>' +
+        '        </h2>' +
+        '        <div id="collapse2Invi' + proyecto.id + '" class="accordion-collapse collapse" aria-labelledby="heading2Invi' + proyecto.id + '">' +
+        '          <div class="accordion-body">' + getHTMLInvitaciones(invisAceptadas) + '</div>' +
+        '        </div>' +
+        '      </div>' +
+        '      <div class="accordion-item">' +
+        '        <h2 class="accordion-header" id="heading3Invi' + proyecto.id + '">' +
+        '          <button class="accordion-button collapsed" type="button" data-mdb-toggle="collapse" data-mdb-target="#collapse3Invi' + proyecto.id + '" aria-expanded="false" aria-controls="collapse3Invi' + proyecto.id + '">' +
+        '            <a href="">' +
+        '              <i class="far fa-thumbs-down fa-lg"></i>' +
+        '              <span class="badge rounded-pill badge-notification bg-dark">' + getLength(invisRechazadas) + '</span>' +
+        '            </a>' +
+        '            <div class="container">Invitaciones Rechazadas</div>' +
+        '          </button>' +
+        '        </h2>' +
+        '        <div id="collapse3Invi' + proyecto.id + '" class="accordion-collapse collapse" aria-labelledby="heading3Invi' + proyecto.id + '">' +
+        '          <div class="accordion-body">' + getHTMLInvitaciones(invisRechazadas) + '</div>' +
+        '        </div>' +
         '      </div>' +
         '    </div>' +
         '  </div>' +

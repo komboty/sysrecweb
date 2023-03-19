@@ -7,7 +7,7 @@
     // Cabecera y Estilos .
     require_once(dirname(dirname(__FILE__)) . '/shared/head.php');
     ?>
-    <!-- MisProyectosReclutador CSS -->
+    <!-- InvitarProyecto CSS -->
     <!-- <link rel="stylesheet" href="login.css" /> -->
 </head>
 
@@ -19,14 +19,15 @@
 
     // Menu
     require_once(dirname(dirname(__FILE__)) . '/shared/menu/menu.php');
-    setBreadcrumb(ConstsMenu::TITLE_MIS_PROYECTO);
+    setBreadcrumb(ConstsMenu::TITLE_INVITAR_PROYECTO);
     ?>
 
+    <!-- Card Desarrolladores -->
     <section>
         <div class="container py-3">
-            <!-- Mis Proyectos -->
-            <div class="row row-cols-1 row-cols-md-3 g-4" id="bodyMisProyectos"></div>
-            
+            <!-- Desarrolladores -->
+            <div class="row row-cols-1 row-cols-md-4 g-4" id="bodyDesarrolladores"></div>
+
             <!-- Efecto carga -->
             <div class="row py-4 row-cols-1 row-cols-md-3 g-4" id="cardLoad">
                 <div class="col">
@@ -67,13 +68,12 @@
         </div>
     </section>
 
-
     <?php
     // JavaScripts
     require_once(dirname(dirname(__FILE__)) . '/shared/scripts.php');
     ?>
-    <!-- MisProyectosReclutador JavaScript -->
-    <script type="text/javascript" src="misProyectosReclutador.js"></script>
+    <!-- InvitarProyecto JavaScript -->
+    <script type="text/javascript" src="invitarProyecto.js"></script>
 </body>
 
 </html>

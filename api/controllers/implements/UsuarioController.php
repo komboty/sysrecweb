@@ -29,9 +29,10 @@ switch ($_SERVER['REQUEST_METHOD']) {
             $usuarios = $usuarioService->getByTipoUsuario($_GET[Consts::USER_KEY_TIPO]);
 
             // Si se quiere obtener todos los Usuarios.
-        } else if (isset($_GET[Consts::GET_ALL_USERS])) {
-            $usuarios = $usuarioService->getAll();
-        }
+        } 
+        // else if (isset($_GET[Consts::GET_ALL_USERS])) {
+        //     $usuarios = $usuarioService->getAll();
+        // }
 
         // Si no existen Usuarios en la base de datos se manda error.
         if (empty($usuarios)) {

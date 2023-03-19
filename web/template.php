@@ -18,6 +18,7 @@
 
     // Menu
     require_once(dirname(dirname(__FILE__)) . '/shared/menu/menu.php');
+    setBreadcrumb(ConstsMenu::TITLE_CREAR_PROYECTO);
     ?>
 
     <!-- Start your project here-->
