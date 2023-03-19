@@ -27,29 +27,23 @@ formLogin.addEventListener('submit', (event) => {
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(data)
         })
-        .then(response => {
-            // Si se encontro el registro del usuario en el servidor, continua el flujo.
-            if (response.status === 200) {
-                return response.json();
-            }
-
-            // Si existio un error o no se encontro el registro del usuario en el servidor, 
-            // se manda error y termina el flujo.
-            let title = response.status === 404 ? CONST_MSG_ALERT.USER_NOT_FOUND.TITLE : CONST_MSG_ALERT.ERROR.TITLE;
-            let text = response.status === 404 ? CONST_MSG_ALERT.USER_NOT_FOUND.TEXT : CONST_MSG_ALERT.ERROR.TEXT;
-            alertError(title, text);
-            throw new Error(title);
-        })
-        .then(usuario => {
-            // Dependiendo del tipo del usuario, se redirige a su home.
-            redirectToHome(usuario.tipo);
-        })
-        .catch(error => error.message);
+        // Si se la peticion es correcta sigue el flujo, de lo contrario manda a catch.
+        .then(res =>
+            isStatusOk(res, () => res.json(),
+                msg404 = {
+                    title: CONST_MSG_ALERT.USER_NOT_FOUND.TITLE,
+                    text: CONST_MSG_ALERT.USER_NOT_FOUND.TEXT
+                })
+        )
+        // Dependiendo del tipo del Usuario, se redirige a su home.
+        .then(usuario => redirectToHome(usuario.tipo))
+        // Si ocurrio una excepcion o error.
+        .catch(error => catchSysrecWebError(error));
 });
 
 /**
  * Redirecciona a la pagina de crear cuenta.
  */
 function onCrearCuenta() {
-    window.location.replace(WEB_URL.VIEW_REGISTRO);
+    window.location.replace(WEB_URL.VIEW_CREAR_USUARIO);
 }

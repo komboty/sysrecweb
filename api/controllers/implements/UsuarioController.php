@@ -9,12 +9,14 @@ require_once(dirname(dirname(dirname(dirname(__FILE__)))) . '/shared/Consts.php'
 switch ($_SERVER['REQUEST_METHOD']) {
 
         /**
-     *  Si se quiere obtener uno o varios Usuarios registrados en el sistema.
+     * Si se quiere obtener uno o varios Usuarios registrados en el sistema. (Se debe estar logeado como Reclutador)
+     * Todos los Usuarios: ?All (Sin valor)
+     * Un Usuario: ?tipo=
      */
     case 'GET':
-        // Se verifica que el Usuario tenga una sesion activa, si no es asi, se manda "No autorizado".
+        // Se verifica que el Usuario tenga una sesion activa y de tipo Reclutador, si no es asi, se manda "No autorizado".
         session_start();
-        if (!isset($_SESSION[Consts::SESSION_KEY_USER])) {
+        if ($_SESSION[Consts::SESSION_KEY_USER][Consts::SESSION_USER_KEY_TIPO] != Consts::USER_TIPO_RECLUTADOR) {
             header(ConfigControllers::HEADER_STATUS_UNAUTHORIZED);
             return;
         }
@@ -24,19 +26,26 @@ switch ($_SERVER['REQUEST_METHOD']) {
 
         // Si se quiere obtener un Usuario por su tipo.
         if (isset($_GET[Consts::USER_KEY_TIPO])) {
-            $response = $usuarioService->getByTipoUsuario($_GET[Consts::USER_KEY_TIPO]);
+            $usuarios = $usuarioService->getByTipoUsuario($_GET[Consts::USER_KEY_TIPO]);
 
             // Si se quiere obtener todos los Usuarios.
-        } else {
-            $response = $usuarioService->getAll();
+        } else if (isset($_GET[Consts::GET_ALL_USERS])) {
+            $usuarios = $usuarioService->getAll();
         }
 
-        echo json_encode($response);
+        // Si no existen Usuarios en la base de datos se manda error.
+        if (empty($usuarios)) {
+            header(ConfigControllers::HEADER_STATUS_NOT_FOUND);
+            return;
+        }
+
+        echo json_encode($usuarios);
         break;
 
 
         /**
-         *  Si se quiere registra un Usuario en el sistema. (Peticion por JSON)
+         * Si se quiere registra un Usuario en el sistema. 
+         * Peticion por JSON: { 'tipo': , 'nombre': , 'correo': , 'contrasenia': , 'telefono': , 'edad': , 'curriculum': }
          */
     case 'POST':
         $json = json_decode(file_get_contents('php://input'), true);

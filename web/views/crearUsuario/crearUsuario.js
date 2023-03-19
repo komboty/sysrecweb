@@ -17,7 +17,7 @@ formRegistro.addEventListener('submit', (event) => {
 
     // Se obtienen los elementos del formulario.
     const checkDeveloper = document.getElementById('checkDeveloper');
-    const checkReclutador = document.getElementById('checkReclutador');
+    // const checkReclutador = document.getElementById('checkReclutador');
     const inputNombre = document.getElementById('inputNombre');
     const inputEmail = document.getElementById('inputEmail');
     const inputTel = document.getElementById('inputTel');
@@ -62,29 +62,20 @@ formRegistro.addEventListener('submit', (event) => {
                 body: JSON.stringify(data)
             })
         })
-        .then(response => {
-            // Si se encontro el registro del usuario en el servidor, continua el flujo.
-            if (response.status === 200) {
-                return response.json();
-            }
-
-            // Si existio un error, se manda error y termina el flujo.
-            alertError(CONST_MSG_ALERT.ERROR.TITLE, CONST_MSG_ALERT.ERROR.TEXT);
-            throw new Error(title);
-        })
+        // Si se la peticion es correcta sigue el flujo, de lo contrario manda a catch.
+        .then(res => isStatusOk(res, () => res.json()))
         .then(usuario => {
-            // Si se registro correctamente el usuario, se redirige al Login.
-            if (usuario.id) {
-                alertSuccessRedirectLogin(CONST_MSG_ALERT.SAVE_USER.TITLE, CONST_MSG_ALERT.SAVE_USER.TEXT);
+            // Si no se registro el Usuario, se manda error.
+            if (!usuario.id) {
+                alertError(CONST_MSG_ALERT.ERROR.TITLE, CONST_MSG_ALERT.ERROR.TEXT);
                 return;
             }
 
-            // Si ocurrio un error.
-            alertError(CONST_MSG_ALERT.ERROR.TITLE, CONST_MSG_ALERT.ERROR.TEXT);
+            // Si se registro correctamente el Usuario, se redirige al Login.
+            alertSuccessRedirect(CONST_MSG_ALERT.SAVE_USER.TITLE, CONST_MSG_ALERT.SAVE_USER.TEXT, WEB_URL.VIEW_LOGIN);
         })
-        .catch(error => error);
-    // Se realiza la peticion al servidor para loguearse.
-
+        // Si ocurrio una excepcion o error.
+        .catch(error => catchSysrecWebError(error));
 });
 
 /**

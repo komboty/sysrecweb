@@ -6,8 +6,8 @@
     // Cabecera y Estilos .
     require_once(dirname(dirname(__FILE__)) . '/shared/head.php');
     ?>
-    <!-- Registro CSS -->
-    <link rel="stylesheet" href="registro.css" />
+    <!-- CrearUsuario CSS -->
+    <link rel="stylesheet" href="crearUsuario.css" />
 </head>
 
 <body>
@@ -22,7 +22,7 @@
                             <img src="../../sources/images/logo_sysrec.png" class="card-img-top logo" alt="SYSREC" />
                         </div>
                         <div class="card-body p-4 text-center">
-                            <h3 class="mb-4">Registro</h3>
+                            <h3 class="mb-4">Crear una cuenta</h3>
                             <!-- Formulario -->                            
                             <span class="badge badge-danger mb-4 col-md-12">* Campos obligatorios</span>
                             <div class="mb-4 col-md-12 btn-group">
@@ -106,8 +106,8 @@
     // JavaScripts
     require_once(dirname(dirname(__FILE__)) . '/shared/scripts.php');
     ?>
-    <!-- Registro JavaScript -->
-    <script type="text/javascript" src="registro.js"></script>
+    <!-- CrearUsuario JavaScript -->
+    <script type="text/javascript" src="crearUsuario.js"></script>
 </body>
 
 </html>

@@ -11,12 +11,13 @@ const API_URL = {
 }
 
 const API_URL_WHIT_PARAMS = {
-    'MIS_PROYECTOS': API_URL.CONTROLLER_PROYECTO + '?MisProyectos'
+    'MIS_PROYECTOS': API_URL.CONTROLLER_PROYECTO + '?MisProyectos',
+    'SESSION_USER': API_URL.CONTROLLER_SESSION + '?User'
 }
 
 const WEB_URL = {
     'VIEW_LOGIN': SERVER.HOST + SERVER.WEB_VIEWS + '/login/login.php',
-    'VIEW_REGISTRO': SERVER.HOST + SERVER.WEB_VIEWS + '/registro/registro.php',
+    'VIEW_CREAR_USUARIO': SERVER.HOST + SERVER.WEB_VIEWS + '/crearUsuario/crearUsuario.php',
     'VIEW_HOME_DESARROLLADOR': SERVER.HOST + SERVER.WEB_VIEWS + '/homeDesarrollador/homeDesarrollador.php',
     'VIEW_HOME_RECLUTADOR': SERVER.HOST + SERVER.WEB_VIEWS + '/homeReclutador/homeReclutador.php',
     'VIEW_MIS_PROYECTOS_RECLUTADOR': SERVER.HOST + SERVER.WEB_VIEWS + '/misProyectosReclutador/misProyectosReclutador.php',
@@ -34,11 +35,15 @@ const CONST_SHARED = {
 const CONST_MSG_ALERT = {
     // ERRORs
     'ERROR': { 'TITLE': 'Error', 'TEXT': 'Por favor, inténtalo más tarde' },
-    'PASS_NOT_EQUALS': { 'TITLE': 'Error', 'TEXT': 'Las contraseñas no coinciden' },
-    'USER_NOT_FOUND': { 'TITLE': 'Usuario no encontrado', 'TEXT': 'Por favor, verifique sus datos' },
-    'USER_NOT_SESSION': { 'TITLE': 'Tu sesión ha expirado', 'TEXT': 'Por favor, vuelve a iniciar sesión' },
+    'ERROR_WEB': { 'TITLE': 'Error Fatal', 'TEXT': 'Por favor, inténtalo más tarde' },
     'PERMISSIONS_DENIED': { 'TITLE': 'Error', 'TEXT': 'No cuentas con las credenciales necesarias' },
+    'NOT_FOUND': { 'TITLE': 'Error', 'TEXT': 'No se encontro' },
+    'PASS_NOT_EQUALS': { 'TITLE': 'Error', 'TEXT': 'Las contraseñas no coinciden' },
+    'USER_NOT_FOUND': { 'TITLE': 'Error', 'TEXT': 'Por favor, verifique sus datos' },
+    'PROJECT_NOT_FOUND': { 'TITLE': 'Ups!', 'TEXT': 'No se encontro ningún Proyecto' },
+    'USER_NOT_SESSION': { 'TITLE': 'Tu sesión ha expirado', 'TEXT': 'Por favor, vuelve a iniciar sesión' },
 
     // OKs
     'SAVE_USER': { 'TITLE': 'Registro exitoso', 'TEXT': 'Su cuenta se ha registrado correctamente' },
+    'SAVE_PROJECT': { 'TITLE': 'Registro exitoso', 'TEXT': 'Su proyecto se ha registrado correctamente' },
 }

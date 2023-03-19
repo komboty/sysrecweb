@@ -8,14 +8,16 @@ const cardLoad = document.getElementById('cardLoad');
 fetch(API_URL_WHIT_PARAMS.MIS_PROYECTOS, {
         method: 'GET',
     })
-    .then(res => res.json())
+    // Si se la peticion es correcta sigue el flujo, de lo contrario manda a catch.
+    .then(res =>
+        isStatusOk(res, () => res.json(),
+            msg404 = {
+                title: CONST_MSG_ALERT.PROJECT_NOT_FOUND.TITLE,
+                text: CONST_MSG_ALERT.PROJECT_NOT_FOUND.TEXT
+            })
+    )
+    // Se ponen los Proyectos en HTML.
     .then(misProyectos => {
-        // Si no se encontraron Proyectos, se termina el flujo.
-        if (misProyectos === null) {
-            return;
-        }
-
-        // Se ponen los Proyectos en HTML.
         cleanScreen();
         badgeMisProyectos.innerHTML = getLength(misProyectos);
         for (const proyecto of misProyectos) {
@@ -23,8 +25,15 @@ fetch(API_URL_WHIT_PARAMS.MIS_PROYECTOS, {
         }
 
     })
-    .catch(error => error.message);
+    // Si ocurrio una excepcion o error.
+    .catch(error => {
+        cleanScreen();
+        catchSysrecWebError(error);
+    });
 
+/**
+ * Limpia la pantalla.
+ */
 function cleanScreen() {
     bodyMisProyectos.innerHTML = '';
     cardLoad.innerHTML = '';

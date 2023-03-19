@@ -38,7 +38,7 @@
                                 <div class="mb-1">
                                     <div class="form-outline">
                                         <i class="fab fa-sketch trailing"></i>
-                                        <input type="email" id="inputNombre" class="form-control form-control-lg form-icon-trailing" required />
+                                        <input type="text" id="inputNombre" class="form-control form-control-lg form-icon-trailing" required />
                                         <label class="form-label" for="inputNombre">* Nombre</label>
                                         <div class="invalid-feedback">Ingresa un nombre.</div>
                                     </div>

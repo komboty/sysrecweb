@@ -2,6 +2,7 @@
 require_once(dirname(dirname(__FILE__)) . '/interfaces/IProyectoService.php');
 require_once(dirname(dirname(dirname(__FILE__))) . '/database/daos/interfaces/IProyectoDAO.php');
 require_once(dirname(dirname(dirname(__FILE__))) . '/database/daos/interfaces/IInvitacionDAO.php');
+require_once(dirname(dirname(dirname(dirname(__FILE__)))) . '/shared/Consts.php');
 
 /**
  * Clase que realiza los servicios de un Proyecto.
@@ -18,9 +19,9 @@ class ProyectoServiceImpl implements IProyectoService
     }
 
 
-    public function save($usuario)
+    public function save($proyecto)
     {
-        return $this->proyectoDAO->save($usuario);
+        return $this->proyectoDAO->save($proyecto);
     }
 
     public function getAll(): array
@@ -32,7 +33,7 @@ class ProyectoServiceImpl implements IProyectoService
     {
         $proyectos = $this->proyectoDAO->getByFundador($idFundador);        
         for ($i=0; $i < count($proyectos); $i++) {
-            $proyectos[$i]['invitaciones'] = $this->invitacionDAO->getByProyecto($proyectos[$i]['id']);
+            $proyectos[$i][Consts::PROJECT_KEY_INVITACIONES] = $this->invitacionDAO->getByProyecto($proyectos[$i][Consts::PROJECT_KEY_ID]);
         }
         return $proyectos;
     }

@@ -9,8 +9,25 @@ require_once(dirname(dirname(dirname(dirname(__FILE__)))) . '/shared/Consts.php'
 switch ($_SERVER['REQUEST_METHOD']) {
 
         /**
-     *  Si un Usuario quiere iniciar sesion. (Peticion por JSON)
+     * Si se quiere obtener datos de la sesion actual del servidor.
+     * Datos del Usuario: ?User (Sin valor)
      */
+    case 'GET':
+        session_start();
+
+        // Si se quiere obtener el Usuario de la sesion.
+        if (isset($_GET[Consts::GET_SESSION_USERS])) {
+            $response = $_SESSION[Consts::SESSION_KEY_USER];
+        }
+
+        echo json_encode($response);
+        break;
+
+
+        /**
+         * Si se quiere iniciar sesion en el servidor.
+         * Peticion por JSON: {'correo': , 'contrasenia': }
+         */
     case 'POST':
         $json = json_decode(file_get_contents('php://input'), true);
 
@@ -41,7 +58,7 @@ switch ($_SERVER['REQUEST_METHOD']) {
 
 
         /**
-         *  Si un Usuario quiere eliminar su sesion.
+         * Si se quiere eliminar la sesion del servidor. (Sin parametros)
          */
     case 'DELETE':
         session_start();

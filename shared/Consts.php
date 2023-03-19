@@ -21,5 +21,13 @@ class Consts
     const USER_TIPO_DESARROLLADOR = 'Desarrollador';
     const USER_TIPO_RECLUTADOR = 'Reclutador';
 
+    const GET_ALL_USERS = 'All';
+    const GET_SESSION_USERS = 'User';
     const GET_MIS_PROYECTOS = 'MisProyectos';
+
+    const PROJECT_KEY_ID = 'id';
+    const PROJECT_KEY_ID_FUNDADOR = 'idFundador';
+    const PROJECT_KEY_NOMBRE = 'nombre';
+    const PROJECT_KEY_DESCRIPCION = 'descripcion';
+    const PROJECT_KEY_INVITACIONES = 'invitaciones';
 }

@@ -1,6 +1,7 @@
 <?php
 require_once(dirname(dirname(__FILE__)) . '/interfaces/IProyectoDAO.php');
 require_once(dirname(dirname(dirname(__FILE__))) . '/connection/IConnectionDB.php');
+require_once(dirname(dirname(dirname(dirname(dirname(__FILE__))))) . '/shared/Consts.php');
 
 /**
  * Clase que realiza las consultas a la tabla de Proyecto de la base de datos.
@@ -17,6 +18,21 @@ class ProyectoDAOImpl implements IProyectoDAO
 
     public function save($proyecto)
     {
+        $this->connectionDB->connectDB();
+        $query = 'INSERT INTO Proyecto (idUsuarioFundador, nombre, descripcion) VALUES (?, ?, ?)';
+        $statement = $this->connectionDB->getPrepare($query);
+        $statement->bind_param(
+            'iss',
+            $proyecto[Consts::PROJECT_KEY_ID_FUNDADOR],
+            $proyecto[Consts::PROJECT_KEY_NOMBRE],
+            $proyecto[Consts::PROJECT_KEY_DESCRIPCION]
+        );
+        // Si se registro correctamente el Proyecto se regresa el id.
+        if ($statement->execute()) {
+            return $statement->insert_id;
+        }
+        // Si no se registro el Proyecto en  la base de datos.
+        return null;
     }
 
     public function getAll(): array

@@ -1,21 +1,15 @@
 // /**
-//  * Obtiene la sesion del usuario.
+//  * Obtiene el Usuario almacenado en la sesion del servidor.
 //  */
-// function getSession() {
-//     // Se realiza la peticion al servidor para obtener la sesion.
-//     return fetch(API_URL.CONTROLLER_SESSION, {
+// function getSessionUser() {
+//     // Se realiza la peticion al servidor para obtener el Usuario en la sesion.
+//     return fetch(API_URL.CONTROLLER_SESSION + API_URL_WHIT_PARAMS.SESSION_USER, {
 //             method: 'GET',
 //         })
-//         .then(res => res.json())
-//         .then(sesion => {
-//             // Si no se encontro la sesion del usuario en el servidor.
-//             if (sesion === null) {
-//                 return null;
-//             }
-//             // Si se encontro la sesion del usuario en el servidor.
-//             return sesion;
-//         })
-//         .catch(error => error.message);
+//         // Si se la peticion es correcta sigue el flujo, de lo contrario manda a catch.
+//         .then(res =>        isStatusOk(res, () => res.json())
+//         // Si ocurrio una excepcion o error.
+//        .catch(error => catchSysrecWebError(error));
 // }
 
 /**
@@ -37,6 +31,61 @@ function redirectToHome(tipoUsuario) {
             // default:
             //     window.location.replace(WEB_URL.VIEW_LOGIN);
             //     break;
+    }
+}
+
+/**
+ * Verifica que la peticion haya sido correcta. De lo contrario manda alert con error.
+ * @param {*} response respuesta del servidor.
+ * @param {*} fun Funcion a ejecutar, si el estado de la peticion fue Ok.
+ * @returns 
+ */
+function isStatusOk(response, fun,
+    msg404 = { title: CONST_MSG_ALERT.NOT_FOUND.TITLE, text: CONST_MSG_ALERT.NOT_FOUND.TEXT }
+) {
+    // Si la respuesta es OK, se regresa el valor que retorna la funcion al ejecutarla.
+    if (response.status == 200) {
+        return fun();
+    }
+
+    let msgThrow = '';
+    switch (response.status) {
+
+        // Si se realizo mal la peticion.
+        // case 400:
+        //     msgThrow = msg404.title;
+        //     alertError(msgThrow, msg404.text);
+        //     break;
+
+        // Si no esta autorizado.
+        // case 401:
+        //     msgThrow = CONST_MSG_ALERT.PERMISSIONS_DENIED.TEXT;
+        //     alertWarning(CONST_MSG_ALERT.PERMISSIONS_DENIED.TITLE, msgThrow);
+        //     break;
+
+        // Si no se encontro
+        case 404:
+            msgThrow = msg404.text;
+            alertWarning(msg404.title, msgThrow);
+            break;
+
+            // Si existio otro error
+        default:
+            msgThrow = CONST_MSG_ALERT.ERROR.TEXT;
+            alertError(CONST_MSG_ALERT.ERROR.TITLE, msgThrow);
+            break;
+    }
+
+    throw new SysrecWebError(msgThrow);
+}
+
+/**
+ * Manda error si la excepcion no es de SysrecWebError.
+ * @param {*} error excepcion.
+ */
+function catchSysrecWebError(error) {
+    if (!(error instanceof SysrecWebError)) {
+        alertError(CONST_MSG_ALERT.ERROR_WEB.TITLE, CONST_MSG_ALERT.ERROR_WEB.TEXT);
     }
 }
 

@@ -1,6 +1,7 @@
 <?php
 require_once(dirname(dirname(__FILE__)) . '/interfaces/IUsuarioDAO.php');
 require_once(dirname(dirname(dirname(__FILE__))) . '/connection/IConnectionDB.php');
+require_once(dirname(dirname(dirname(dirname(dirname(__FILE__))))) . '/shared/Consts.php');
 
 /**
  * Clase que realiza las consultas a la tabla de Usuario de la base de datos.
