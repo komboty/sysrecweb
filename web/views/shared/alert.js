@@ -5,12 +5,20 @@
  * @param {string} text Mensaje a mostrar en la alerta.
  */
 function alert(title, text, icon) {
-    return Swal.fire({
-        title: title,
-        text: text,
-        icon: icon,
-        confirmButtonText: 'OK'
-    });
+
+    return Swal.mixin({
+            customClass: {
+                confirmButton: 'btn btn-primary btn-lg',
+                // cancelButton: 'btn btn-danger btn-lg'
+            },
+            buttonsStyling: false
+        })
+        .fire({
+            title: title,
+            text: text,
+            icon: icon,
+            confirmButtonText: 'OK'
+        });
 }
 
 /**

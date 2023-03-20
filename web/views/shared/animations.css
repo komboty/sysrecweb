@@ -1,0 +1,64 @@
+/* @keyframes slideFromDown {
+    0% {
+        transform: translateY(100%);
+        opacity: 0
+    }
+    100% {
+        transform: translateY(0);
+        opacity: 1
+    }
+} */
+
+@keyframes slideFromRight {
+    0% {
+        transform: translateX(100%);
+        opacity: 0
+    }
+    100% {
+        transform: translateX(0);
+        opacity: 1
+    }
+}
+
+
+/* @keyframes slideFromLeft {
+    0% {
+        transform: translateX(-100%);
+        opacity: 0
+    }
+    100% {
+        transform: translateX(0);
+        opacity: 1
+    }
+} */
+
+
+/* .animaSlideFromDown {
+    animation-duration: 0.4s;
+    animation-timing-function: ease-out;
+    animation-delay: 0s;
+    animation-iteration-count: 1;
+    animation-name: slideFromDown;
+} */
+
+.animaSlideFromRight {
+    /* the duration of the animation */
+    animation-duration: 0.4s;
+    /* how the animation will behave */
+    animation-timing-function: ease-out;
+    /* how long to delay the animation from starting */
+    animation-delay: 0s;
+    /* how many times the animation will play */
+    animation-iteration-count: 1;
+    /* the name of the animation we defined above */
+    animation-name: slideFromRight;
+}
+
+
+/* .animaSlideFromLeft {
+    animation-duration: 0.4s;
+    animation-timing-function: ease-out;
+    animation-delay: 0s;
+    animation-iteration-count: 1;
+    animation-name: slideFromLeft;
+} */

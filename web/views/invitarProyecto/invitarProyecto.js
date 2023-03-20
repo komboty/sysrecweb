@@ -1,6 +1,9 @@
 const bodyDesarrolladores = document.getElementById('bodyDesarrolladores');
 const cardLoad = document.getElementById('cardLoad');
 
+// Clase deafult para el div de Desarrolladores.
+const classBodyDesarrolladores = bodyDesarrolladores.className;
+
 /**
  * Obtiene Todos los Desarrolladores.
  */
@@ -15,7 +18,7 @@ fetch(API_URL_WHIT_PARAMS.USER_TIPO + CONST_SHARED.TIPO_DESARROLLADOR, {
         for (const desarrollador of desarrolladores) {
             bodyDesarrolladores.innerHTML += getHTMLDesarrollador(desarrollador);
         }
-
+        bodyDesarrolladores.className += ' animaSlideFromRight';
     })
     // Si ocurrio una excepcion o error.
     .catch(error => {
@@ -28,6 +31,7 @@ fetch(API_URL_WHIT_PARAMS.USER_TIPO + CONST_SHARED.TIPO_DESARROLLADOR, {
  */
 function cleanScreen() {
     bodyDesarrolladores.innerHTML = '';
+    bodyDesarrolladores.className = classBodyDesarrolladores;
     cardLoad.innerHTML = '';
 }
 
@@ -62,7 +66,7 @@ function getHTMLDesarrollador(desarrollador) {
         '    ' + htmlDetalles +
         '  </div>' +
         '  <div class="card-footer border-0 bg-light p-2 d-flex justify-content-around">' +
-        '    <a class="btn btn-link m-0 text-reset" role="button" data-ripple-color="primary">' +
+        '    <a class="btn btn-link m-0 text-reset" role="button" onClick="onInvitar(' + desarrollador + ')" data-ripple-color="primary">' +
         '      Invitar<i class="fas fa-user-check ms-2"></i>' +
         '    </a>' +
         '  </div>' +

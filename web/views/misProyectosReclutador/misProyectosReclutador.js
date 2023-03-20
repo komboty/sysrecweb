@@ -2,6 +2,9 @@ const badgeMisProyectos = document.getElementById('badgeMisProyectos');
 const bodyMisProyectos = document.getElementById('bodyMisProyectos');
 const cardLoad = document.getElementById('cardLoad');
 
+// Clase deafult para el div de Mis Proyectos.
+const classBodyMisProyectos = bodyMisProyectos.className;
+
 /**
  * Obtiene los Proyectos que tiene el Reclutador.
  */
@@ -23,7 +26,7 @@ fetch(API_URL_WHIT_PARAMS.MIS_PROYECTOS, {
         for (const proyecto of misProyectos) {
             bodyMisProyectos.innerHTML += getHTMLProyecto(proyecto);
         }
-
+        bodyMisProyectos.className += ' animaSlideFromRight';
     })
     // Si ocurrio una excepcion o error.
     .catch(error => {
@@ -36,6 +39,7 @@ fetch(API_URL_WHIT_PARAMS.MIS_PROYECTOS, {
  */
 function cleanScreen() {
     bodyMisProyectos.innerHTML = '';
+    bodyMisProyectos.className = classBodyMisProyectos;
     cardLoad.innerHTML = '';
 }
 

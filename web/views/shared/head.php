@@ -15,3 +15,6 @@
 
 <!-- MDB CSS -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.2.0/mdb.min.css" />
+
+<!-- SYSREC CSS -->
+<link rel="stylesheet" href="../../views/shared/animations.css"/>
