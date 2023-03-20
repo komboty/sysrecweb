@@ -13,7 +13,7 @@ fetch(API_URL_WHIT_PARAMS.MIS_PROYECTOS, {
     })
     // Si se la peticion es correcta sigue el flujo, de lo contrario manda a catch.
     .then(res =>
-        isStatusOk(res, () => res.json(),
+        UtilsSysrec.isStatusOk(res, () => res.json(),
             msg404 = {
                 title: CONST_MSG_ALERT.PROJECT_NOT_FOUND.TITLE,
                 text: CONST_MSG_ALERT.PROJECT_NOT_FOUND.TEXT
@@ -22,7 +22,7 @@ fetch(API_URL_WHIT_PARAMS.MIS_PROYECTOS, {
     // Se ponen los Proyectos en HTML.
     .then(misProyectos => {
         cleanScreen();
-        badgeMisProyectos.innerHTML = getLengthArray(misProyectos);
+        badgeMisProyectos.innerHTML = UtilsSysrec.getLengthArray(misProyectos);
         for (const proyecto of misProyectos) {
             bodyMisProyectos.innerHTML += getHTMLProyecto(proyecto);
         }
@@ -31,7 +31,7 @@ fetch(API_URL_WHIT_PARAMS.MIS_PROYECTOS, {
     // Si ocurrio una excepcion o error.
     .catch(error => {
         cleanScreen();
-        catchSysrecWebError(error);
+        UtilsSysrec.catchErrorSysrec(error);
     });
 
 /**
@@ -80,7 +80,7 @@ function getHTMLProyecto(proyecto) {
         '          <button class="accordion-button collapsed" type="button" data-mdb-toggle="collapse" data-mdb-target="#collapse1Invi' + proyecto.id + '" aria-expanded="false" aria-controls="collapse1Invi' + proyecto.id + '">' +
         '            <a href="#">' +
         '              <i class="fas fa-envelope fa-lg"></i>' +
-        '              <span class="badge rounded-pill badge-notification bg-dark">' + getLengthArray(invisEnviadas) + '</span>' +
+        '              <span class="badge rounded-pill badge-notification bg-dark">' + UtilsSysrec.getLengthArray(invisEnviadas) + '</span>' +
         '            </a>' +
         '            <div class="container">Invitaciones sin respuesta</div>' +
         '          </button>' +
@@ -94,7 +94,7 @@ function getHTMLProyecto(proyecto) {
         '          <button class="accordion-button collapsed" type="button" data-mdb-toggle="collapse" data-mdb-target="#collapse2Invi' + proyecto.id + '" aria-expanded="false" aria-controls="collapse2Invi' + proyecto.id + '">' +
         '            <a href="#">' +
         '              <i class="far fa-thumbs-up fa-lg"></i>' +
-        '              <span class="badge rounded-pill badge-notification bg-dark">' + getLengthArray(invisAceptadas) + '</span>' +
+        '              <span class="badge rounded-pill badge-notification bg-dark">' + UtilsSysrec.getLengthArray(invisAceptadas) + '</span>' +
         '            </a>' +
         '            <div class="container">Invitaciones Aceptadas</div>' +
         '          </button>' +
@@ -108,7 +108,7 @@ function getHTMLProyecto(proyecto) {
         '          <button class="accordion-button collapsed" type="button" data-mdb-toggle="collapse" data-mdb-target="#collapse3Invi' + proyecto.id + '" aria-expanded="false" aria-controls="collapse3Invi' + proyecto.id + '">' +
         '            <a href="#">' +
         '              <i class="far fa-thumbs-down fa-lg"></i>' +
-        '              <span class="badge rounded-pill badge-notification bg-dark">' + getLengthArray(invisRechazadas) + '</span>' +
+        '              <span class="badge rounded-pill badge-notification bg-dark">' + UtilsSysrec.getLengthArray(invisRechazadas) + '</span>' +
         '            </a>' +
         '            <div class="container">Invitaciones Rechazadas</div>' +
         '          </button>' +

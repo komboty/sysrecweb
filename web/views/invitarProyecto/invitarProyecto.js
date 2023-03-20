@@ -14,7 +14,7 @@ fetch(API_URL_WHIT_PARAMS.USER_TIPO + CONST_SHARED.TIPO_DESARROLLADOR, {
         method: 'GET',
     })
     // Si se la peticion es correcta sigue el flujo, de lo contrario manda a catch.
-    .then(res => isStatusOk(res, () => res.json()))
+    .then(res => UtilsSysrec.isStatusOk(res, () => res.json()))
     // Se ponen los Desarrolladores en HTML.
     .then(resDesarrolladores => {
         cleanScreen();
@@ -27,7 +27,7 @@ fetch(API_URL_WHIT_PARAMS.USER_TIPO + CONST_SHARED.TIPO_DESARROLLADOR, {
     // Si ocurrio una excepcion o error.
     .catch(error => {
         cleanScreen();
-        catchSysrecWebError(error);
+        UtilsSysrec.catchErrorSysrec(error);
     });
 
 /**
@@ -93,7 +93,7 @@ function getHTMLDetalles(desarrollador, promedios) {
         '    <button class="accordion-button collapsed" type="button" data-mdb-toggle="collapse" data-mdb-target="#collapseHabils' + desarrollador.id + '" aria-expanded="false" aria-controls="collapseHabils' + desarrollador.id + '">' +
         '      <a href="#">' +
         '        <i class="fas fa-clipboard-list fa-lg"></i>' +
-        '        <span class="badge rounded-pill badge-notification bg-dark">' + getLengthArray(promedios) + '</span>' +
+        '        <span class="badge rounded-pill badge-notification bg-dark">' + UtilsSysrec.getLengthArray(promedios) + '</span>' +
         '      </a>' +
         '      <div class="container">Habilidades</div>' +
         '    </button>' +
@@ -107,7 +107,7 @@ function getHTMLDetalles(desarrollador, promedios) {
         '    <button class="accordion-button collapsed" type="button" data-mdb-toggle="collapse" data-mdb-target="#collapseParticipa' + desarrollador.id + '" aria-expanded="false" aria-controls="collapseParticipa' + desarrollador.id + '">' +
         '      <a href="#">' +
         '        <i class="fas fa-certificate fa-lg"></i>' +
-        '        <span class="badge rounded-pill badge-notification bg-dark">' + getLengthArray(participaciones) + '</span>' +
+        '        <span class="badge rounded-pill badge-notification bg-dark">' + UtilsSysrec.getLengthArray(participaciones) + '</span>' +
         '      </a>' +
         '      <div class="container">Participaciones</div>' +
         '    </button>' +
@@ -282,7 +282,7 @@ function onInvitar(idDesarrollador) {
         })
         // Si se la peticion es correcta sigue el flujo, de lo contrario manda a catch.
         .then(res =>
-            isStatusOk(res, () => res.json(),
+            UtilsSysrec.isStatusOk(res, () => res.json(),
                 msg404 = {
                     title: CONST_MSG_ALERT.PROJECT_NOT_FOUND.TITLE,
                     text: CONST_MSG_ALERT.PROJECT_NOT_FOUND.TEXT
@@ -310,7 +310,7 @@ function onInvitar(idDesarrollador) {
         // Si ocurrio una excepcion o error.
         .catch(error => {
             if (error.message !== msgCancelModal) {
-                catchSysrecWebError(error);
+                UtilsSysrec.catchErrorSysrec(error);
             }
         });
 

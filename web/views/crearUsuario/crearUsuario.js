@@ -33,7 +33,7 @@ formRegistro.addEventListener('submit', (event) => {
 
     // Si las contrasenias no son iguales, se manda error.
     if (!isValidPass()) {
-        alertError(CONST_MSG_ALERT.PASS_NOT_EQUALS.TITLE, CONST_MSG_ALERT.PASS_NOT_EQUALS.TEXT);
+        AlertSysrec.okError(CONST_MSG_ALERT.PASS_NOT_EQUALS.TITLE, CONST_MSG_ALERT.PASS_NOT_EQUALS.TEXT);
         return;
     }
 
@@ -63,19 +63,19 @@ formRegistro.addEventListener('submit', (event) => {
             })
         })
         // Si se la peticion es correcta sigue el flujo, de lo contrario manda a catch.
-        .then(res => isStatusOk(res, () => res.json()))
+        .then(res => UtilsSysrec.isStatusOk(res, () => res.json()))
         .then(usuario => {
             // Si no se registro el Usuario, se manda error.
             if (!usuario.id) {
-                alertError(CONST_MSG_ALERT.ERROR.TITLE, CONST_MSG_ALERT.ERROR.TEXT);
+                AlertSysrec.okError(CONST_MSG_ALERT.ERROR.TITLE, CONST_MSG_ALERT.ERROR.TEXT);
                 return;
             }
 
             // Si se registro correctamente el Usuario, se redirige al Login.
-            alertSuccessRedirect(CONST_MSG_ALERT.SAVE_USER.TITLE, CONST_MSG_ALERT.SAVE_USER.TEXT, WEB_URL.VIEW_LOGIN);
+            AlertSysrec.okSuccessRedirect(CONST_MSG_ALERT.SAVE_USER.TITLE, CONST_MSG_ALERT.SAVE_USER.TEXT, WEB_URL.VIEW_LOGIN);
         })
         // Si ocurrio una excepcion o error.
-        .catch(error => catchSysrecWebError(error));
+        .catch(error => UtilsSysrec.catchErrorSysrec(error));
 });
 
 /**

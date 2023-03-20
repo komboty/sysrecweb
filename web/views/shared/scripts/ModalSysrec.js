@@ -1,3 +1,6 @@
+/**
+ * Modals de SYSREC.
+ */
 class ModalSysrec {
 
     static openByHTML(title, html, textBtnConfirm, textBtnCancel, funPreConfirm) {

@@ -14,7 +14,7 @@ require_once(dirname(__FILE__) . '/ConstsMenu.php');
         <!-- Menu izquierdo colapsable -->
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <!-- Icono -->
-            <a class="navbar-brand mt-2 mt-lg-0" onclick="redirectToHome('<?php echo $_SESSION[Consts::SESSION_KEY_USER][Consts::SESSION_USER_KEY_TIPO]; ?>')" style="cursor: pointer;">
+            <a class="navbar-brand mt-2 mt-lg-0" onclick="UtilsSysrec.redirectToHome('<?php echo $_SESSION[Consts::SESSION_KEY_USER][Consts::SESSION_USER_KEY_TIPO]; ?>')" style="cursor: pointer;">
                 <img src="../../sources/images/logo_sysrec.png" height="35" alt="SYSREC Logo" />
             </a>
             <!-- Botones -->
@@ -92,7 +92,7 @@ function setBreadcrumb(string $url)
             <div class="container-fluid">
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb">
-                        <li class="breadcrumb-item" onclick="redirectToHome(' . "'" . $_SESSION[Consts::SESSION_KEY_USER][Consts::SESSION_USER_KEY_TIPO] . "'" . ')" >
+                        <li class="breadcrumb-item" onclick="UtilsSysrec.redirectToHome(' . "'" . $_SESSION[Consts::SESSION_KEY_USER][Consts::SESSION_USER_KEY_TIPO] . "'" . ')" >
                             <a href="#"><i class="fas fa-home"></i></a>
                         </li>
                         ' . $itemBreadcrumb . '
