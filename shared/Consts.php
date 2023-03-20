@@ -17,6 +17,7 @@ class Consts
     const USER_KEY_TELEFONO = 'telefono';
     const USER_KEY_EDAD = 'edad';
     const USER_KEY_CURRICULUM = 'curriculum';
+    const USER_KEY_CALIFICACIONES = 'calificaciones';
 
     const USER_TIPO_DESARROLLADOR = 'Desarrollador';
     const USER_TIPO_RECLUTADOR = 'Reclutador';

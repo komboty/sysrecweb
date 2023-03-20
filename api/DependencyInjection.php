@@ -19,6 +19,11 @@ require_once(dirname(__FILE__) . '/database/daos/implements/InvitacionDAOImpl.ph
 require_once(dirname(__FILE__) . '/services/interfaces/IInvitacionService.php');
 require_once(dirname(__FILE__) . '/services/implements/InvitacionServiceImpl.php');
 
+require_once(dirname(__FILE__) . '/database/daos/interfaces/ICalificacionDAO.php');
+require_once(dirname(__FILE__) . '/database/daos/implements/CalificacionDAOImpl.php');
+require_once(dirname(__FILE__) . '/services/interfaces/ICalificacionService.php');
+require_once(dirname(__FILE__) . '/services/implements/CalificacionServiceImpl.php');
+
 class DependencyInjection
 {
     // Data Base
@@ -28,11 +33,13 @@ class DependencyInjection
     private $usuarioDAO;
     private $proyectoDAO;
     private $invitacionDAO;
+    private $calificacionDAO;
 
     // Services
     private $usuarioService;
     private $proyectoService;
     private $invitacionService;
+    private $calificacionService;
 
     public function __construct()
     {
@@ -43,21 +50,18 @@ class DependencyInjection
         $this->usuarioDAO = new UsuarioDAOImpl($this->conexionBD);
         $this->proyectoDAO = new ProyectoDAOImpl($this->conexionBD);
         $this->invitacionDAO = new InvitacionDAOImpl($this->conexionBD);
+        $this->calificacionDAO = new CalificacionDAOImpl($this->conexionBD);
 
         // Services
-        $this->usuarioService = new UsuarioServiceImpl($this->usuarioDAO);
+        $this->usuarioService = new UsuarioServiceImpl($this->usuarioDAO, $this->calificacionDAO);
         $this->proyectoService = new ProyectoServiceImpl($this->proyectoDAO, $this->invitacionDAO);
         $this->invitacionService = new InvitacionServiceImpl($this->invitacionDAO);
+        $this->calificacionService = new CalificacionServiceImpl($this->calificacionDAO);
     }
 
     public function getConnectionDB(): IConnectionDB
     {
         return $this->conexionBD;
-    }
-
-    public function getUsuarioDAO(): IUsuarioDAO
-    {
-        return $this->usuarioDAO;
     }
 
     public function getUsuarioService(): IUsuarioService
@@ -73,5 +77,10 @@ class DependencyInjection
     public function getInvitacionService(): IInvitacionService
     {
         return $this->invitacionService;
+    }
+
+    public function getCalificacionService(): ICalificacionService
+    {
+        return $this->calificacionService;
     }
 }

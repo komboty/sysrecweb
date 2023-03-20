@@ -19,7 +19,7 @@ fetch(API_URL_WHIT_PARAMS.MIS_PROYECTOS, {
     // Se ponen los Proyectos en HTML.
     .then(misProyectos => {
         cleanScreen();
-        badgeMisProyectos.innerHTML = getLength(misProyectos);
+        badgeMisProyectos.innerHTML = getLengthArray(misProyectos);
         for (const proyecto of misProyectos) {
             bodyMisProyectos.innerHTML += getHTMLProyecto(proyecto);
         }
@@ -61,7 +61,7 @@ function getHTMLProyecto(proyecto) {
         '      <div class="accordion-item">' +
         '        <h2 class="accordion-header" id="headingDesc' + proyecto.id + '">' +
         '          <button class="accordion-button collapsed" type="button" data-mdb-toggle="collapse" data-mdb-target="#collapseDesc' + proyecto.id + '" aria-expanded="false" aria-controls="collapseDesc' + proyecto.id + '">' +
-        '            <a href="">' +
+        '            <a href="#">' +
         '              <i class="fas fa-info-circle"></i>' +
         '            </a>' +
         '            <div class="container">Descripción</div>' +
@@ -74,9 +74,9 @@ function getHTMLProyecto(proyecto) {
         '      <div class="accordion-item">' +
         '        <h2 class="accordion-header" id="heading1Invi' + proyecto.id + '">' +
         '          <button class="accordion-button collapsed" type="button" data-mdb-toggle="collapse" data-mdb-target="#collapse1Invi' + proyecto.id + '" aria-expanded="false" aria-controls="collapse1Invi' + proyecto.id + '">' +
-        '            <a href="">' +
+        '            <a href="#">' +
         '              <i class="fas fa-envelope fa-lg"></i>' +
-        '              <span class="badge rounded-pill badge-notification bg-dark">' + getLength(invisEnviadas) + '</span>' +
+        '              <span class="badge rounded-pill badge-notification bg-dark">' + getLengthArray(invisEnviadas) + '</span>' +
         '            </a>' +
         '            <div class="container">Invitaciones sin respuesta</div>' +
         '          </button>' +
@@ -88,9 +88,9 @@ function getHTMLProyecto(proyecto) {
         '      <div class="accordion-item">' +
         '        <h2 class="accordion-header" id="heading2Invi' + proyecto.id + '">' +
         '          <button class="accordion-button collapsed" type="button" data-mdb-toggle="collapse" data-mdb-target="#collapse2Invi' + proyecto.id + '" aria-expanded="false" aria-controls="collapse2Invi' + proyecto.id + '">' +
-        '            <a href="">' +
+        '            <a href="#">' +
         '              <i class="far fa-thumbs-up fa-lg"></i>' +
-        '              <span class="badge rounded-pill badge-notification bg-dark">' + getLength(invisAceptadas) + '</span>' +
+        '              <span class="badge rounded-pill badge-notification bg-dark">' + getLengthArray(invisAceptadas) + '</span>' +
         '            </a>' +
         '            <div class="container">Invitaciones Aceptadas</div>' +
         '          </button>' +
@@ -102,9 +102,9 @@ function getHTMLProyecto(proyecto) {
         '      <div class="accordion-item">' +
         '        <h2 class="accordion-header" id="heading3Invi' + proyecto.id + '">' +
         '          <button class="accordion-button collapsed" type="button" data-mdb-toggle="collapse" data-mdb-target="#collapse3Invi' + proyecto.id + '" aria-expanded="false" aria-controls="collapse3Invi' + proyecto.id + '">' +
-        '            <a href="">' +
+        '            <a href="#">' +
         '              <i class="far fa-thumbs-down fa-lg"></i>' +
-        '              <span class="badge rounded-pill badge-notification bg-dark">' + getLength(invisRechazadas) + '</span>' +
+        '              <span class="badge rounded-pill badge-notification bg-dark">' + getLengthArray(invisRechazadas) + '</span>' +
         '            </a>' +
         '            <div class="container">Invitaciones Rechazadas</div>' +
         '          </button>' +

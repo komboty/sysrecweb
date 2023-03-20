@@ -12,6 +12,10 @@ switch ($_SERVER['REQUEST_METHOD']) {
      * Si se quiere obtener uno o varios Usuarios registrados en el sistema. (Se debe estar logeado como Reclutador)
      * Todos los Usuarios: ?All (Sin valor)
      * Un Usuario: ?tipo=
+     * Respuesta; [{'id': ,'nombre': ,'tipo': ,'correo': ,'telefono': ,'edad': ,
+     *              'calificaciones': [{'id': ,'idProyecto': ,'nombreProyecto': ,'idHabilidad': ,'nombreHabilidad': ,'puntos': ,'comentario': 
+     *                                  }, ...]
+     *              }, ...]
      */
     case 'GET':
         // Se verifica que el Usuario tenga una sesion activa y de tipo Reclutador, si no es asi, se manda "No autorizado".
@@ -47,6 +51,7 @@ switch ($_SERVER['REQUEST_METHOD']) {
         /**
          * Si se quiere registra un Usuario en el sistema. 
          * Peticion por JSON: { 'tipo': , 'nombre': , 'correo': , 'contrasenia': , 'telefono': , 'edad': , 'curriculum': }
+         * Respuesta: {'id': }
          */
     case 'POST':
         $json = json_decode(file_get_contents('php://input'), true);

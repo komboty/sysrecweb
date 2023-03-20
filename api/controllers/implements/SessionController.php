@@ -11,6 +11,7 @@ switch ($_SERVER['REQUEST_METHOD']) {
         /**
      * Si se quiere obtener datos de la sesion actual del servidor.
      * Datos del Usuario: ?User (Sin valor)
+     * Respuesta: {'id': ,'nombre': ,'tipo': ,'correo': ,'telefono': ,'edad': }
      */
     case 'GET':
         session_start();
@@ -27,6 +28,7 @@ switch ($_SERVER['REQUEST_METHOD']) {
         /**
          * Si se quiere iniciar sesion en el servidor.
          * Peticion por JSON: {'correo': , 'contrasenia': }
+         * Respuesta: {'tipo': }
          */
     case 'POST':
         $json = json_decode(file_get_contents('php://input'), true);

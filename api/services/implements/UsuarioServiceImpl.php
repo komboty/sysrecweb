@@ -1,6 +1,8 @@
 <?php
 require_once(dirname(dirname(__FILE__)) . '/interfaces/IUsuarioService.php');
 require_once(dirname(dirname(dirname(__FILE__))) . '/database/daos/interfaces/IUsuarioDAO.php');
+require_once(dirname(dirname(dirname(__FILE__))) . '/database/daos/interfaces/ICalificacionDAO.php');
+require_once(dirname(dirname(dirname(dirname(__FILE__)))) . '/shared/Consts.php');
 
 /**
  * Clase que realiza los servicios de un Usuario.
@@ -8,10 +10,12 @@ require_once(dirname(dirname(dirname(__FILE__))) . '/database/daos/interfaces/IU
 class UsuarioServiceImpl implements IUsuarioService
 {
     private $usuarioDAO;
+    private $calificacionDAO;
 
-    public function __construct(IUsuarioDAO $usuarioDAO)
+    public function __construct(IUsuarioDAO $usuarioDAO, ICalificacionDAO $calificacionDAO)
     {
         $this->usuarioDAO = $usuarioDAO;
+        $this->calificacionDAO = $calificacionDAO;
     }
 
     public function save($usuario)
@@ -26,7 +30,11 @@ class UsuarioServiceImpl implements IUsuarioService
 
     public function getByTipoUsuario(string $tipoUsuario): array
     {
-        return $this->usuarioDAO->getByTipoUsuario($tipoUsuario);
+        $usuarios = $this->usuarioDAO->getByTipoUsuario($tipoUsuario);                
+        for ($i=0; $i < count($usuarios); $i++) {            
+            $usuarios[$i][Consts::USER_KEY_CALIFICACIONES] = $this->calificacionDAO->getByUsuario($usuarios[$i][Consts::USER_KEY_ID]);
+        }
+        return $usuarios;
     }
 
     public function getByCorreoAndContrasenia(string $correo, string $contrasenia)

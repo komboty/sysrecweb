@@ -90,10 +90,20 @@ function catchSysrecWebError(error) {
 }
 
 /**
- * Obtiene el numero de elementos de un array
+ * Obtiene el numero de elementos de un array.
  * @param {array} array Array a obtener el numero de elementos.
  * @returns Numero de elementos, si no tiene, se manada cadena vacia.
  */
-function getLength(array) {
-    return array.length ? array.length : ''
+function getLengthArray(array) {
+    return array.length ? array.length : '';
 }
+
+// /**
+//  * Obtiene el numero de llaves de un objeto.
+//  * @param {object} object Objeto a obtener el numero de llaves.
+//  * @returns Numero de llaves, si no tiene, se manada cadena vacia.
+//  */
+// function getLengthKeys(object) {
+//     const keys = Object.keys(object);
+//     return keys.length ? keys.length : '';
+// }

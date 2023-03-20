@@ -18,6 +18,10 @@ switch ($_SERVER['REQUEST_METHOD']) {
         /**
      * Si se quiere obtener uno o varios Proyectos registrados en el sistema. 
      * ?MisProyectos, Sin valor ya que regresan los Proyectos del Usuario almacenado en la sesion.
+     * Respuesta: [{'id': ,'nombre': ,'descripcion': ,
+     *              'invitaciones':[{'id': ,'estado': ,'idUsuario': ,'nombre': ,'correo': ,'telefono': 
+     *                              }, ...]
+     *              }, ...]
      */
     case 'GET':
         // Si no existen el parametro en la peticion se manda error.
@@ -57,8 +61,9 @@ switch ($_SERVER['REQUEST_METHOD']) {
         break;
 
         /**
-         * Si se quiere registra un Usuario en el sistema. 
+         * Si se quiere registra un Proyecto en el sistema. 
          * Peticion por JSON: { 'idFundador': , 'nombre': , 'descripcion': }
+         * Respuesta: {'id': }
          */
     case 'POST':
         $json = json_decode(file_get_contents('php://input'), true);
