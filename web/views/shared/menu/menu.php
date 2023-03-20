@@ -20,7 +20,7 @@ require_once(dirname(__FILE__) . '/ConstsMenu.php');
             <!-- Botones -->
             <ul class="navbar-nav me-auto mb-2 mb-lg-0" id="btnMenu">
                 <li class="nav-item" style="cursor: pointer;">
-                    <a class="nav-link" onclick="onMisProyectos('<?php echo $_SESSION[Consts::SESSION_KEY_USER][Consts::SESSION_USER_KEY_TIPO]; ?>')">
+                    <a class="nav-link" onclick="redirectToMisProyectos('<?php echo $_SESSION[Consts::SESSION_KEY_USER][Consts::SESSION_USER_KEY_TIPO]; ?>')">
                         <i class="fab fa-sketch fa-lg"></i>
                         <span class="badge rounded-pill badge-notification bg-dark" id="badgeMisProyectos"></span>
                         <?php echo ConstsMenu::TITLE_MIS_PROYECTO; ?>
@@ -30,12 +30,12 @@ require_once(dirname(__FILE__) . '/ConstsMenu.php');
                 // Si el Usaurio es Reclutador
                 if ($_SESSION[Consts::SESSION_KEY_USER][Consts::SESSION_USER_KEY_TIPO] == Consts::USER_TIPO_RECLUTADOR) {
                     echo '<li class="nav-item" style="cursor: pointer;">
-                            <a class="nav-link" onclick="onCrearProyecto()">
+                            <a class="nav-link" onclick="redirectToCrearProyecto()">
                                 <i class="fas fa-plus-circle fa-lg"></i> ' . ConstsMenu::TITLE_CREAR_PROYECTO . '
                             </a>
                         </li>
                         <li class="nav-item" style="cursor: pointer;">
-                            <a class="nav-link" onclick="onInvitar()">
+                            <a class="nav-link" onclick="redirectToInvitar()">
                                 <i class="fas fa-user-friends fa-lg"></i> ' . ConstsMenu::TITLE_INVITAR_PROYECTO . '
                             </a>
                         </li>';
@@ -43,7 +43,7 @@ require_once(dirname(__FILE__) . '/ConstsMenu.php');
                     // Si el Usaurio es Desarrollador
                 } elseif ($_SESSION[Consts::SESSION_KEY_USER][Consts::SESSION_USER_KEY_TIPO] == Consts::USER_TIPO_DESARROLLADOR) {
                     echo '<li class="nav-item" style="cursor: pointer;">
-                            <a class="nav-link" onclick="on()">
+                            <a class="nav-link" onclick="redirectTo()">
                                 <i class="fas fa-envelope-square fa-lg"></i>
                                 <span class="badge rounded-pill badge-notification bg-dark" id="badgeInvitaciones"></span>  ' . ConstsMenu::TITLE_INVITACIONES . '
                             </a>

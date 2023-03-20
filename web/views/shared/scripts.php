@@ -10,3 +10,4 @@
 <script type="text/javascript" src="../shared/SysrecWebError.js"></script>
 <script type="text/javascript" src="../shared/utils.js"></script>
 <script type="text/javascript" src="../shared/alert.js"></script>
+<script type="text/javascript" src="../shared/ModalSysrec.js"></script>

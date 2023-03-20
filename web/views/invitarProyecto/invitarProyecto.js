@@ -4,6 +4,9 @@ const cardLoad = document.getElementById('cardLoad');
 // Clase deafult para el div de Desarrolladores.
 const classBodyDesarrolladores = bodyDesarrolladores.className;
 
+// Desarrolladores.
+let desarrolladores = [];
+
 /**
  * Obtiene Todos los Desarrolladores.
  */
@@ -13,8 +16,9 @@ fetch(API_URL_WHIT_PARAMS.USER_TIPO + CONST_SHARED.TIPO_DESARROLLADOR, {
     // Si se la peticion es correcta sigue el flujo, de lo contrario manda a catch.
     .then(res => isStatusOk(res, () => res.json()))
     // Se ponen los Desarrolladores en HTML.
-    .then(desarrolladores => {
+    .then(resDesarrolladores => {
         cleanScreen();
+        desarrolladores = resDesarrolladores;
         for (const desarrollador of desarrolladores) {
             bodyDesarrolladores.innerHTML += getHTMLDesarrollador(desarrollador);
         }
@@ -66,7 +70,7 @@ function getHTMLDesarrollador(desarrollador) {
         '    ' + htmlDetalles +
         '  </div>' +
         '  <div class="card-footer border-0 bg-light p-2 d-flex justify-content-around">' +
-        '    <a class="btn btn-link m-0 text-reset" role="button" onClick="onInvitar(' + desarrollador + ')" data-ripple-color="primary">' +
+        '    <a class="btn btn-link m-0 text-reset" role="button" onClick="onInvitar(' + desarrollador.id + ')" data-ripple-color="primary">' +
         '      Invitar<i class="fas fa-user-check ms-2"></i>' +
         '    </a>' +
         '  </div>' +
@@ -265,4 +269,78 @@ function getParticipaciones(calificaciones) {
     // Se ordenan los promedios.
     promedios.sort(function(a, b) { return b.promedio - a.promedio });
     return promedios;
+}
+
+function onInvitar(idDesarrollador) {
+    // Se obtiene el Desarrollador a invitar.
+    const desarrollador = desarrolladores.filter(desarrollador => desarrollador.id === idDesarrollador)[0];
+    const msgCancelModal = 'CANCEL_MODAL';
+
+    // Se obtienen los Proyectos que tiene el Reclutador.
+    fetch(API_URL_WHIT_PARAMS.MIS_PROYECTOS, {
+            method: 'GET',
+        })
+        // Si se la peticion es correcta sigue el flujo, de lo contrario manda a catch.
+        .then(res =>
+            isStatusOk(res, () => res.json(),
+                msg404 = {
+                    title: CONST_MSG_ALERT.PROJECT_NOT_FOUND.TITLE,
+                    text: CONST_MSG_ALERT.PROJECT_NOT_FOUND.TEXT
+                })
+        )
+        // Se ponen los Proyectos en HTML.
+        .then(proyectos => ModalSysrec.openByHTML('Invitar a', getHTMLInvitar(proyectos, desarrollador),
+            'Invitar <i class="fas fa-user-check" style="margin-left: 0.3em;"></i>',
+            'Cancelar <i class="fas fa-user-times" style="margin-left: 0.3em;"></i>',
+            () => {
+                return {
+                    'idProyecto': document.getElementById('swal2SelectProyect').value,
+                    'comentario': document.getElementById('swal2AreaComent').value
+                };
+            }
+        ))
+        .then((resModal) => {
+            // Si el Reclutador cancelo la invitacion.
+            if (!resModal.isConfirmed) {
+                throw new Error(msgCancelModal);
+            }
+
+            console.log(resModal);
+        })
+        // Si ocurrio una excepcion o error.
+        .catch(error => {
+            if (error.message !== msgCancelModal) {
+                catchSysrecWebError(error);
+            }
+        });
+
+
+}
+
+function getHTMLInvitar(proyectos, desarrollador) {
+    let optionsProyectos = '';
+    for (const proyecto of proyectos) {
+        optionsProyectos += '  <option value="' + proyecto.id + '">' + proyecto.nombre + '</option>';
+    }
+
+    return '<div class="container py-1">' +
+        '  <img src="../../sources/images/img_user.png" style="width: 45px; height: 45px" class="rounded-circle"/>' +
+        '  <div class="ms-3 py-2">' +
+        '    <p class="fw-bold mb-1">' + desarrollador.nombre + '</p>' +
+        '    <p class="text-muted mb-0"><i class="fas fa-envelope fa-xs"></i> ' + desarrollador.correo + '</p>' +
+        '    <p class="text-muted mb-0"><i class="fas fa-phone fa-xs"></i> ' + desarrollador.telefono + '</p>' +
+        '    <p class="text-muted mb-0"><i class="fas fa-hiking fa-xs"></i> ' + desarrollador.edad + '</p>' +
+        // '    <span class="badge rounded-pill badge-' + colorCard + '">' + textBadgePromedio + '</span>' +
+        '  </div>' +
+        '</div>' +
+        '<div class="container py-2">' +
+        '  <div class="input-group input-group-lg mb-4">' +
+        '    <span class="input-group-text border-0"><i class="fab fa-sketch" ></i></span>' +
+        '    <select class="form-select rounded" id="swal2SelectProyect" placeholder="Proyecto">' + optionsProyectos + '</select>' +
+        '  </div>' +
+        '  <div class="input-group input-group-lg">' +
+        '    <span class="input-group-text border-0"><i class="fas fa-edit"></i></span>' +
+        '    <textarea class="form-control rounded" id="swal2AreaComent" placeholder="Comentario"></textarea>' +
+        '  </div>' +
+        '</div>';
 }

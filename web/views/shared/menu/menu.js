@@ -14,7 +14,7 @@ function onCerrarSesion() {
 /**
  * Redirecciona a la pagina donde se muetran los Proyectos que tiene el Usuario.
  */
-function onMisProyectos(tipoUsuario) {
+function redirectToMisProyectos(tipoUsuario) {
     switch (tipoUsuario) {
         case CONST_SHARED.TIPO_DESARROLLADOR:
             // window.location.replace(WEB_URL.VIEW_HOME_DESARROLLADOR);
@@ -34,13 +34,13 @@ function onMisProyectos(tipoUsuario) {
 /**
  * Redirecciona a la pagina para crear un Proyecto.
  */
-function onCrearProyecto() {
+function redirectToCrearProyecto() {
     window.location.replace(WEB_URL.VIEW_CREAR_PROYECTO);
 }
 
 /**
  * Redirecciona a la pagina para Invitar un Usuario a un Proyecto.
  */
-function onInvitar() {
+function redirectToInvitar() {
     window.location.replace(WEB_URL.VIEW_INVITAR_PROYECTO);
 }
