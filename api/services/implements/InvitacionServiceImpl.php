@@ -14,9 +14,9 @@ class InvitacionServiceImpl implements IInvitacionService
         $this->invitacionDAO = $invitacionDAO;
     }
 
-    public function save($usuario)
+    public function save($invitacion)
     {
-        return $this->invitacionDAO->save($usuario);
+        return $this->invitacionDAO->save($invitacion);
     }
 
     public function getAll(): array

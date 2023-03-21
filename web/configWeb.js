@@ -7,7 +7,8 @@ const SERVER = {
 const API_URL = {
     'CONTROLLER_SESSION': SERVER.HOST + SERVER.API_CONTROLLERS + '/SessionController.php',
     'CONTROLLER_USUARIO': SERVER.HOST + SERVER.API_CONTROLLERS + '/UsuarioController.php',
-    'CONTROLLER_PROYECTO': SERVER.HOST + SERVER.API_CONTROLLERS + '/ProyectoController.php'
+    'CONTROLLER_PROYECTO': SERVER.HOST + SERVER.API_CONTROLLERS + '/ProyectoController.php',
+    'CONTROLLER_INVITACION': SERVER.HOST + SERVER.API_CONTROLLERS + '/InvitacionController.php'
 }
 
 const API_URL_WHIT_PARAMS = {
@@ -44,8 +45,12 @@ const CONST_MSG_ALERT = {
     'USER_NOT_FOUND': { 'TITLE': 'Error', 'TEXT': 'Por favor, verifique sus datos' },
     'PROJECT_NOT_FOUND': { 'TITLE': 'Ups!', 'TEXT': 'No se encontro ningún Proyecto' },
     'USER_NOT_SESSION': { 'TITLE': 'Tu sesión ha expirado', 'TEXT': 'Por favor, vuelve a iniciar sesión' },
+    'ERROR_USER_INVITADO': { 'TITLE': 'Desarrollador invitado', 'TEXT': 'El desarrollador ya tiene una invitación a este Proyecto, aún no la responde' },
+    'ERROR_USER_ACEPTADO': { 'TITLE': 'Desarrollador aceptado', 'TEXT': 'El desarrollador ya Acepto la invitacion a este Proyecto' },
+
 
     // OKs
     'SAVE_USER': { 'TITLE': 'Registro exitoso', 'TEXT': 'Su cuenta se ha registrado correctamente' },
     'SAVE_PROJECT': { 'TITLE': 'Registro exitoso', 'TEXT': 'Su proyecto se ha registrado correctamente' },
+    'SAVE_INVITACTION': { 'TITLE': 'Invitación enviada', 'TEXT': 'Se ha mandado correctamente' },
 }

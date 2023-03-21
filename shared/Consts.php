@@ -5,6 +5,9 @@
  */
 class Consts
 {
+    /**
+     * Constantes de Usuarios
+     */
     const SESSION_KEY_USER = 'user';
     const SESSION_USER_KEY_TIPO = 'tipo';
     const SESSION_USER_KEY_CORREO = 'correo';
@@ -26,9 +29,25 @@ class Consts
     const GET_SESSION_USERS = 'User';
     const GET_MIS_PROYECTOS = 'MisProyectos';
 
+
+    /**
+     * Constantes de Proyectos
+     */
     const PROJECT_KEY_ID = 'id';
     const PROJECT_KEY_ID_FUNDADOR = 'idFundador';
     const PROJECT_KEY_NOMBRE = 'nombre';
     const PROJECT_KEY_DESCRIPCION = 'descripcion';
     const PROJECT_KEY_INVITACIONES = 'invitaciones';
+
+
+    /**
+     * Constantes de Invitaciones
+     */
+    const INVITACION_KEY_ID = 'id';
+    const INVITACION_KEY_ESTADO = 'estado';
+    const INVITACION_KEY_ID_USUARIO = 'idUsuario';
+    const INVITACION_KEY_ID_PROYECTO = 'idProyecto';
+    const INVITACION_KEY_COMENTARIO = 'comentario';
+
+    const INVITACION_ESTADO_ENVIADA = 'Enviada';
 }

@@ -4,7 +4,9 @@ const cardLoad = document.getElementById('cardLoad');
 // Clase deafult para el div de Desarrolladores.
 const classBodyDesarrolladores = bodyDesarrolladores.className;
 
-// Desarrolladores.
+/**
+ * @type {Desarrollador[]}
+ */
 let desarrolladores = [];
 
 /**
@@ -18,8 +20,10 @@ fetch(API_URL_WHIT_PARAMS.USER_TIPO + CONST_SHARED.TIPO_DESARROLLADOR, {
     // Se ponen los Desarrolladores en HTML.
     .then(resDesarrolladores => {
         cleanScreen();
-        desarrolladores = resDesarrolladores;
-        for (const desarrollador of desarrolladores) {
+        let desarrollador = null;
+        for (const resDesarrollador of resDesarrolladores) {
+            desarrollador = new Desarrollador(resDesarrollador);
+            desarrolladores.push(desarrollador);
             bodyDesarrolladores.innerHTML += getHTMLDesarrollador(desarrollador);
         }
         bodyDesarrolladores.className += ' animaSlideFromRight';
@@ -42,15 +46,11 @@ function cleanScreen() {
 
 /**
  * Regresa el HTML de un Desarrollador.
- * @param {object} desarrollador Desarrollador a poner formato.
+ * @param {Desarrollador} desarrollador Desarrollador a poner formato.
  * @returns {string} HTML.
  */
 function getHTMLDesarrollador(desarrollador) {
-    const promedios = getPromedios(desarrollador.calificaciones);
-    const promedioTotal = getPromedioTotal(promedios);
-    const colorCard = getColorByValue(promedioTotal);
-    const textBadgePromedio = desarrollador.calificaciones.length ? getHTMLStars(promedioTotal, 'fa-lg') + ' ' + promedioTotal : 'Sin calificaciones';
-    const htmlDetalles = desarrollador.calificaciones.length ? getHTMLDetalles(desarrollador, promedios) : '';
+    const htmlDetalles = desarrollador.calificaciones.length ? getHTMLDetalles(desarrollador) : '';
 
     return '<div class="col">' +
         '<div class="card mb-3 h-100 shadow-3-strong">' +
@@ -63,7 +63,7 @@ function getHTMLDesarrollador(desarrollador) {
         '          <p class="text-muted mb-0"><i class="fas fa-envelope fa-xs"></i> ' + desarrollador.correo + '</p>' +
         '          <p class="text-muted mb-0"><i class="fas fa-phone fa-xs"></i> ' + desarrollador.telefono + '</p>' +
         '          <p class="text-muted mb-0"><i class="fas fa-hiking fa-xs"></i> ' + desarrollador.edad + '</p>' +
-        '          <span class="badge rounded-pill badge-' + colorCard + '">' + textBadgePromedio + '</span>' +
+        '          <span class="badge rounded-pill badge-' + getColorByValue(desarrollador.promedioTotal) + '">' + getRating(desarrollador.promedioTotal) + '</span>' +
         '        </div>' +
         '      </div>' +
         '    </div>' +
@@ -80,26 +80,23 @@ function getHTMLDesarrollador(desarrollador) {
 
 /**
  * Regresa el HTML de detalles.
- * @param {object} desarrollador Desarrollador a poner sus detalles.
- * @param {array} promedios Promedios del Desarrollador.
+ * @param {Desarrollador} desarrollador Desarrollador a poner sus detalles.
  * @returns {string} HTML.
  */
-function getHTMLDetalles(desarrollador, promedios) {
-    const participaciones = getParticipaciones(desarrollador.calificaciones);
-
+function getHTMLDetalles(desarrollador) {
     return '<div class="accordion py-3">' +
         '<div class="accordion-item">' +
         '  <h2 class="accordion-header" id="headingHabils' + desarrollador.id + '">' +
         '    <button class="accordion-button collapsed" type="button" data-mdb-toggle="collapse" data-mdb-target="#collapseHabils' + desarrollador.id + '" aria-expanded="false" aria-controls="collapseHabils' + desarrollador.id + '">' +
         '      <a href="#">' +
         '        <i class="fas fa-clipboard-list fa-lg"></i>' +
-        '        <span class="badge rounded-pill badge-notification bg-dark">' + UtilsSysrec.getLengthArray(promedios) + '</span>' +
+        '        <span class="badge rounded-pill badge-notification bg-dark">' + UtilsSysrec.getLengthArray(desarrollador.habilidades) + '</span>' +
         '      </a>' +
         '      <div class="container">Habilidades</div>' +
         '    </button>' +
         '  </h2>' +
         '  <div id="collapseHabils' + desarrollador.id + '" class="accordion-collapse collapse" aria-labelledby="headingHabils' + desarrollador.id + '">' +
-        '    <div class="accordion-body">' + getHTMLHabilidades(promedios) + '</div>' +
+        '    <div class="accordion-body">' + getHTMLHabilidades(desarrollador.habilidades) + '</div>' +
         '  </div>' +
         '</div>' +
         '<div class="accordion-item">' +
@@ -107,31 +104,30 @@ function getHTMLDetalles(desarrollador, promedios) {
         '    <button class="accordion-button collapsed" type="button" data-mdb-toggle="collapse" data-mdb-target="#collapseParticipa' + desarrollador.id + '" aria-expanded="false" aria-controls="collapseParticipa' + desarrollador.id + '">' +
         '      <a href="#">' +
         '        <i class="fas fa-certificate fa-lg"></i>' +
-        '        <span class="badge rounded-pill badge-notification bg-dark">' + UtilsSysrec.getLengthArray(participaciones) + '</span>' +
+        '        <span class="badge rounded-pill badge-notification bg-dark">' + UtilsSysrec.getLengthArray(desarrollador.participaciones) + '</span>' +
         '      </a>' +
         '      <div class="container">Participaciones</div>' +
         '    </button>' +
         '  </h2>' +
         '  <div id="collapseParticipa' + desarrollador.id + '" class="accordion-collapse collapse" aria-labelledby="headingParticipa' + desarrollador.id + '">' +
-        '    <div class="accordion-body">' + getHTMLParticipaciones(participaciones) + '</div>' +
+        '    <div class="accordion-body">' + getHTMLParticipaciones(desarrollador.participaciones) + '</div>' +
         '  </div>' +
         '</div>' +
         '</div>';
 }
 
-
 /**
- * Regresa el HTML de las Habilidades Calificadas.
- * @param {array} calificaciones [{'habilidad': , 'promedio': }, ...]
+ * Regresa el HTML de las Habilidades.
+ * @param {HabilidadDesarrollador[]} habilidades
  * @returns {string} HTML.
  */
-function getHTMLHabilidades(calificaciones) {
+function getHTMLHabilidades(habilidades) {
     let html = '';
     let color = 'secondary';
-    for (const calificacion of calificaciones) {
-        // color = getColorByValue(calificacion.promedio);
+    for (const habilidad of habilidades) {
+        // color = getColorByValue(habilidad.promedio);
         html += '<span class="badge badge-' + color + '">' +
-            calificacion.habilidad + ': ' + calificacion.promedio + ' ' + getHTMLStars(calificacion.promedio, 'fa-xs') +
+            habilidad.nombre + ': ' + habilidad.promedio + ' ' + getHTMLStars(habilidad.promedio, 'fa-xs') +
             '</span>';
     }
     return html;
@@ -139,7 +135,7 @@ function getHTMLHabilidades(calificaciones) {
 
 /**
  * Regresa el HTML de las Participaciones.
- * @param {array} participaciones [{ 'idProyecto': ,'proyecto': ,'promedio'}, ...]
+ * @param {ParticipacionDesarrollador[]} participaciones
  * @returns {string} HTML.
  */
 function getHTMLParticipaciones(participaciones) {
@@ -172,48 +168,6 @@ function getHTMLStars(value, size = '') {
 }
 
 /**
- * Obtiene el promedio de cada Habiliad.
- * @param {array} calificaciones Calificaciones de cada Habilidad.
- * @returns {array} [{'habilidad': , 'promedio': }, ...]
- */
-function getPromedios(calificaciones) {
-    // Se obtienen todas las Calificaciones de cada Habilidad.
-    let habilidades = {};
-    for (const calificacion of calificaciones) {
-        if (Object.hasOwnProperty.call(habilidades, calificacion.nombreHabilidad)) {
-            habilidades[calificacion.nombreHabilidad].push(calificacion.puntos);
-        } else {
-            habilidades[calificacion.nombreHabilidad] = [calificacion.puntos];
-        }
-    }
-
-    // Se saca el promedio de todas las Calificaciones de cada Habilidad.
-    let promedios = [];
-    let promedio;
-    for (const [habilidad, puntos] of Object.entries(habilidades)) {
-        promedio = puntos.reduce((acc, cur) => acc + cur, 0) / puntos.length;
-        promedios.push({
-            'habilidad': habilidad,
-            'promedio': parseFloat(promedio.toFixed(1))
-        });
-    }
-
-    // Se ordenan los promedios.
-    promedios.sort(function(a, b) { return b.promedio - a.promedio });
-    return promedios;
-}
-
-/**
- * Obtiene el promedio total.
- * @param {array} promedios [{'habilidad': , 'promedio': }, ...]
- * @returns {float} promedio total.
- */
-function getPromedioTotal(promedios) {
-    const promedioTotal = promedios.reduce((acc, cur) => acc + cur.promedio, 0) / promedios.length;
-    return promedioTotal.toFixed(1);
-}
-
-/**
  * Obtiene un color segun el valor.
  * @param {float} value Valor a obtener el color.
  * @returns {string} Color.
@@ -225,7 +179,7 @@ function getColorByValue(value) {
         color = 'success';
     } else if (value <= 3 && value > 2) {
         color = 'warning';
-    } else if (value <= 2 && value >= 0) {
+    } else if (value <= 2 && value >= 1) {
         color = 'danger';
     }
 
@@ -233,48 +187,52 @@ function getColorByValue(value) {
 }
 
 /**
- * Regresa las Participaciones de un Desrrollador.
- * @param {array} calificaciones [{ 'idProyecto': , 'nombreProyecto': }, ...]
- * @returns {array} [{ 'idProyecto': ,'proyecto': ,'promedio'}, ...]
+ * Obtiene Rating segun el valor.
+ * @param {float} value Valor a obtener el Rating.
+ * @returns {string} Rating.
  */
-function getParticipaciones(calificaciones) {
-    // Se obtienen todas las Calificaciones de cada Proyecto.
-    let participaciones = {};
-    let idProyecto;
-    for (const calificacion of calificaciones) {
-        idProyecto = calificacion.idProyecto + '';
-        if (Object.hasOwnProperty.call(participaciones, idProyecto)) {
-            participaciones[idProyecto].puntos.push(calificacion.puntos);
-        } else {
-            participaciones[idProyecto] = {
-                'idProyecto': calificacion.idProyecto,
-                'nombreProyecto': calificacion.nombreProyecto,
-                'puntos': [calificacion.puntos]
-            };
-        }
-    }
-
-    // Se saca el promedio de todas las calificaciones de cada Proyecto.
-    let promedios = [];
-    let promedio;
-    for (const [idProyecto, participacion] of Object.entries(participaciones)) {
-        promedio = participacion.puntos.reduce((acc, cur) => acc + cur, 0) / participacion.puntos.length;
-        promedios.push({
-            'idProyecto': idProyecto,
-            'proyecto': participacion.nombreProyecto,
-            'promedio': parseFloat(promedio.toFixed(1))
-        });
-    }
-
-    // Se ordenan los promedios.
-    promedios.sort(function(a, b) { return b.promedio - a.promedio });
-    return promedios;
+function getRating(value) {
+    return value ? getHTMLStars(value, 'fa-lg') + ' ' + value : 'Sin calificaciones';
 }
 
+/**
+ * Obtiene un Proyecto por un id proporcionado.
+ * @param {array} proyectos.
+ * @param {int} idProyecto Id del Proyecto a encontrar.
+ * @returns {} Si se encontro se regresa el Proyecto, de lo contrario manda error.
+ */
+function getProyectoById(proyectos, idProyecto) {
+    return proyectos.filter(proyecto => proyecto.id === parseInt(idProyecto))[0];
+}
+
+/**
+ * Obtiene Invitaciones por un esatdo proporcionado.
+ * @param {array} invitaciones.
+ * @param {string} estado Estado de la Invitacion a encontrar.
+ * @returns {array} Se regresan las Invitaciones con el esatdo proporcionado.
+ */
+function getInvitacionesByEstado(invitaciones, estado) {
+    return invitaciones.filter(invitacion => invitacion.estado === estado);
+}
+
+/**
+ * Verifica si el id de un Usuario esta en las Invitaciones proporcionadas.
+ * @param {array} invitaciones.
+ * @param {int} idUsuario Id del Usuario a verificar.
+ * @returns {boolean} Se regresan true si esta el id en las Invitaciones, de lo contrario false.
+ */
+function includeIdUsuario(invitaciones, idUsuario) {
+    return invitaciones.map(invitacion => invitacion.idUsuario).includes(idUsuario);
+}
+
+/**
+ * Realiza flujo para hacer una Invitacion a un Desarrollador.
+ * @param {int} idDesarrollador 
+ */
 function onInvitar(idDesarrollador) {
     // Se obtiene el Desarrollador a invitar.
     const desarrollador = desarrolladores.filter(desarrollador => desarrollador.id === idDesarrollador)[0];
-    const msgCancelModal = 'CANCEL_MODAL';
+    const errorCancelModal = 'CANCEL_MODAL';
 
     // Se obtienen los Proyectos que tiene el Reclutador.
     fetch(API_URL_WHIT_PARAMS.MIS_PROYECTOS, {
@@ -288,38 +246,94 @@ function onInvitar(idDesarrollador) {
                     text: CONST_MSG_ALERT.PROJECT_NOT_FOUND.TEXT
                 })
         )
-        // Se ponen los Proyectos en HTML.
-        .then(proyectos => ModalSysrec.openByHTML('Invitar a', getHTMLInvitar(proyectos, desarrollador),
-            'Invitar <i class="fas fa-user-check" style="margin-left: 0.3em;"></i>',
-            'Cancelar <i class="fas fa-user-times" style="margin-left: 0.3em;"></i>',
-            () => {
-                return {
-                    'idProyecto': document.getElementById('swal2SelectProyect').value,
-                    'comentario': document.getElementById('swal2AreaComent').value
-                };
-            }
-        ))
-        .then((resModal) => {
-            // Si el Reclutador cancelo la invitacion.
-            if (!resModal.isConfirmed) {
-                throw new Error(msgCancelModal);
+        // Se lanza el Modal, si se da cancelar se manda a catch.
+        .then(proyectosReclutador => openModalInvitacion(proyectosReclutador, desarrollador, errorCancelModal))
+        // Se hace la peticion al sevidor para registrar una Invitacion.
+        .then((modalValues) => {
+            const data = {
+                'idUsuario': desarrollador.id,
+                'idProyecto': modalValues.idProyecto,
+                'comentario': modalValues.comentario,
+            };
+
+            return fetch(API_URL.CONTROLLER_INVITACION, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(data)
+            })
+        })
+        // Si se la peticion es correcta sigue el flujo, de lo contrario manda a catch.
+        .then(res => UtilsSysrec.isStatusOk(res, () => res.json()))
+        .then(invitacion => {
+            // Si no se registro la Invitacion, se manda error.
+            if (!invitacion.id) {
+                AlertSysrec.okError(CONST_MSG_ALERT.ERROR.TITLE, CONST_MSG_ALERT.ERROR.TEXT);
+                return;
             }
 
-            console.log(resModal);
+            // Si se registro correctamente la Invitacion.
+            AlertSysrec.okSuccess(CONST_MSG_ALERT.SAVE_INVITACTION.TITLE, CONST_MSG_ALERT.SAVE_INVITACTION.TEXT);
         })
         // Si ocurrio una excepcion o error.
         .catch(error => {
-            if (error.message !== msgCancelModal) {
+            if (error.message !== errorCancelModal) {
                 UtilsSysrec.catchErrorSysrec(error);
             }
         });
-
-
 }
 
-function getHTMLInvitar(proyectos, desarrollador) {
+/**
+ * Lanza Modal con el formulario para obtener los datos de registro de una invitacion.
+ * @param {array} proyectosReclutador 
+ * @param {Desarrollador} desarrollador 
+ * @param {string} errorCancelModal Mensaje con el que se identifica que se cerro el Modal.
+ * @returns 
+ */
+function openModalInvitacion(proyectosReclutador, desarrollador, errorCancelModal) {
+    return ModalSysrec.openByHTML('Invitar a', getHTMLInvitar(proyectosReclutador, desarrollador),
+            'Invitar <i class="fas fa-user-check" style="margin-left: 0.3em;"></i>',
+            'Cancelar <i class="fas fa-user-times" style="margin-left: 0.3em;"></i>',
+            () => {
+                const idProyecto = document.getElementById('swal2SelectProyect').value;
+                const comentario = document.getElementById('swal2AreaComent').value;
+
+                const proyecto = getProyectoById(proyectosReclutador, idProyecto);
+
+                // Si el Desarrollador ya tiene una invitacion aceptada por el Proyecto seleccionado.
+                const invitaAceptadas = getInvitacionesByEstado(proyecto.invitaciones, CONST_SHARED.ESTADO_INVITACION_ACEPTADA);
+                if (includeIdUsuario(invitaAceptadas, desarrollador.id)) {
+                    Swal.showValidationMessage(CONST_MSG_ALERT.ERROR_USER_ACEPTADO.TEXT);
+                }
+
+                // Si el Desarrollador ya se le mando una invitacion al Proyecto seleccionado.
+                const invitaEnviadas = getInvitacionesByEstado(proyecto.invitaciones, CONST_SHARED.ESTADO_INVITACION_ENVIADA);
+                if (includeIdUsuario(invitaEnviadas, desarrollador.id)) {
+                    Swal.showValidationMessage(CONST_MSG_ALERT.ERROR_USER_INVITADO.TEXT);
+                }
+
+                return { 'idProyecto': idProyecto, 'comentario': comentario };
+            }
+        )
+        // Se valida la respuesta del Modal.
+        .then((resModal) => {
+            // Si el Reclutador cancelo la Invitacion se manda a catch.
+            if (!resModal.isConfirmed) {
+                throw new Error(errorCancelModal);
+            }
+            // Si no se cancelo la Invitacion se regresan los valores del Modal.
+            return resModal.value;
+        })
+}
+
+/**
+ * Regresa el HTML de Invitacion.
+ * @param {object} proyectosReclutador Proyectos del Reclutador.
+ * @param {Desarrollador} desarrollador Desarrollador a invitar.
+ * @returns {string} HTML.
+ */
+function getHTMLInvitar(proyectosReclutador, desarrollador) {
     let optionsProyectos = '';
-    for (const proyecto of proyectos) {
+    for (const proyecto of proyectosReclutador) {
         optionsProyectos += '  <option value="' + proyecto.id + '">' + proyecto.nombre + '</option>';
     }
 
@@ -330,10 +344,10 @@ function getHTMLInvitar(proyectos, desarrollador) {
         '    <p class="text-muted mb-0"><i class="fas fa-envelope fa-xs"></i> ' + desarrollador.correo + '</p>' +
         '    <p class="text-muted mb-0"><i class="fas fa-phone fa-xs"></i> ' + desarrollador.telefono + '</p>' +
         '    <p class="text-muted mb-0"><i class="fas fa-hiking fa-xs"></i> ' + desarrollador.edad + '</p>' +
-        // '    <span class="badge rounded-pill badge-' + colorCard + '">' + textBadgePromedio + '</span>' +
+        '    <span class="badge rounded-pill m-2 badge-' + getColorByValue(desarrollador.promedioTotal) + '">' + getRating(desarrollador.promedioTotal) + '</span>' +
         '  </div>' +
         '</div>' +
-        '<div class="container py-2">' +
+        '<div class="container">' +
         '  <div class="input-group input-group-lg mb-4">' +
         '    <span class="input-group-text border-0"><i class="fab fa-sketch" ></i></span>' +
         '    <select class="form-select rounded" id="swal2SelectProyect" placeholder="Proyecto">' + optionsProyectos + '</select>' +
