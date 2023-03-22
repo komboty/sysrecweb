@@ -28,17 +28,11 @@ formLogin.addEventListener('submit', (event) => {
             body: JSON.stringify(data)
         })
         // Si se la peticion es correcta sigue el flujo, de lo contrario manda a catch.
-        .then(res =>
-            UtilsSysrec.isStatusOk(res, () => res.json(),
-                msg404 = {
-                    title: CONST_MSG_ALERT.USER_NOT_FOUND.TITLE,
-                    text: CONST_MSG_ALERT.USER_NOT_FOUND.TEXT
-                })
-        )
+        .then(res => ErrorSysrec.isHTTPStatusOk(res, () => res.json(), CONST_MSG_ALERT.USER_NOT_FOUND.CODE))
         // Dependiendo del tipo del Usuario, se redirige a su home.
         .then(usuario => UtilsSysrec.redirectToHome(usuario.tipo))
         // Si ocurrio una excepcion o error.
-        .catch(error => UtilsSysrec.catchErrorSysrec(error));
+        .catch(error => ErrorSysrec.alert(error));
 });
 
 /**

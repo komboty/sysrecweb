@@ -12,7 +12,13 @@
 <script type="text/javascript" src="../../utils/AlertSysrec.js"></script>
 <script type="text/javascript" src="../../utils/ModalSysrec.js"></script>
 
+
 <script type="text/javascript" src="../../models/Desarrollador.js"></script>
 <script type="text/javascript" src="../../models/HabilidadDesarrollador.js"></script>
 <script type="text/javascript" src="../../models/CalificacionDesarrollador.js"></script>
 <script type="text/javascript" src="../../models/ParticipacionDesarrollador.js"></script>
+
+<!-- <script type="text/javascript" src="../../models/Habilidad.js"></script> -->
+
+<script type="text/javascript" src="../../models/Proyecto.js"></script>
+<script type="text/javascript" src="../../models/InvitacionProyecto.js"></script>

@@ -16,7 +16,7 @@ fetch(API_URL_WHIT_PARAMS.USER_TIPO + CONST_SHARED.TIPO_DESARROLLADOR, {
         method: 'GET',
     })
     // Si se la peticion es correcta sigue el flujo, de lo contrario manda a catch.
-    .then(res => UtilsSysrec.isStatusOk(res, () => res.json()))
+    .then(res => ErrorSysrec.isHTTPStatusOk(res, () => res.json()))
     // Se ponen los Desarrolladores en HTML.
     .then(resDesarrolladores => {
         cleanScreen();
@@ -31,7 +31,7 @@ fetch(API_URL_WHIT_PARAMS.USER_TIPO + CONST_SHARED.TIPO_DESARROLLADOR, {
     // Si ocurrio una excepcion o error.
     .catch(error => {
         cleanScreen();
-        UtilsSysrec.catchErrorSysrec(error);
+        ErrorSysrec.alert(error);
     });
 
 /**
@@ -201,23 +201,19 @@ function getRating(value) {
  */
 function onInvitar(idDesarrollador) {
     // Se obtiene el Desarrollador a invitar.
-    const desarrollador = desarrolladores.filter(desarrollador => desarrollador.id === idDesarrollador)[0];
-    const errorCancelModal = 'CANCEL_MODAL';
+    const desarrollador = UtilsSysrec.getObjectById(desarrolladores, idDesarrollador);
 
     // Se obtienen los Proyectos que tiene el Reclutador.
     fetch(API_URL_WHIT_PARAMS.MIS_PROYECTOS, {
             method: 'GET',
         })
         // Si se la peticion es correcta sigue el flujo, de lo contrario manda a catch.
-        .then(res =>
-            UtilsSysrec.isStatusOk(res, () => res.json(),
-                msg404 = {
-                    title: CONST_MSG_ALERT.PROJECT_NOT_FOUND.TITLE,
-                    text: CONST_MSG_ALERT.PROJECT_NOT_FOUND.TEXT
-                })
-        )
+        .then(res => ErrorSysrec.isHTTPStatusOk(res, () => res.json(), CONST_MSG_ALERT.PROJECT_NOT_FOUND.CODE))
         // Se lanza el Modal, si se da cancelar se manda a catch.
-        .then(proyectosReclutador => openModalInvitacion(proyectosReclutador, desarrollador, errorCancelModal))
+        .then(proyectos => {
+            const proyectosReclutador = proyectos.map(proyecto => new Proyecto(proyecto));
+            return openModalInvitacion(proyectosReclutador, desarrollador);
+        })
         // Se hace la peticion al sevidor para registrar una Invitacion.
         .then((modalValues) => {
             const data = {
@@ -233,7 +229,7 @@ function onInvitar(idDesarrollador) {
             })
         })
         // Si se la peticion es correcta sigue el flujo, de lo contrario manda a catch.
-        .then(res => UtilsSysrec.isStatusOk(res, () => res.json()))
+        .then(res => ErrorSysrec.isHTTPStatusOk(res, () => res.json()))
         .then(invitacion => {
             // Si no se registro la Invitacion, se manda error.
             if (!invitacion.id) {
@@ -245,59 +241,46 @@ function onInvitar(idDesarrollador) {
             AlertSysrec.okSuccess(CONST_MSG_ALERT.SAVE_INVITACTION.TITLE, CONST_MSG_ALERT.SAVE_INVITACTION.TEXT);
         })
         // Si ocurrio una excepcion o error.
-        .catch(error => {
-            if (error.message !== errorCancelModal) {
-                UtilsSysrec.catchErrorSysrec(error);
-            }
-        });
+        .catch(error => ErrorSysrec.alert(error));
 }
 
 /**
  * Lanza Modal con el formulario para obtener los datos de registro de una invitacion.
- * @param {array} proyectosReclutador 
- * @param {Desarrollador} desarrollador 
- * @param {string} errorCancelModal Mensaje con el que se identifica que se cerro el Modal.
- * @returns 
+ * @param {Proyecto[]} proyectosReclutador 
+ * @param {Desarrollador} desarrollador
+ * @returns {Promise} Modal.
  */
-function openModalInvitacion(proyectosReclutador, desarrollador, errorCancelModal) {
-    return ModalSysrec.openByHTML('Invitar a', getHTMLInvitar(proyectosReclutador, desarrollador),
-            'Invitar <i class="fas fa-user-check" style="margin-left: 0.3em;"></i>',
-            'Cancelar <i class="fas fa-user-times" style="margin-left: 0.3em;"></i>',
-            () => {
+function openModalInvitacion(proyectosReclutador, desarrollador) {
+    return ModalSysrec.openByHTML({
+            title: 'Invitar a',
+            html: getHTMLInvitar(proyectosReclutador, desarrollador),
+            textBtnConfirm: 'Invitar <i class="fas fa-user-check" style="margin-left: 0.3em;"></i>',
+            textBtnCancel: 'Cancelar <i class="fas fa-user-times" style="margin-left: 0.3em;"></i>',
+            funPreConfirm: () => {
                 const idProyecto = document.getElementById('swal2SelectProyect').value;
                 const comentario = document.getElementById('swal2AreaComent').value;
-
-                const proyecto = UtilsSysrec.getProyectoById(proyectosReclutador, idProyecto);
+                const proyecto = UtilsSysrec.getObjectById(proyectosReclutador, parseInt(idProyecto));
 
                 // Si el Desarrollador ya tiene una invitacion aceptada por el Proyecto seleccionado.
-                const invitaAceptadas = UtilsSysrec.getInvitacionesByEstado(proyecto.invitaciones, CONST_SHARED.ESTADO_INVITACION_ACEPTADA);
-                if (UtilsSysrec.includeIdUsuario(invitaAceptadas, desarrollador.id)) {
+                if (proyecto.hasUserInInvitacionesAceptadas(desarrollador.id)) {
                     Swal.showValidationMessage(CONST_MSG_ALERT.ERROR_USER_ACEPTADO.TEXT);
                 }
 
                 // Si el Desarrollador ya se le mando una invitacion al Proyecto seleccionado.
-                const invitaEnviadas = UtilsSysrec.getInvitacionesByEstado(proyecto.invitaciones, CONST_SHARED.ESTADO_INVITACION_ENVIADA);
-                if (UtilsSysrec.includeIdUsuario(invitaEnviadas, desarrollador.id)) {
+                if (proyecto.hasUserInInvitacionesEnviadas(desarrollador.id)) {
                     Swal.showValidationMessage(CONST_MSG_ALERT.ERROR_USER_INVITADO.TEXT);
                 }
 
                 return { 'idProyecto': idProyecto, 'comentario': comentario };
             }
-        )
-        // Se valida la respuesta del Modal.
-        .then((resModal) => {
-            // Si el Reclutador cancelo la Invitacion se manda a catch.
-            if (!resModal.isConfirmed) {
-                throw new Error(errorCancelModal);
-            }
-            // Si no se cancelo la Invitacion se regresan los valores del Modal.
-            return resModal.value;
         })
+        // Se valida la respuesta del Modal.
+        .then(resModal => ModalSysrec.getValues(resModal))
 }
 
 /**
  * Regresa el HTML de Invitacion.
- * @param {object} proyectosReclutador Proyectos del Reclutador.
+ * @param {Proyecto[]} proyectosReclutador Proyectos del Reclutador.
  * @param {Desarrollador} desarrollador Desarrollador a invitar.
  * @returns {string} HTML.
  */
@@ -319,12 +302,12 @@ function getHTMLInvitar(proyectosReclutador, desarrollador) {
         '</div>' +
         '<div class="container">' +
         '  <div class="input-group input-group-lg mb-4">' +
-        '    <span class="input-group-text border-0"><i class="fab fa-sketch" ></i></span>' +
-        '    <select class="form-select rounded" id="swal2SelectProyect" placeholder="Proyecto">' + optionsProyectos + '</select>' +
+        '    <select class="form-select" id="swal2SelectProyect" placeholder="Proyecto">' + optionsProyectos + '</select>' +
+        '    <span class="input-group-text"><i class="fab fa-sketch" ></i></span>' +
         '  </div>' +
         '  <div class="input-group input-group-lg">' +
-        '    <span class="input-group-text border-0"><i class="fas fa-edit"></i></span>' +
-        '    <textarea class="form-control rounded" id="swal2AreaComent" placeholder="Comentario"></textarea>' +
+        '    <textarea class="form-control" id="swal2AreaComent" placeholder="Comentario"></textarea>' +
+        '    <span class="input-group-text"><i class="fas fa-edit"></i></span>' +
         '  </div>' +
         '</div>';
 }

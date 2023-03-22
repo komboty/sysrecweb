@@ -8,7 +8,7 @@
     require_once(dirname(dirname(__FILE__)) . '/shared/head.php');
     ?>
     <!-- MisProyectosReclutador CSS -->
-    <!-- <link rel="stylesheet" href="misProyectosReclutador.css" /> -->
+    <link rel="stylesheet" href="misProyectosReclutador.css" />
 </head>
 
 <body>

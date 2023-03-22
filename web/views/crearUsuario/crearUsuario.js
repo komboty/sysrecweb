@@ -63,7 +63,7 @@ formRegistro.addEventListener('submit', (event) => {
             })
         })
         // Si se la peticion es correcta sigue el flujo, de lo contrario manda a catch.
-        .then(res => UtilsSysrec.isStatusOk(res, () => res.json()))
+        .then(res => ErrorSysrec.isHTTPStatusOk(res, () => res.json()))
         .then(usuario => {
             // Si no se registro el Usuario, se manda error.
             if (!usuario.id) {
@@ -75,7 +75,7 @@ formRegistro.addEventListener('submit', (event) => {
             AlertSysrec.okSuccessRedirect(CONST_MSG_ALERT.SAVE_USER.TITLE, CONST_MSG_ALERT.SAVE_USER.TEXT, WEB_URL.VIEW_LOGIN);
         })
         // Si ocurrio una excepcion o error.
-        .catch(error => UtilsSysrec.catchErrorSysrec(error));
+        .catch(error => ErrorSysrec.alert(error));
 });
 
 /**

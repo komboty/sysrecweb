@@ -21,7 +21,7 @@ formCrearProyecto.addEventListener('submit', (event) => {
             method: 'GET',
         })
         // Si se la peticion es correcta sigue el flujo, de lo contrario manda a catch.
-        .then(res => UtilsSysrec.isStatusOk(res, () => res.json()))
+        .then(res => ErrorSysrec.isHTTPStatusOk(res, () => res.json()))
         // Se manda la peticion para registrar un Proyecto.
         .then(user => {
             // Se construte el json a enviar al servidor.
@@ -38,7 +38,7 @@ formCrearProyecto.addEventListener('submit', (event) => {
             })
         })
         // Si se la peticion es correcta sigue el flujo, de lo contrario manda a catch.
-        .then(res => UtilsSysrec.isStatusOk(res, () => res.json()))
+        .then(res => ErrorSysrec.isHTTPStatusOk(res, () => res.json()))
         .then(preoyecto => {
             // Si no se registro el Proyecto, se manda error.
             if (!preoyecto.id) {
@@ -50,6 +50,6 @@ formCrearProyecto.addEventListener('submit', (event) => {
             AlertSysrec.okSuccessRedirect(CONST_MSG_ALERT.SAVE_PROJECT.TITLE, CONST_MSG_ALERT.SAVE_PROJECT.TEXT, WEB_URL.VIEW_CREAR_PROYECTO);
         })
         // Si ocurrio una excepcion o error.
-        .catch(error => UtilsSysrec.catchErrorSysrec(error));
+        .catch(error => ErrorSysrec.alert(error));
 
 });

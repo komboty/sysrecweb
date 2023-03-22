@@ -6,9 +6,9 @@ function onCerrarSesion() {
             method: 'DELETE',
         })
         // Si se la peticion es correcta se redirige al Login, de lo contrario manda a catch.
-        .then(res => UtilsSysrec.isStatusOk(res, () => window.location.replace(WEB_URL.VIEW_LOGIN)))
+        .then(res => ErrorSysrec.isHTTPStatusOk(res, () => window.location.replace(WEB_URL.VIEW_LOGIN)))
         // Si ocurrio una excepcion o error.
-        .catch(error => UtilsSysrec.catchErrorSysrec(error));
+        .catch(error => ErrorSysrec.alert(error));
 }
 
 /**

@@ -8,13 +8,15 @@ const API_URL = {
     'CONTROLLER_SESSION': SERVER.HOST + SERVER.API_CONTROLLERS + '/SessionController.php',
     'CONTROLLER_USUARIO': SERVER.HOST + SERVER.API_CONTROLLERS + '/UsuarioController.php',
     'CONTROLLER_PROYECTO': SERVER.HOST + SERVER.API_CONTROLLERS + '/ProyectoController.php',
-    'CONTROLLER_INVITACION': SERVER.HOST + SERVER.API_CONTROLLERS + '/InvitacionController.php'
+    'CONTROLLER_INVITACION': SERVER.HOST + SERVER.API_CONTROLLERS + '/InvitacionController.php',
+    'CONTROLLER_HABILIDAD': SERVER.HOST + SERVER.API_CONTROLLERS + '/HabilidadController.php'
 }
 
 const API_URL_WHIT_PARAMS = {
     'MIS_PROYECTOS': API_URL.CONTROLLER_PROYECTO + '?MisProyectos',
     'SESSION_USER': API_URL.CONTROLLER_SESSION + '?User',
     'USER_TIPO': API_URL.CONTROLLER_USUARIO + '?tipo=',
+    'HABILIDAD_ALL': API_URL.CONTROLLER_HABILIDAD + '?All',
 }
 
 const WEB_URL = {
@@ -37,20 +39,24 @@ const CONST_SHARED = {
 
 const CONST_MSG_ALERT = {
     // ERRORs
-    'ERROR': { 'TITLE': 'Error', 'TEXT': 'Por favor, inténtalo más tarde' },
-    'ERROR_WEB': { 'TITLE': 'Error Fatal', 'TEXT': 'Por favor, inténtalo más tarde' },
-    'PERMISSIONS_DENIED': { 'TITLE': 'Error', 'TEXT': 'No cuentas con las credenciales necesarias' },
-    'NOT_FOUND': { 'TITLE': 'Error', 'TEXT': 'No se encontro' },
-    'PASS_NOT_EQUALS': { 'TITLE': 'Error', 'TEXT': 'Las contraseñas no coinciden' },
-    'USER_NOT_FOUND': { 'TITLE': 'Error', 'TEXT': 'Por favor, verifique sus datos' },
-    'PROJECT_NOT_FOUND': { 'TITLE': 'Ups!', 'TEXT': 'No se encontro ningún Proyecto' },
-    'USER_NOT_SESSION': { 'TITLE': 'Tu sesión ha expirado', 'TEXT': 'Por favor, vuelve a iniciar sesión' },
-    'ERROR_USER_INVITADO': { 'TITLE': 'Desarrollador invitado', 'TEXT': 'El desarrollador ya tiene una invitación a este Proyecto, aún no la responde' },
-    'ERROR_USER_ACEPTADO': { 'TITLE': 'Desarrollador aceptado', 'TEXT': 'El desarrollador ya Acepto la invitacion a este Proyecto' },
+    'ERROR': { 'CODE': 'ERROR', 'TITLE': 'Error', 'TEXT': 'Por favor, inténtalo más tarde' },
+    'ERROR_FATAL': { 'CODE': 'ERROR_FATAL', 'TITLE': 'Error Fatal', 'TEXT': 'Por favor, inténtalo más tarde' },
+    'PERMISSIONS_DENIED': { 'CODE': 'PERMISSIONS_DENIED', 'TITLE': 'Error', 'TEXT': 'No cuentas con las credenciales necesarias' },
+    'NOT_FOUND': { 'CODE': 'NOT_FOUND', 'TITLE': 'Error', 'TEXT': 'No se encontro' },
+    'PASS_NOT_EQUALS': { 'CODE': 'PASS_NOT_EQUALS', 'TITLE': 'Error', 'TEXT': 'Las contraseñas no coinciden' },
+    'USER_NOT_FOUND': { 'CODE': 'USER_NOT_FOUND', 'TITLE': 'Error', 'TEXT': 'Por favor, verifique sus datos' },
+    'PROJECT_NOT_FOUND': { 'CODE': 'PROJECT_NOT_FOUND', 'TITLE': 'Ups!', 'TEXT': 'No se encontro ningún Proyecto' },
+    'USER_NOT_SESSION': { 'CODE': 'USER_NOT_SESSION', 'TITLE': 'Tu sesión ha expirado', 'TEXT': 'Por favor, vuelve a iniciar sesión' },
+    'ERROR_USER_INVITADO': { 'CODE': 'ERROR_USER_INVITADO', 'TITLE': 'Desarrollador invitado', 'TEXT': 'El desarrollador ya tiene una invitación a este Proyecto, aún no la responde' },
+    'ERROR_USER_ACEPTADO': { 'CODE': 'ERROR_USER_ACEPTADO', 'TITLE': 'Desarrollador aceptado', 'TEXT': 'El desarrollador ya Acepto la invitacion a este Proyecto' },
 
 
     // OKs
     'SAVE_USER': { 'TITLE': 'Registro exitoso', 'TEXT': 'Su cuenta se ha registrado correctamente' },
     'SAVE_PROJECT': { 'TITLE': 'Registro exitoso', 'TEXT': 'Su proyecto se ha registrado correctamente' },
     'SAVE_INVITACTION': { 'TITLE': 'Invitación enviada', 'TEXT': 'Se ha mandado correctamente' },
+}
+
+const MODAL = {
+    ACTION_CANCEL: 'MODAL_ACTION_CANCEL'
 }
