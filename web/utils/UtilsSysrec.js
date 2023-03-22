@@ -112,4 +112,34 @@ class UtilsSysrec {
     //     const keys = Object.keys(object);
     //     return keys.length ? keys.length : '';
     // }
+
+    /**
+     * Obtiene un Proyecto por un id proporcionado.
+     * @param {array} proyectos.
+     * @param {int} idProyecto Id del Proyecto a encontrar.
+     * @returns {} Si se encontro se regresa el Proyecto, de lo contrario manda error.
+     */
+    static getProyectoById(proyectos, idProyecto) {
+        return proyectos.filter(proyecto => proyecto.id === parseInt(idProyecto))[0];
+    }
+
+    /**
+     * Obtiene Invitaciones por un esatdo proporcionado.
+     * @param {array} invitaciones.
+     * @param {string} estado Estado de la Invitacion a encontrar.
+     * @returns {array} Se regresan las Invitaciones con el esatdo proporcionado.
+     */
+    static getInvitacionesByEstado(invitaciones, estado) {
+        return invitaciones.filter(invitacion => invitacion.estado === estado);
+    }
+
+    /**
+     * Verifica si el id de un Usuario esta en las Invitaciones proporcionadas.
+     * @param {array} invitaciones.
+     * @param {int} idUsuario Id del Usuario a verificar.
+     * @returns {boolean} Se regresan true si esta el id en las Invitaciones, de lo contrario false.
+     */
+    static includeIdUsuario(invitaciones, idUsuario) {
+        return invitaciones.map(invitacion => invitacion.idUsuario).includes(idUsuario);
+    }
 }

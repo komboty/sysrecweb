@@ -3,7 +3,7 @@ require_once(dirname(dirname(__FILE__)) . '/interfaces/ICalificacionDAO.php');
 require_once(dirname(dirname(dirname(__FILE__))) . '/connection/IConnectionDB.php');
 
 /**
- * Clase que realiza las consultas a la tabla de Invitacion de la base de datos.
+ * Clase que realiza las consultas a la tabla de Calificaion de la base de datos.
  */
 class CalificacionDAOImpl implements ICalificacionDAO
 {

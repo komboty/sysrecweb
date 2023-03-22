@@ -24,6 +24,11 @@ require_once(dirname(__FILE__) . '/database/daos/implements/CalificacionDAOImpl.
 require_once(dirname(__FILE__) . '/services/interfaces/ICalificacionService.php');
 require_once(dirname(__FILE__) . '/services/implements/CalificacionServiceImpl.php');
 
+require_once(dirname(__FILE__) . '/database/daos/interfaces/IHabilidadDAO.php');
+require_once(dirname(__FILE__) . '/database/daos/implements/HabilidadDAOImpl.php');
+require_once(dirname(__FILE__) . '/services/interfaces/IHabilidadService.php');
+require_once(dirname(__FILE__) . '/services/implements/HabilidadServiceImpl.php');
+
 class DependencyInjection
 {
     // Data Base
@@ -34,12 +39,14 @@ class DependencyInjection
     private $proyectoDAO;
     private $invitacionDAO;
     private $calificacionDAO;
+    private $habilidadDAO;
 
     // Services
     private $usuarioService;
     private $proyectoService;
     private $invitacionService;
     private $calificacionService;
+    private $habilidadService;
 
     public function __construct()
     {
@@ -51,12 +58,14 @@ class DependencyInjection
         $this->proyectoDAO = new ProyectoDAOImpl($this->conexionBD);
         $this->invitacionDAO = new InvitacionDAOImpl($this->conexionBD);
         $this->calificacionDAO = new CalificacionDAOImpl($this->conexionBD);
+        $this->habilidadDAO = new HabilidadDAOImpl($this->conexionBD);
 
         // Services
         $this->usuarioService = new UsuarioServiceImpl($this->usuarioDAO, $this->calificacionDAO);
         $this->proyectoService = new ProyectoServiceImpl($this->proyectoDAO, $this->invitacionDAO);
         $this->invitacionService = new InvitacionServiceImpl($this->invitacionDAO);
         $this->calificacionService = new CalificacionServiceImpl($this->calificacionDAO);
+        $this->habilidadService = new HabilidadServiceImpl($this->habilidadDAO);
     }
 
     public function getConnectionDB(): IConnectionDB
@@ -82,5 +91,10 @@ class DependencyInjection
     public function getCalificacionService(): ICalificacionService
     {
         return $this->calificacionService;
+    }
+
+    public function getHabilidadService(): IHabilidadService
+    {
+        return $this->habilidadService;
     }
 }

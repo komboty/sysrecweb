@@ -196,36 +196,6 @@ function getRating(value) {
 }
 
 /**
- * Obtiene un Proyecto por un id proporcionado.
- * @param {array} proyectos.
- * @param {int} idProyecto Id del Proyecto a encontrar.
- * @returns {} Si se encontro se regresa el Proyecto, de lo contrario manda error.
- */
-function getProyectoById(proyectos, idProyecto) {
-    return proyectos.filter(proyecto => proyecto.id === parseInt(idProyecto))[0];
-}
-
-/**
- * Obtiene Invitaciones por un esatdo proporcionado.
- * @param {array} invitaciones.
- * @param {string} estado Estado de la Invitacion a encontrar.
- * @returns {array} Se regresan las Invitaciones con el esatdo proporcionado.
- */
-function getInvitacionesByEstado(invitaciones, estado) {
-    return invitaciones.filter(invitacion => invitacion.estado === estado);
-}
-
-/**
- * Verifica si el id de un Usuario esta en las Invitaciones proporcionadas.
- * @param {array} invitaciones.
- * @param {int} idUsuario Id del Usuario a verificar.
- * @returns {boolean} Se regresan true si esta el id en las Invitaciones, de lo contrario false.
- */
-function includeIdUsuario(invitaciones, idUsuario) {
-    return invitaciones.map(invitacion => invitacion.idUsuario).includes(idUsuario);
-}
-
-/**
  * Realiza flujo para hacer una Invitacion a un Desarrollador.
  * @param {int} idDesarrollador 
  */
@@ -297,17 +267,17 @@ function openModalInvitacion(proyectosReclutador, desarrollador, errorCancelModa
                 const idProyecto = document.getElementById('swal2SelectProyect').value;
                 const comentario = document.getElementById('swal2AreaComent').value;
 
-                const proyecto = getProyectoById(proyectosReclutador, idProyecto);
+                const proyecto = UtilsSysrec.getProyectoById(proyectosReclutador, idProyecto);
 
                 // Si el Desarrollador ya tiene una invitacion aceptada por el Proyecto seleccionado.
-                const invitaAceptadas = getInvitacionesByEstado(proyecto.invitaciones, CONST_SHARED.ESTADO_INVITACION_ACEPTADA);
-                if (includeIdUsuario(invitaAceptadas, desarrollador.id)) {
+                const invitaAceptadas = UtilsSysrec.getInvitacionesByEstado(proyecto.invitaciones, CONST_SHARED.ESTADO_INVITACION_ACEPTADA);
+                if (UtilsSysrec.includeIdUsuario(invitaAceptadas, desarrollador.id)) {
                     Swal.showValidationMessage(CONST_MSG_ALERT.ERROR_USER_ACEPTADO.TEXT);
                 }
 
                 // Si el Desarrollador ya se le mando una invitacion al Proyecto seleccionado.
-                const invitaEnviadas = getInvitacionesByEstado(proyecto.invitaciones, CONST_SHARED.ESTADO_INVITACION_ENVIADA);
-                if (includeIdUsuario(invitaEnviadas, desarrollador.id)) {
+                const invitaEnviadas = UtilsSysrec.getInvitacionesByEstado(proyecto.invitaciones, CONST_SHARED.ESTADO_INVITACION_ENVIADA);
+                if (UtilsSysrec.includeIdUsuario(invitaEnviadas, desarrollador.id)) {
                     Swal.showValidationMessage(CONST_MSG_ALERT.ERROR_USER_INVITADO.TEXT);
                 }
 

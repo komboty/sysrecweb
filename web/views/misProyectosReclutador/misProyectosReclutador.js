@@ -50,9 +50,9 @@ function cleanScreen() {
  * @returns {string} HTML.
  */
 function getHTMLProyecto(proyecto) {
-    const invisEnviadas = getInvitaciones(proyecto, CONST_SHARED.ESTADO_INVITACION_ENVIADA);
-    const invisAceptadas = getInvitaciones(proyecto, CONST_SHARED.ESTADO_INVITACION_ACEPTADA);
-    const invisRechazadas = getInvitaciones(proyecto, CONST_SHARED.ESTADO_INVITACION_RECHAZADA);
+    const invisEnviadas = UtilsSysrec.getInvitacionesByEstado(proyecto.invitaciones, CONST_SHARED.ESTADO_INVITACION_ENVIADA);
+    const invisAceptadas = UtilsSysrec.getInvitacionesByEstado(proyecto.invitaciones, CONST_SHARED.ESTADO_INVITACION_ACEPTADA);
+    const invisRechazadas = UtilsSysrec.getInvitacionesByEstado(proyecto.invitaciones, CONST_SHARED.ESTADO_INVITACION_RECHAZADA);
 
     return '<div class="col">' +
         '<div class="card h-100 shadow-3-strong">' +
@@ -100,7 +100,7 @@ function getHTMLProyecto(proyecto) {
         '          </button>' +
         '        </h2>' +
         '        <div id="collapse2Invi' + proyecto.id + '" class="accordion-collapse collapse" aria-labelledby="heading2Invi' + proyecto.id + '">' +
-        '          <div class="accordion-body">' + getHTMLInvitaciones(invisAceptadas) + '</div>' +
+        '          <div class="accordion-body">' + getHTMLInvitaciones(invisAceptadas, true) + '</div>' +
         '        </div>' +
         '      </div>' +
         '      <div class="accordion-item">' +
@@ -124,29 +124,24 @@ function getHTMLProyecto(proyecto) {
 }
 
 /**
- * Obtiene las Invitaciones de un Proyecto segun el estado proporcionado.
- * @param {object} proyecto Proyecto a obtener las invitaciones.
- * @param {string} estado Estado de las invitaciones a obtener.
- * @returns {object[]} Invitaciones con el estado proporcionado.
- */
-function getInvitaciones(proyecto, estado) {
-    let invitaciones = [];
-    for (const invitacion of proyecto.invitaciones) {
-        if (invitacion.estado === estado) {
-            invitaciones.push(invitacion);
-        }
-    }
-    return invitaciones;
-}
-
-/**
  * Regresa el HTML de las invitaciones.
  * @param {object} inivitaciones Invitaciones a poner formato.
+ * @param {boolean} isCalificar Si se quiere mostrar el boton de calificar.
  * @returns HTML
  */
-function getHTMLInvitaciones(inivitaciones) {
+function getHTMLInvitaciones(inivitaciones, isCalificar = false) {
     let html = '';
+    let btnCalificar = '';
+
     for (const invitacion of inivitaciones) {
+        if (isCalificar) {
+            btnCalificar = '<div class="card-footer border-0 bg-light p-2 d-flex justify-content-around">' +
+                '  <a class="btn btn-link m-0 text-reset" role="button" onClick="onCalificar(' + invitacion.idUsuario + ')" data-ripple-color="primary">' +
+                '    Calificar<i class="fas fa-star-half-alt ms-2"></i><i class="fas fa-star-half-alt ms-2"></i><i class="fas fa-star-half-alt ms-2"></i>' +
+                '  </a>' +
+                '</div>';
+        }
+
         html += '<div class="card mb-3 h-100 shadow-3-strong">' +
             '  <div class="card-body">' +
             '    <div class="d-flex justify-content-between align-items-center">' +
@@ -158,15 +153,18 @@ function getHTMLInvitaciones(inivitaciones) {
             '          <p class="text-muted mb-0"><i class="fas fa-phone fa-xs"></i> ' + invitacion.telefono + '</p>' +
             '        </div>' +
             '      </div>' +
-            // '      <span class="badge rounded-pill badge-warning">Awaiting</span>' +
             '    </div>' +
             '  </div>' +
-            '  <div class="card-footer border-0 bg-light p-2 d-flex justify-content-around">' +
-            '    <a class="btn btn-link m-0 text-reset" role="button" data-ripple-color="primary">' +
-            '      Calificar<i class="fas fa-star-half-alt ms-2"></i><i class="fas fa-star-half-alt ms-2"></i><i class="fas fa-star-half-alt ms-2"></i>' +
-            '    </a>' +
-            '  </div>' +
+            btnCalificar +
             '</div>';
     }
     return html;
+}
+
+/**
+ * Realiza flujo para hacer una Invitacion a un Desarrollador.
+ * @param {int} idDesarrollador 
+ */
+function onCalificar(idUsuario) {
+
 }

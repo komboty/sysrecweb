@@ -28,6 +28,7 @@ class Consts
     const GET_ALL_USERS = 'All';
     const GET_SESSION_USERS = 'User';
     const GET_MIS_PROYECTOS = 'MisProyectos';
+    const GET_ALL_HABILIDADES = 'All';
 
 
     /**
