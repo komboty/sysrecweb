@@ -15,8 +15,25 @@ class CalificacionDAOImpl implements ICalificacionDAO
         $this->connectionDB = $connectionDB;
     }
 
-    public function save($proyecto)
+    public function save($calificacion)
     {
+        $this->connectionDB->connectDB();
+        $query = 'INSERT INTO Calificacion(idUsuario, idProyecto, idHabilidad, puntos, comentario) VALUES (?,?,?,?,?)';
+        $statement = $this->connectionDB->getPrepare($query);
+        $statement->bind_param(
+            'iiiis',
+            $calificacion[Consts::CALIFICACION_KEY_ID_USUARIO],
+            $calificacion[Consts::CALIFICACION_KEY_ID_PROYECTO],
+            $calificacion[Consts::CALIFICACION_KEY_ID_HABILIDAD],
+            $calificacion[Consts::CALIFICACION_KEY_PUNTOS],
+            $calificacion[Consts::CALIFICACION_KEY_COMENTARIO]
+        );
+        // Si se registro correctamente la Calificacion se regresa el id.
+        if ($statement->execute()) {
+            return $statement->insert_id;
+        }
+        // Si no se registro la Calificacion en  la base de datos.
+        return null;
     }
 
     public function getAll(): array

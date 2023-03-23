@@ -9,7 +9,8 @@ const API_URL = {
     'CONTROLLER_USUARIO': SERVER.HOST + SERVER.API_CONTROLLERS + '/UsuarioController.php',
     'CONTROLLER_PROYECTO': SERVER.HOST + SERVER.API_CONTROLLERS + '/ProyectoController.php',
     'CONTROLLER_INVITACION': SERVER.HOST + SERVER.API_CONTROLLERS + '/InvitacionController.php',
-    'CONTROLLER_HABILIDAD': SERVER.HOST + SERVER.API_CONTROLLERS + '/HabilidadController.php'
+    'CONTROLLER_HABILIDAD': SERVER.HOST + SERVER.API_CONTROLLERS + '/HabilidadController.php',
+    'CONTROLLER_CALIFICACION': SERVER.HOST + SERVER.API_CONTROLLERS + '/CalificacionController.php'
 }
 
 const API_URL_WHIT_PARAMS = {
@@ -55,6 +56,7 @@ const CONST_MSG_ALERT = {
     'SAVE_USER': { 'TITLE': 'Registro exitoso', 'TEXT': 'Su cuenta se ha registrado correctamente' },
     'SAVE_PROJECT': { 'TITLE': 'Registro exitoso', 'TEXT': 'Su proyecto se ha registrado correctamente' },
     'SAVE_INVITACTION': { 'TITLE': 'Invitación enviada', 'TEXT': 'Se ha mandado correctamente' },
+    'SAVE_CALIFICACION': { 'TITLE': 'Registro exitoso', 'TEXT': 'La calificación se ha registrado correctamente' },
 }
 
 const MODAL = {

@@ -1,6 +1,6 @@
 <?php
 require_once(dirname(dirname(dirname(__FILE__))) . '/DependencyInjection.php');
-require_once(dirname(dirname(__FILE__)) . '/ConfigControllers.php');
+require_once(dirname(dirname(__FILE__)) . '/utils/Validacion.php');
 require_once(dirname(dirname(dirname(dirname(__FILE__)))) . '/shared/Consts.php');
 
 /**
@@ -15,15 +15,11 @@ switch ($_SERVER['REQUEST_METHOD']) {
      */
     case 'GET':
         // Se verifica que el Usuario tenga una sesion activa, si no es asi, se manda "No autorizado".
-        session_start();
-        if (!isset($_SESSION[Consts::SESSION_KEY_USER])) {
-            header(ConfigControllers::HEADER_STATUS_UNAUTHORIZED);
-            return;
-        }
+        Validacion::isSession();
 
         // Si no existen el parametro en la peticion se manda error.
         if (!isset($_GET[Consts::GET_ALL_HABILIDADES])) {
-            header(ConfigControllers::HEADER_STATUS_BAD_REQUEST);
+            header(Validacion::HEADER_STATUS_BAD_REQUEST);
             return;
         }
 

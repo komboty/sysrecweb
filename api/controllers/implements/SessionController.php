@@ -1,6 +1,6 @@
 <?php
 require_once(dirname(dirname(dirname(__FILE__))) . '/DependencyInjection.php');
-require_once(dirname(dirname(__FILE__)) . '/ConfigControllers.php');
+require_once(dirname(dirname(__FILE__)) . '/utils/Validacion.php');
 require_once(dirname(dirname(dirname(dirname(__FILE__)))) . '/shared/Consts.php');
 
 /**
@@ -35,7 +35,7 @@ switch ($_SERVER['REQUEST_METHOD']) {
 
         // Si no existen correo ni contrasenia en la peticion se manda error.
         if (!(isset($json[Consts::USER_KEY_CORREO]) && isset($json[Consts::USER_KEY_CONTRASENIA]))) {
-            header(ConfigControllers::HEADER_STATUS_BAD_REQUEST);
+            header(Validacion::HEADER_STATUS_BAD_REQUEST);
             return;
         }
 
@@ -46,7 +46,7 @@ switch ($_SERVER['REQUEST_METHOD']) {
 
         // Si no existe el Usuario en la base de datos se manda error.
         if (!isset($usuario)) {
-            header(ConfigControllers::HEADER_STATUS_NOT_FOUND);
+            header(Validacion::HEADER_STATUS_NOT_FOUND);
             return;
         }
 

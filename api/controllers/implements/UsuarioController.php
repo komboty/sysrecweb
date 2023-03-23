@@ -1,6 +1,6 @@
 <?php
 require_once(dirname(dirname(dirname(__FILE__))) . '/DependencyInjection.php');
-require_once(dirname(dirname(__FILE__)) . '/ConfigControllers.php');
+require_once(dirname(dirname(__FILE__)) . '/utils/Validacion.php');
 require_once(dirname(dirname(dirname(dirname(__FILE__)))) . '/shared/Consts.php');
 
 /**
@@ -18,12 +18,8 @@ switch ($_SERVER['REQUEST_METHOD']) {
      *              }, ...]
      */
     case 'GET':
-        // Se verifica que el Usuario tenga una sesion activa y de tipo Reclutador, si no es asi, se manda "No autorizado".
-        session_start();
-        if ($_SESSION[Consts::SESSION_KEY_USER][Consts::SESSION_USER_KEY_TIPO] != Consts::USER_TIPO_RECLUTADOR) {
-            header(ConfigControllers::HEADER_STATUS_UNAUTHORIZED);
-            return;
-        }
+        // Se verifica que el Usuario tenga una sesion activa y de tipo Reclutador, si no es asi, se termina el Script.
+        Validacion::isSessionReclutador();
 
         $dependencys = new DependencyInjection();
         $usuarioService = $dependencys->getUsuarioService();
@@ -40,7 +36,7 @@ switch ($_SERVER['REQUEST_METHOD']) {
 
         // Si no existen Usuarios en la base de datos se manda error.
         if (empty($usuarios)) {
-            header(ConfigControllers::HEADER_STATUS_NOT_FOUND);
+            header(Validacion::HEADER_STATUS_NOT_FOUND);
             return;
         }
 
@@ -61,7 +57,7 @@ switch ($_SERVER['REQUEST_METHOD']) {
             isset($json[Consts::USER_KEY_CORREO]) && isset($json[Consts::USER_KEY_CONTRASENIA]) &&
             isset($json[Consts::USER_KEY_TELEFONO]))) {
 
-            header(ConfigControllers::HEADER_STATUS_BAD_REQUEST);
+            header(Validacion::HEADER_STATUS_BAD_REQUEST);
             return;
         }
 

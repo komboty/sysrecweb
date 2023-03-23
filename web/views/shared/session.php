@@ -12,7 +12,7 @@ function verifyHome(string $tipoUsuario)
         echo '<script type="text/javascript">
                 AlertSysrec.okErrorRedirect(CONST_MSG_ALERT.USER_NOT_SESSION.TITLE, CONST_MSG_ALERT.USER_NOT_SESSION.TEXT, WEB_URL.VIEW_LOGIN);
             </script>';
-        die();
+        exit();
     }
 
     if ($_SESSION[Consts::SESSION_KEY_USER][Consts::SESSION_USER_KEY_TIPO] != $tipoUsuario) {
@@ -20,6 +20,6 @@ function verifyHome(string $tipoUsuario)
         echo '<script type="text/javascript">
                 AlertSysrec.okErrorRedirect(CONST_MSG_ALERT.PERMISSIONS_DENIED.TITLE, CONST_MSG_ALERT.PERMISSIONS_DENIED.TEXT, WEB_URL.VIEW_LOGIN);
             </script>';
-        die();
+        exit();
     }
 }

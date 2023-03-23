@@ -1,14 +1,8 @@
 <?php
 require_once(dirname(dirname(dirname(__FILE__))) . '/DependencyInjection.php');
-require_once(dirname(dirname(__FILE__)) . '/ConfigControllers.php');
+require_once(dirname(dirname(__FILE__)) . '/utils/Validacion.php');
 require_once(dirname(dirname(dirname(dirname(__FILE__)))) . '/shared/Consts.php');
 
-// Se verifica que el Usuario tenga una sesion activa, si no es asi, se manda "No autorizado".
-session_start();
-if (!isset($_SESSION[Consts::SESSION_KEY_USER])) {
-    header(ConfigControllers::HEADER_STATUS_UNAUTHORIZED);
-    return;
-}
 
 /**
  *  Se atiende la peticion del cliente segun el verbo.
@@ -24,9 +18,12 @@ switch ($_SERVER['REQUEST_METHOD']) {
      *              }, ...]
      */
     case 'GET':
+        // Se verifica que el Usuario tenga una sesion activa, si no es asi, se termina el Script.
+        Validacion::isSession();
+
         // Si no existen el parametro en la peticion se manda error.
         if (!isset($_GET[Consts::GET_MIS_PROYECTOS])) {
-            header(ConfigControllers::HEADER_STATUS_BAD_REQUEST);
+            header(Validacion::HEADER_STATUS_BAD_REQUEST);
             return;
         }
 
@@ -46,14 +43,14 @@ switch ($_SERVER['REQUEST_METHOD']) {
 
                 // Si el usuario no tiene un Rol de los anteriores, se manda "No autorizado".
             default:
-                header(ConfigControllers::HEADER_STATUS_UNAUTHORIZED);
+                header(Validacion::HEADER_STATUS_UNAUTHORIZED);
                 return;
                 break;
         }
 
         // Si no existen Proyectos en la base de datos se manda error.
         if (empty($proyectos)) {
-            header(ConfigControllers::HEADER_STATUS_NOT_FOUND);
+            header(Validacion::HEADER_STATUS_NOT_FOUND);
             return;
         }
 
@@ -66,13 +63,17 @@ switch ($_SERVER['REQUEST_METHOD']) {
          * Respuesta: {'id': }
          */
     case 'POST':
+        // Se verifica que el Usuario tenga una sesion activa y de tipo Reclutador, si no es asi, se termina el Script.
+        Validacion::isSessionReclutador();
+
         $json = json_decode(file_get_contents('php://input'), true);
 
         // Si no existen los campos obligatorios se manda error.
-        if (!(isset($json[Consts::PROJECT_KEY_ID_FUNDADOR]) && isset($json[Consts::PROJECT_KEY_NOMBRE]) &&
+        if (!(isset($json[Consts::PROJECT_KEY_ID_FUNDADOR]) &&
+            isset($json[Consts::PROJECT_KEY_NOMBRE]) &&
             isset($json[Consts::PROJECT_KEY_DESCRIPCION]))) {
 
-            header(ConfigControllers::HEADER_STATUS_BAD_REQUEST);
+            header(Validacion::HEADER_STATUS_BAD_REQUEST);
             return;
         }
 

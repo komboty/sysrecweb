@@ -14,9 +14,9 @@ class CalificacionServiceImpl implements ICalificacionService
         $this->calificacionDAO = $calificacionDAO;
     }
 
-    public function save($usuario)
+    public function save($calificacion)
     {
-        return $this->calificacionDAO->save($usuario);
+        return $this->calificacionDAO->save($calificacion);
     }
 
     public function getAll(): array

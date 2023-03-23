@@ -51,4 +51,14 @@ class Consts
     const INVITACION_KEY_COMENTARIO = 'comentario';
 
     const INVITACION_ESTADO_ENVIADA = 'Enviada';
+
+    /**
+     * Constantes de Calificacion
+     */
+    const CALIFICACION_KEY_ID = 'id';    
+    const CALIFICACION_KEY_ID_USUARIO = 'idUsuario';
+    const CALIFICACION_KEY_ID_PROYECTO = 'idProyecto';
+    const CALIFICACION_KEY_ID_HABILIDAD = 'idHabilidad';
+    const CALIFICACION_KEY_PUNTOS = 'puntos';
+    const CALIFICACION_KEY_COMENTARIO = 'comentario';
 }
