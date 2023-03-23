@@ -54,26 +54,13 @@ formRegistro.addEventListener('submit', (event) => {
                 resolve(null);
             }
         })
+        // Se realiza la peticion para registrar el Usuario.
         .then(file => {
             data.curriculum = file
-            return fetch(API_URL.CONTROLLER_USUARIO, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(data)
-            })
+            return UtilsSysrec.fetchPostAndCheckId(API_URL.CONTROLLER_USUARIO, data);
         })
-        // Si se la peticion es correcta sigue el flujo, de lo contrario manda a catch.
-        .then(res => ErrorSysrec.isHTTPStatusOk(res, () => res.json()))
-        .then(usuario => {
-            // Si no se registro el Usuario, se manda error.
-            if (!usuario.id) {
-                AlertSysrec.okError(CONST_MSG_ALERT.ERROR.TITLE, CONST_MSG_ALERT.ERROR.TEXT);
-                return;
-            }
-
-            // Si se registro correctamente el Usuario, se redirige al Login.
-            AlertSysrec.okSuccessRedirect(CONST_MSG_ALERT.SAVE_USER.TITLE, CONST_MSG_ALERT.SAVE_USER.TEXT, WEB_URL.VIEW_LOGIN);
-        })
+        // Si se registro correctamente el Usuario, se redirige al Login.
+        .then(usuario => AlertSysrec.okSuccessRedirect(CONST_MSG_ALERT.SAVE_USER.TITLE, CONST_MSG_ALERT.SAVE_USER.TEXT, WEB_URL.VIEW_LOGIN))
         // Si ocurrio una excepcion o error.
         .catch(error => ErrorSysrec.alert(error));
 });

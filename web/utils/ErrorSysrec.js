@@ -11,6 +11,7 @@ class ErrorSysrec extends Error {
      * Verifica que la peticion haya sido correcta. De lo contrario manda un ErrorSysrec.
      * @param {*} response respuesta del servidor.
      * @param {*} fun Funcion a ejecutar, si el estado de la peticion fue Ok.
+     * @param {string} code404 Codigo para del mensaje a mostrar para No autorizado.
      * @returns 
      */
     static isHTTPStatusOk(response, fun, code404 = CONST_MSG_ALERT.NOT_FOUND.CODE) {

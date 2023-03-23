@@ -17,11 +17,7 @@ let categoHabilidad = [];
 /**
  * Obtiene los Proyectos que tiene el Reclutador.
  */
-fetch(API_URL_WHIT_PARAMS.MIS_PROYECTOS, {
-        method: 'GET',
-    })
-    // Si se la peticion es correcta sigue el flujo, de lo contrario manda a catch.
-    .then(res => ErrorSysrec.isHTTPStatusOk(res, () => res.json(), CONST_MSG_ALERT.PROJECT_NOT_FOUND.CODE))
+UtilsSysrec.fetchGet(API_URL_WHIT_PARAMS.MIS_PROYECTOS, CONST_MSG_ALERT.PROJECT_NOT_FOUND.CODE)
     // Se ponen los Proyectos en HTML.
     .then(misProyectos => {
         cleanScreen();
@@ -179,45 +175,24 @@ function onCalificar(idDesarrollador, idProyecto) {
     const invitacion = proyecto.getInvitacionesAceptadasByIdUser(idDesarrollador);
 
     // Se obtienen todas las Habilidades del servidor.
-    fetch(API_URL_WHIT_PARAMS.HABILIDAD_ALL, {
-            method: 'GET',
-        })
-        // Si se la peticion es correcta sigue el flujo, de lo contrario manda a catch.
-        .then(res => ErrorSysrec.isHTTPStatusOk(res, () => res.json()))
-        // 
+    UtilsSysrec.fetchGet(API_URL_WHIT_PARAMS.HABILIDAD_ALL)
+        // Se lanza el Modal, si se da cancelar se manda a catch.
         .then(resHabilidades => {
             // habilidades = resHabilidades.map(habilidad => new Habilidad(habilidad));
             categoHabilidad = UtilsSysrec.groupByValue(resHabilidades, 'categoria');
             return openModalCalificar(invitacion);
         })
         // Se hace la peticion al sevidor para registrar la Calificacion.
-        .then((modalValues) => {
-            const data = {
+        .then(modalValues => UtilsSysrec.fetchPostAndCheckId(
+            API_URL.CONTROLLER_CALIFICACION, {
                 'idUsuario': idDesarrollador,
                 'idProyecto': idProyecto,
                 'idHabilidad': modalValues.idHabilidad,
                 'puntos': modalValues.puntos,
                 'comentario': modalValues.comentario,
-            };
-
-            return fetch(API_URL.CONTROLLER_CALIFICACION, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(data)
-            })
-        })
-        // Si se la peticion es correcta sigue el flujo, de lo contrario manda a catch.
-        .then(res => ErrorSysrec.isHTTPStatusOk(res, () => res.json()))
-        .then(invitacion => {
-            // Si no se registro la Invitacion, se manda error.
-            if (!invitacion.id) {
-                AlertSysrec.okError(CONST_MSG_ALERT.ERROR.TITLE, CONST_MSG_ALERT.ERROR.TEXT);
-                return;
-            }
-
-            // Si se registro correctamente la Invitacion.
-            AlertSysrec.okSuccess(CONST_MSG_ALERT.SAVE_CALIFICACION.TITLE, CONST_MSG_ALERT.SAVE_CALIFICACION.TEXT);
-        })
+            }))
+        // Si se registro correctamente la Invitacion.
+        .then(invitacion => AlertSysrec.okSuccess(CONST_MSG_ALERT.SAVE_CALIFICACION.TITLE, CONST_MSG_ALERT.SAVE_CALIFICACION.TEXT))
         // Si ocurrio una excepcion o error.
         .catch(error => ErrorSysrec.alert(error));
 }

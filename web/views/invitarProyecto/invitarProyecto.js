@@ -12,11 +12,7 @@ let desarrolladores = [];
 /**
  * Obtiene Todos los Desarrolladores.
  */
-fetch(API_URL_WHIT_PARAMS.USER_TIPO + CONST_SHARED.TIPO_DESARROLLADOR, {
-        method: 'GET',
-    })
-    // Si se la peticion es correcta sigue el flujo, de lo contrario manda a catch.
-    .then(res => ErrorSysrec.isHTTPStatusOk(res, () => res.json()))
+UtilsSysrec.fetchGet(API_URL_WHIT_PARAMS.USER_TIPO + CONST_SHARED.TIPO_DESARROLLADOR)
     // Se ponen los Desarrolladores en HTML.
     .then(resDesarrolladores => {
         cleanScreen();
@@ -204,42 +200,21 @@ function onInvitar(idDesarrollador) {
     const desarrollador = UtilsSysrec.getObjectById(desarrolladores, idDesarrollador);
 
     // Se obtienen los Proyectos que tiene el Reclutador.
-    fetch(API_URL_WHIT_PARAMS.MIS_PROYECTOS, {
-            method: 'GET',
-        })
-        // Si se la peticion es correcta sigue el flujo, de lo contrario manda a catch.
-        .then(res => ErrorSysrec.isHTTPStatusOk(res, () => res.json(), CONST_MSG_ALERT.PROJECT_NOT_FOUND.CODE))
+    UtilsSysrec.fetchGet(API_URL_WHIT_PARAMS.MIS_PROYECTOS, CONST_MSG_ALERT.PROJECT_NOT_FOUND.CODE)
         // Se lanza el Modal, si se da cancelar se manda a catch.
         .then(proyectos => {
             const proyectosReclutador = proyectos.map(proyecto => new Proyecto(proyecto));
             return openModalInvitacion(proyectosReclutador, desarrollador);
         })
         // Se hace la peticion al sevidor para registrar una Invitacion.
-        .then((modalValues) => {
-            const data = {
+        .then(modalValues => UtilsSysrec.fetchPostAndCheckId(
+            API_URL.CONTROLLER_INVITACION, {
                 'idUsuario': desarrollador.id,
                 'idProyecto': modalValues.idProyecto,
                 'comentario': modalValues.comentario,
-            };
-
-            return fetch(API_URL.CONTROLLER_INVITACION, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(data)
-            })
-        })
-        // Si se la peticion es correcta sigue el flujo, de lo contrario manda a catch.
-        .then(res => ErrorSysrec.isHTTPStatusOk(res, () => res.json()))
-        .then(invitacion => {
-            // Si no se registro la Invitacion, se manda error.
-            if (!invitacion.id) {
-                AlertSysrec.okError(CONST_MSG_ALERT.ERROR.TITLE, CONST_MSG_ALERT.ERROR.TEXT);
-                return;
-            }
-
-            // Si se registro correctamente la Invitacion.
-            AlertSysrec.okSuccess(CONST_MSG_ALERT.SAVE_INVITACTION.TITLE, CONST_MSG_ALERT.SAVE_INVITACTION.TEXT);
-        })
+            }))
+        // Si se registro correctamente la Invitacion.
+        .then(invitacion => AlertSysrec.okSuccess(CONST_MSG_ALERT.SAVE_INVITACTION.TITLE, CONST_MSG_ALERT.SAVE_INVITACTION.TEXT))
         // Si ocurrio una excepcion o error.
         .catch(error => ErrorSysrec.alert(error));
 }

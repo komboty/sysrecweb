@@ -22,13 +22,7 @@ formLogin.addEventListener('submit', (event) => {
     };
 
     // Se realiza la peticion al servidor para loguearse.
-    fetch(API_URL.CONTROLLER_SESSION, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(data)
-        })
-        // Si se la peticion es correcta sigue el flujo, de lo contrario manda a catch.
-        .then(res => ErrorSysrec.isHTTPStatusOk(res, () => res.json(), CONST_MSG_ALERT.USER_NOT_FOUND.CODE))
+    UtilsSysrec.fetchPost(API_URL.CONTROLLER_SESSION, data, CONST_MSG_ALERT.USER_NOT_FOUND.CODE)
         // Dependiendo del tipo del Usuario, se redirige a su home.
         .then(usuario => UtilsSysrec.redirectToHome(usuario.tipo))
         // Si ocurrio una excepcion o error.
