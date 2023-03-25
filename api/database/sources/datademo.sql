@@ -23,10 +23,12 @@ INSERT INTO Invitacion (idEstadoInvitacion, idUsuario, idProyecto, comentario) V
     (2, 4, 1, 'Tuvimos la oportunidad de ver tu perfil y nos parece extraordinario; creemos que puede ser de tu interés nuestra invitación'),
     (2, 5, 1, 'Tuvimos la oportunidad de ver tu perfil y nos parece extraordinario; creemos que puede ser de tu interés nuestra invitación'),
     (1, 6, 2, 'Tuvimos la oportunidad de ver tu perfil y nos parece extraordinario; creemos que puede ser de tu interés nuestra invitación'),
-    (2, 4, 3, 'Queremos invitarte a participar en nuestro Proyecto'),
-    (3, 7, 3, 'Queremos invitarte a participar en nuestro Proyecto'),
-    (3, 8, 4, 'Tuvimos la oportunidad de ver tu perfil y nos parece extraordinario; creemos que puede ser de tu interés nuestra invitación'),
-    (2, 9, 4, 'Tuvimos la oportunidad de ver tu perfil y nos parece extraordinario; creemos que puede ser de tu interés nuestra invitación');
+    (1, 4, 2, 'Tuvimos la oportunidad de ver tu perfil y nos parece extraordinario; creemos que puede ser de tu interés nuestra invitación'),
+    (2, 4, 3, 'Tuvimos la oportunidad de ver tu perfil y nos parece extraordinario; creemos que puede ser de tu interés nuestra invitación'),
+    (3, 7, 3, 'Tuvimos la oportunidad de ver tu perfil y nos parece extraordinario; creemos que puede ser de tu interés nuestra invitación'),
+    (3, 4, 4, 'Queremos invitarte a participar en nuestro Proyecto'),
+    (3, 8, 4, 'Queremos invitarte a participar en nuestro Proyecto'),
+    (2, 9, 4, 'Queremos invitarte a participar en nuestro Proyecto');
 
 INSERT INTO Calificacion (idUsuario, idProyecto, idHabilidad, puntos, comentario) VALUES
     (4, 1, 1, 4, NULL),

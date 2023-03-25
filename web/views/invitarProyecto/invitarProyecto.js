@@ -229,8 +229,8 @@ function openModalInvitacion(proyectosReclutador, desarrollador) {
     return ModalSysrec.openByHTML({
             title: 'Invitar a',
             html: getHTMLInvitar(proyectosReclutador, desarrollador),
-            textBtnConfirm: 'Invitar <i class="fas fa-user-check" style="margin-left: 0.3em;"></i>',
-            textBtnCancel: 'Cancelar <i class="fas fa-user-times" style="margin-left: 0.3em;"></i>',
+            textBtnConfirm: 'Invitar <i class="fas fa-user-check ms-1"></i>',
+            textBtnCancel: 'Cancelar <i class="fas fa-user-times ms-1"></i>',
             funPreConfirm: () => {
                 const idProyecto = document.getElementById('swal2SelectProyect').value;
                 const comentario = document.getElementById('swal2AreaComent').value;

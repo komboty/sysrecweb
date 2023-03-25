@@ -110,6 +110,12 @@ class UtilsSysrec {
         return objects.filter(object => object.id === id)[0];
     }
 
+    /**
+     * Agrupa todos los objetos por el valor que tiene la llave proporcionada.
+     * @param {array} array Array con objetos a agrupar.
+     * @param {string} keyValue Llave donde se encuentra el valor con el que se agrupara.
+     * @returns 
+     */
     static groupByValue(array, keyValue) {
         const group = {};
         let value = null;

@@ -22,3 +22,5 @@
 
 <script type="text/javascript" src="../../models/Proyecto.js"></script>
 <script type="text/javascript" src="../../models/InvitacionProyecto.js"></script>
+
+<script type="text/javascript" src="../../models/Invitacion.js"></script>

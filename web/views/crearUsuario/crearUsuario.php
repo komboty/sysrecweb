@@ -27,10 +27,14 @@
                             <span class="badge badge-danger mb-4 col-md-12">* Campos obligatorios</span>
                             <div class="mb-4 col-md-12 btn-group">
                                 <input type="radio" class="btn-check" name="options" id="checkDeveloper" autocomplete="off" checked />
-                                <label class="btn btn-outline-dark btn-lg btn-block" data-mdb-ripple-color="gray" for="checkDeveloper"><i class="far fa-address-card"></i> Desarrollador</label>
+                                <label class="btn btn-outline-dark btn-lg btn-block" data-mdb-ripple-color="gray" for="checkDeveloper">
+                                    <i class="far fa-address-card"></i> Desarrollador
+                                </label>
 
                                 <input type="radio" class="btn-check" name="options" id="checkReclutador" autocomplete="off" />
-                                <label class="btn btn-outline-dark btn-lg btn-block" data-mdb-ripple-color="gray" for="checkReclutador"><i class="far fa-handshake"></i> Reclutador</label>
+                                <label class="btn btn-outline-dark btn-lg btn-block" data-mdb-ripple-color="gray" for="checkReclutador">
+                                    <i class="far fa-handshake"></i> Reclutador
+                                </label>
                             </div>
                             <form class="row needs-validation" id="formRegistro" novalidate>
                                 <div class="mb-4 col-md-6">

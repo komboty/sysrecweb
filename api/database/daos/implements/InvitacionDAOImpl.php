@@ -63,7 +63,7 @@ class InvitacionDAOImpl implements IInvitacionDAO
     public function getByUsuario(int $idUsuario): array
     {
         $this->connectionDB->connectDB();
-        $query = 'SELECT i.id, ei.nombre as estado, p.nombre as proyecto, p.descripcion, u.nombre as fundador, u.correo, u.telefono  FROM Invitacion as i'
+        $query = 'SELECT i.id, ei.nombre as estado, i.comentario, p.nombre as proyecto, p.descripcion, u.nombre as fundador, u.correo, u.telefono  FROM Invitacion as i'
             . ' JOIN Proyecto as p ON i.idProyecto = p.id'
             . ' JOIN Usuario as u ON p.idUsuarioFundador = u.id'
             . ' JOIN EstadoInvitacion as ei ON i.idEstadoInvitacion = ei.id'

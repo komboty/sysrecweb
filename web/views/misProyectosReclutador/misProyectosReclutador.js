@@ -68,7 +68,7 @@ function getHTMLProyecto(proyecto) {
         '        <h2 class="accordion-header" id="headingDesc' + proyecto.id + '">' +
         '          <button class="accordion-button collapsed" type="button" data-mdb-toggle="collapse" data-mdb-target="#collapseDesc' + proyecto.id + '" aria-expanded="false" aria-controls="collapseDesc' + proyecto.id + '">' +
         '            <a href="#">' +
-        '              <i class="fas fa-info-circle"></i>' +
+        '              <i class="fas fa-info-circle fa-lg"></i>' +
         '            </a>' +
         '            <div class="container">Descripción</div>' +
         '          </button>' +
@@ -126,7 +126,7 @@ function getHTMLProyecto(proyecto) {
 }
 
 /**
- * Regresa el HTML de las invitaciones.
+ * Regresa el HTML de las Invitaciones.
  * @param {InvitacionProyecto} inivitaciones Invitaciones a poner formato.
  * @param {int} idProyecto Id del Proyecto de la invitacion.
  * @param {boolean} isCalificar Si se quiere mostrar el boton de calificar.
@@ -207,8 +207,8 @@ function openModalCalificar(invitacion) {
             title: 'Calificar a',
             html: getHTMLCalificar(invitacion),
             sizeX: '45em',
-            textBtnConfirm: 'Aceptar <i class="fas fa-user-check" style="margin-left: 0.3em;"></i>',
-            textBtnCancel: 'Cancelar <i class="fas fa-user-times" style="margin-left: 0.3em;"></i>',
+            textBtnConfirm: 'Aceptar <i class="fas fa-check-circle ms-1"></i>',
+            textBtnCancel: 'Cancelar <i class="far fa-times-circle ms-1"></i>',
             fundidOpen: () => starsListener(),
             funPreConfirm: () => {
                 return {
