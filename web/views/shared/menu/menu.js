@@ -44,3 +44,10 @@ function redirectToCrearProyecto() {
 function redirectToInvitar() {
     window.location.replace(WEB_URL.VIEW_INVITAR_PROYECTO);
 }
+
+/**
+ * Redirecciona a la pagina de Invitaciones de un Usuario.
+ */
+function redirectToInvitaciones() {
+    window.location.replace(WEB_URL.VIEW_INVITACIONES);
+}

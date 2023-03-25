@@ -15,7 +15,7 @@ function verifyHome(string $tipoUsuario)
         exit();
     }
 
-    if ($_SESSION[Consts::SESSION_KEY_USER][Consts::SESSION_USER_KEY_TIPO] != $tipoUsuario) {
+    if ($_SESSION[Consts::SESSION_KEY_USER][Consts::USER_KEY_TIPO] != $tipoUsuario) {
         require_once(dirname(__FILE__) . '/scripts.php');
         echo '<script type="text/javascript">
                 AlertSysrec.okErrorRedirect(CONST_MSG_ALERT.PERMISSIONS_DENIED.TITLE, CONST_MSG_ALERT.PERMISSIONS_DENIED.TEXT, WEB_URL.VIEW_LOGIN);

@@ -48,7 +48,7 @@ switch ($_SERVER['REQUEST_METHOD']) {
                 break;
         }
 
-        // Si no existen Proyectos en la base de datos se manda error.
+        // Si no existen Proyectos en el sistema se manda error.
         if (empty($proyectos)) {
             header(Validacion::HEADER_STATUS_NOT_FOUND);
             return;

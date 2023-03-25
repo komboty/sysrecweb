@@ -34,7 +34,7 @@ switch ($_SERVER['REQUEST_METHOD']) {
         //     $usuarios = $usuarioService->getAll();
         // }
 
-        // Si no existen Usuarios en la base de datos se manda error.
+        // Si no existen Usuarios en el sistema se manda error.
         if (empty($usuarios)) {
             header(Validacion::HEADER_STATUS_NOT_FOUND);
             return;

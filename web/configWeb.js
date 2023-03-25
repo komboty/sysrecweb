@@ -28,6 +28,7 @@ const WEB_URL = {
     'VIEW_MIS_PROYECTOS_RECLUTADOR': SERVER.HOST + SERVER.WEB_VIEWS + '/misProyectosReclutador/misProyectosReclutador.php',
     'VIEW_CREAR_PROYECTO': SERVER.HOST + SERVER.WEB_VIEWS + '/crearProyecto/crearProyecto.php',
     'VIEW_INVITAR_PROYECTO': SERVER.HOST + SERVER.WEB_VIEWS + '/invitarProyecto/invitarProyecto.php',
+    'VIEW_INVITACIONES': SERVER.HOST + SERVER.WEB_VIEWS + '/invitacionesDesarrollador/invitacionesDesarrollador.php',
 }
 
 const CONST_SHARED = {

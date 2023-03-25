@@ -30,7 +30,7 @@ class Validacion
     public static function isSessionReclutador()
     {
         session_start();
-        if ($_SESSION[Consts::SESSION_KEY_USER][Consts::SESSION_USER_KEY_TIPO] != Consts::USER_TIPO_RECLUTADOR) {
+        if ($_SESSION[Consts::SESSION_KEY_USER][Consts::USER_KEY_TIPO] != Consts::USER_TIPO_RECLUTADOR) {
             header(Validacion::HEADER_STATUS_UNAUTHORIZED);
             exit();
         }

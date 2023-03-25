@@ -44,13 +44,13 @@ switch ($_SERVER['REQUEST_METHOD']) {
         $usuarioService = $dependencys->getUsuarioService();
         $usuario = $usuarioService->getByCorreoAndContrasenia($json[Consts::USER_KEY_CORREO], $json[Consts::USER_KEY_CONTRASENIA]);
 
-        // Si no existe el Usuario en la base de datos se manda error.
+        // Si no existe el Usuario en el sistema se manda error.
         if (!isset($usuario)) {
             header(Validacion::HEADER_STATUS_NOT_FOUND);
             return;
         }
 
-        // Si existe el Usuario en la base de datos, se asigna a la sesion del servidor.
+        // Si existe el Usuario en el sistema, se asigna a la sesion del servidor.
         session_start();
         $_SESSION[Consts::SESSION_KEY_USER] = $usuario;
         // Se regresa el tipo de Usuario.

@@ -21,7 +21,17 @@
     require_once(dirname(dirname(__FILE__)) . '/shared/menu/menu.php');
     setBreadcrumb('');
     ?>
-    
+
+    <section class="animaSlideFromRight">
+        <div class="container py-3">
+            <div class="card text-center">
+                <div class="card-header">
+                    <h4>Bienvenido <?php echo $_SESSION[Consts::SESSION_KEY_USER][Consts::USER_KEY_NOMBRE] ?></h4>
+                </div>
+                <!-- <div class="card-footer text-muted"></div> -->
+            </div>
+        </div>
+    </section>
 
     <?php
     // JavaScripts

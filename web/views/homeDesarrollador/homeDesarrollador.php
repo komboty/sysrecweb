@@ -22,30 +22,13 @@
     setBreadcrumb('');
     ?>
 
-    <!-- Accordion -->
-    <section>
+    <section class="animaSlideFromRight">
         <div class="container py-3">
-            <div class="accordion" id="accordionDeveloper">
-                <div class="accordion-item">
-                    <h2 class="accordion-header" id="headingMisProyectos">
-                        <button class="accordion-button collapsed" type="button" data-mdb-toggle="collapse" data-mdb-target="#collapseMisProyectos" aria-expanded="false" aria-controls="collapseMisProyectos">
-                            <i class="fab fa-sketch fa-sm me-2 opacity-70"></i> Mis Proyectos
-                        </button>
-                    </h2>
-                    <div id="collapseMisProyectos" class="accordion-collapse collapse" aria-labelledby="headingMisProyectos">
-                        <div class="accordion-body" id="bodyMisProyectos"></div>
-                    </div>
+            <div class="card text-center">
+                <div class="card-header">
+                    <h4>¡Hola! <?php echo $_SESSION[Consts::SESSION_KEY_USER][Consts::USER_KEY_NOMBRE] ?></h4>
                 </div>
-                <div class="accordion-item">
-                    <h2 class="accordion-header" id="headingInvitaciones">
-                        <button class="accordion-button collapsed" type="button" data-mdb-toggle="collapse" data-mdb-target="#collapseInvitaciones" aria-expanded="false" aria-controls="collapseInvitaciones">
-                            <i class="fas fa-envelope fa-sm me-2 opacity-70"></i> Invitaciones
-                        </button>
-                    </h2>
-                    <div id="collapseInvitaciones" class="accordion-collapse collapse" aria-labelledby="headingInvitaciones">
-                        <div class="accordion-body" id="bodyInvitaciones"></div>
-                    </div>
-                </div>
+                <!-- <div class="card-footer text-muted"></div> -->
             </div>
         </div>
     </section>

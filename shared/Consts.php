@@ -9,8 +9,6 @@ class Consts
      * Constantes de Usuarios
      */
     const SESSION_KEY_USER = 'user';
-    const SESSION_USER_KEY_TIPO = 'tipo';
-    const SESSION_USER_KEY_CORREO = 'correo';
     
     const USER_KEY_ID = 'id';
     const USER_KEY_TIPO = 'tipo';
@@ -29,6 +27,7 @@ class Consts
     const GET_SESSION_USERS = 'User';
     const GET_MIS_PROYECTOS = 'MisProyectos';
     const GET_ALL_HABILIDADES = 'All';
+    const GET_ALL_INVITACIONES = 'All';
 
 
     /**
