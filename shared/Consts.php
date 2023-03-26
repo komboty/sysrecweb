@@ -52,6 +52,7 @@ class Consts
     const INVITACION_KEY_COMENTARIO = 'comentario';
 
     const INVITACION_ESTADO_ENVIADA = 'Enviada';
+    const INVITACION_ESTADO_ACEPTADA = 'Aceptada';
 
     /**
      * Constantes de Calificacion

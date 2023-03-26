@@ -31,15 +31,28 @@ class ProyectoServiceImpl implements IProyectoService
 
     public function getByFundador(int $idFundador): array
     {
-        $proyectos = $this->proyectoDAO->getByFundador($idFundador);        
-        for ($i=0; $i < count($proyectos); $i++) {
-            $proyectos[$i][Consts::PROJECT_KEY_INVITACIONES] = $this->invitacionDAO->getByProyecto($proyectos[$i][Consts::PROJECT_KEY_ID]);
+        $proyectos = $this->proyectoDAO->getByFundador($idFundador);
+        foreach ($proyectos as &$proyecto) {
+            $proyecto[Consts::PROJECT_KEY_INVITACIONES] = $this->invitacionDAO->getByProyecto($proyecto[Consts::PROJECT_KEY_ID]);
         }
         return $proyectos;
     }
 
     public function getByInvitado(int $idInvitado): array
     {
-        return $this->proyectoDAO->getByInvitado($idInvitado);
+        $projectsAceptados = $this->proyectoDAO->getByInvitado($idInvitado, Consts::INVITACION_ESTADO_ACEPTADA);
+        foreach ($projectsAceptados as &$projectAceptado) {
+            $invitaciones = $this->invitacionDAO->getByProyecto($projectAceptado[Consts::PROJECT_KEY_ID]);
+            $projectAceptado[Consts::PROJECT_KEY_INVITACIONES] = $this->filterAceptadas($invitaciones);
+        }
+        return $projectsAceptados;
+    }
+
+    private function filterAceptadas(array $invitaciones): array
+    {
+        $filter = array_filter($invitaciones, function ($invitacion) {
+            return ($invitacion[Consts::INVITACION_KEY_ESTADO] == Consts::INVITACION_ESTADO_ACEPTADA);
+        });
+        return array_values($filter);
     }
 }

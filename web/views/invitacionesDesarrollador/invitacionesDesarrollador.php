@@ -28,19 +28,19 @@
             <li class="nav-item" role="presentation">
                 <a class="nav-link active" id="tab-recibidas" data-mdb-toggle="tab" href="#tabs-recibidas" role="tab" aria-controls="tabs-recibidas" aria-selected="true">
                     <i class="fas fa-envelope-open-text fa-lg me-1"></i>Recibidas
-                    <span class="badge bg-dark ms-1" id="badgeRecibidas"></span>
+                    <span class="badge bg-dark ms-1" id="badgeRecibidas">0</span>
                 </a>
             </li>
             <li class="nav-item" role="presentation">
                 <a class="nav-link" id="tab-aceptadas" data-mdb-toggle="tab" href="#tabs-aceptadas" role="tab" aria-controls="tabs-aceptadas" aria-selected="false">
                     <i class="fas fa-thumbs-up fa-lg me-1"></i>Aceptadas
-                    <span class="badge bg-dark ms-1" id="badgeAceptadas"></span>
+                    <span class="badge bg-dark ms-1" id="badgeAceptadas">0</span>
                 </a>
             </li>
             <li class="nav-item" role="presentation">
                 <a class="nav-link" id="tab-rechazadas" data-mdb-toggle="tab" href="#tabs-rechazadas" role="tab" aria-controls="tabs-rechazadas" aria-selected="false">
                     <i class="fas fa-thumbs-down fa-lg me-1"></i>Rechazadas
-                    <span class="badge bg-dark ms-1" id="badgeRechazadas"></span>
+                    <span class="badge bg-dark ms-1" id="badgeRechazadas">0</span>
                 </a>
             </li>
         </ul>

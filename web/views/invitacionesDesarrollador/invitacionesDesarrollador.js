@@ -1,3 +1,4 @@
+const badgeInvitaciones = document.getElementById('badgeInvitaciones');
 const bodyInviRecibidas = document.getElementById('bodyInviRecibidas');
 const bodyInviAceptadas = document.getElementById('bodyInviAceptadas');
 const bodyInviRechazadas = document.getElementById('bodyInviRechazadas');
@@ -15,6 +16,7 @@ APISysrec.fetchGet(API_URL_WHIT_PARAMS.INVITACION_ALL, CONST_MSG_ALERT.INVITATIO
     // Se ponen las Invitaciones en HTML.
     .then(resInvitaciones => {
         cleanScreen();
+        badgeInvitaciones.innerHTML = UtilsSysrec.getLengthArray(resInvitaciones);
         let invitacion = null;
         for (const resInvitacion of resInvitaciones) {
             invitacion = new Invitacion(resInvitacion);
@@ -114,7 +116,7 @@ function getHTMLInvitacion(invitacion, isRecibida = false) {
         '            <a href="#">' +
         '              <i class="far fa-handshake fa-lg"></i>' +
         '            </a>' +
-        '            <div class="container">Reclutador</div>' +
+        '            <div class="ms-2">Reclutador</div>' +
         '          </button>' +
         '        </h2>' +
         '        <div id="collapseFundador' + invitacion.id + '" class="accordion-collapse collapse" aria-labelledby="headingFundador' + invitacion.id + '">' +

@@ -4,12 +4,18 @@ class Proyecto {
      * @param {int} param0.id
      * @param {string} param0.nombre
      * @param {string} param0.descripcion
+     * @param {string} param0.fundador
+     * @param {string} param0.correo
+     * @param {string} param0.telefono
      * @param {InvitacionProyecto[]} param0.invitaciones
      */
-    constructor({ id, nombre, descripcion, invitaciones }) {
+    constructor({ id, nombre, descripcion, fundador, correo, telefono, invitaciones }) {
         this.id = id;
         this.nombre = nombre;
         this.descripcion = descripcion;
+        this.fundador = fundador;
+        this.correo = correo;
+        this.telefono = telefono;
         this.invitaciones = invitaciones.map(invitacion => new InvitacionProyecto(invitacion));
     }
 

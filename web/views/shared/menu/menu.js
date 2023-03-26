@@ -17,7 +17,7 @@ function onCerrarSesion() {
 function redirectToMisProyectos(tipoUsuario) {
     switch (tipoUsuario) {
         case CONST_SHARED.TIPO_DESARROLLADOR:
-            // window.location.replace(WEB_URL.VIEW_HOME_DESARROLLADOR);
+            window.location.replace(WEB_URL.VIEW_MIS_PROYECTOS_DESARROLLADOR);
             break;
 
         case CONST_SHARED.TIPO_RECLUTADOR:

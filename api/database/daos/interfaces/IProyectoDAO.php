@@ -17,7 +17,8 @@ interface IProyectoDAO extends IGenericDAO
      * Obtiene todos los Proyectos de un Usuario Invitado.
      * 
      * @param int $idInvitado Id del Usuario Invitado.
+     * @param string $estado estado de la Invitacion.
      * @return array Proyectos.
      */
-    public function getByInvitado(int $idInvitado): array;
+    public function getByInvitado(int $idInvitado, string $estado): array;
 }

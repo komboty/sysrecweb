@@ -31,8 +31,8 @@ class UsuarioServiceImpl implements IUsuarioService
     public function getByTipoUsuario(string $tipoUsuario): array
     {
         $usuarios = $this->usuarioDAO->getByTipoUsuario($tipoUsuario);                
-        for ($i=0; $i < count($usuarios); $i++) {            
-            $usuarios[$i][Consts::USER_KEY_CALIFICACIONES] = $this->calificacionDAO->getByUsuario($usuarios[$i][Consts::USER_KEY_ID]);
+        foreach ($usuarios as &$usuario) {            
+            $usuario[Consts::USER_KEY_CALIFICACIONES] = $this->calificacionDAO->getByUsuario($usuario[Consts::USER_KEY_ID]);
         }
         return $usuarios;
     }

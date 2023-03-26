@@ -1,3 +1,4 @@
+const badgeInvitar = document.getElementById('badgeInvitar');
 const bodyDesarrolladores = document.getElementById('bodyDesarrolladores');
 const cardLoad = document.getElementById('cardLoad');
 
@@ -16,6 +17,7 @@ APISysrec.fetchGet(API_URL_WHIT_PARAMS.USER_TIPO + CONST_SHARED.TIPO_DESARROLLAD
     // Se ponen los Desarrolladores en HTML.
     .then(resDesarrolladores => {
         cleanScreen();
+        badgeInvitar.innerHTML = UtilsSysrec.getLengthArray(resDesarrolladores);
         let desarrollador = null;
         for (const resDesarrollador of resDesarrolladores) {
             desarrollador = new Desarrollador(resDesarrollador);
@@ -58,7 +60,7 @@ function getHTMLDesarrollador(desarrollador) {
         '          <p class="fw-bold mb-1">' + desarrollador.nombre + '</p>' +
         '          <p class="text-muted mb-0"><i class="fas fa-envelope fa-xs"></i> ' + desarrollador.correo + '</p>' +
         '          <p class="text-muted mb-0"><i class="fas fa-phone fa-xs"></i> ' + desarrollador.telefono + '</p>' +
-        '          <p class="text-muted mb-0"><i class="fas fa-hiking fa-xs"></i> ' + desarrollador.edad + '</p>' +
+        '          <p class="text-muted mb-0"><i class="fas fa-hiking fa-xs"></i> ' + (desarrollador.edad ? desarrollador.edad : '') + '</p>' +
         '          <span class="badge rounded-pill badge-' + getColorByValue(desarrollador.promedioTotal) + '">' + getRating(desarrollador.promedioTotal) + '</span>' +
         '        </div>' +
         '      </div>' +
@@ -271,7 +273,7 @@ function getHTMLInvitar(proyectosReclutador, desarrollador) {
         '    <p class="fw-bold mb-1">' + desarrollador.nombre + '</p>' +
         '    <p class="text-muted mb-0"><i class="fas fa-envelope fa-xs"></i> ' + desarrollador.correo + '</p>' +
         '    <p class="text-muted mb-0"><i class="fas fa-phone fa-xs"></i> ' + desarrollador.telefono + '</p>' +
-        '    <p class="text-muted mb-0"><i class="fas fa-hiking fa-xs"></i> ' + desarrollador.edad + '</p>' +
+        '    <p class="text-muted mb-0"><i class="fas fa-hiking fa-xs"></i> ' + (desarrollador.edad ? desarrollador.edad : '') + '</p>' +
         '    <span class="badge rounded-pill m-2 badge-' + getColorByValue(desarrollador.promedioTotal) + '">' + getRating(desarrollador.promedioTotal) + '</span>' +
         '  </div>' +
         '</div>' +

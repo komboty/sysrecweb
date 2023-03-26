@@ -44,7 +44,7 @@ class ProyectoDAOImpl implements IProyectoDAO
     {
         $this->connectionDB->connectDB();
         $query = 'SELECT id, nombre, descripcion FROM Proyecto'
-            . ' WHERE idUsuarioFundador = ? ';
+            . ' WHERE idUsuarioFundador = ?';
         $statement = $this->connectionDB->getPrepare($query);
         $statement->bind_param('i', $idFundador);
         $statement->execute();
@@ -53,8 +53,18 @@ class ProyectoDAOImpl implements IProyectoDAO
             ->fetch_all(MYSQLI_ASSOC);
     }
 
-    public function getByInvitado(int $idInvitado): array
+    public function getByInvitado(int $idInvitado, string $estado): array
     {
-        return [];
+        $this->connectionDB->connectDB();
+        $query = 'SELECT p.id, p.nombre, p.descripcion, u.nombre as fundador, u.correo, u.telefono FROM Proyecto as p'
+            . ' JOIN Invitacion as i ON p.id = i.idProyecto'
+            . ' JOIN Usuario as u ON p.idUsuarioFundador = u.id'
+            . ' WHERE i.idUsuario = ? AND i.idEstadoInvitacion = (SELECT id FROM EstadoInvitacion WHERE nombre = ?)';
+        $statement = $this->connectionDB->getPrepare($query);
+        $statement->bind_param('is', $idInvitado, $estado);
+        $statement->execute();
+        return $statement
+            ->get_result()
+            ->fetch_all(MYSQLI_ASSOC);
     }
 }

@@ -52,7 +52,7 @@
                                         <div class="invalid-feedback">Ingresa una descripción.</div>
                                     </div>
                                 </div>
-                                <button class="btn btn-primary btn-lg btn-block" type="submit">Entrar <i class="fas fa-sign-in-alt"></i></button>
+                                <button class="btn btn-primary btn-lg btn-block" type="submit">Crear Proyecto <i class="fab fa-sketch"></i></button>
                             </form>
                         </div>
                     </div>
