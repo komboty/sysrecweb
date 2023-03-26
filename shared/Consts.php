@@ -5,6 +5,8 @@
  */
 class Consts
 {
+    const UPDATE_KEY_ROWS = 'actualizados';
+
     /**
      * Constantes de Usuarios
      */

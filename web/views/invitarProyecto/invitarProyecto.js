@@ -12,7 +12,7 @@ let desarrolladores = [];
 /**
  * Obtiene Todos los Desarrolladores.
  */
-UtilsSysrec.fetchGet(API_URL_WHIT_PARAMS.USER_TIPO + CONST_SHARED.TIPO_DESARROLLADOR)
+APISysrec.fetchGet(API_URL_WHIT_PARAMS.USER_TIPO + CONST_SHARED.TIPO_DESARROLLADOR, CONST_MSG_ALERT.DEVELOPERS_NOT_FOUND.CODE)
     // Se ponen los Desarrolladores en HTML.
     .then(resDesarrolladores => {
         cleanScreen();
@@ -200,14 +200,14 @@ function onInvitar(idDesarrollador) {
     const desarrollador = UtilsSysrec.getObjectById(desarrolladores, idDesarrollador);
 
     // Se obtienen los Proyectos que tiene el Reclutador.
-    UtilsSysrec.fetchGet(API_URL_WHIT_PARAMS.MIS_PROYECTOS, CONST_MSG_ALERT.PROJECT_NOT_FOUND.CODE)
+    APISysrec.fetchGet(API_URL_WHIT_PARAMS.MIS_PROYECTOS, CONST_MSG_ALERT.PROJECT_NOT_FOUND.CODE)
         // Se lanza el Modal, si se da cancelar se manda a catch.
         .then(proyectos => {
             const proyectosReclutador = proyectos.map(proyecto => new Proyecto(proyecto));
             return openModalInvitacion(proyectosReclutador, desarrollador);
         })
         // Se hace la peticion al sevidor para registrar una Invitacion.
-        .then(modalValues => UtilsSysrec.fetchPostAndCheckId(
+        .then(modalValues => APISysrec.fetchPostAndCheckId(
             API_URL.CONTROLLER_INVITACION, {
                 'idUsuario': desarrollador.id,
                 'idProyecto': modalValues.idProyecto,

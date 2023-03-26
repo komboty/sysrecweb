@@ -11,7 +11,7 @@ let invitaciones = [];
 /**
  * Obtiene Todos los Desarrolladores.
  */
-UtilsSysrec.fetchGet(API_URL_WHIT_PARAMS.INVITACION_ALL)
+APISysrec.fetchGet(API_URL_WHIT_PARAMS.INVITACION_ALL, CONST_MSG_ALERT.INVITATIONS_NOT_FOUND.CODE)
     // Se ponen las Invitaciones en HTML.
     .then(resInvitaciones => {
         cleanScreen();
@@ -57,14 +57,17 @@ function cleanScreen() {
  */
 function setBadges() {
     const groupInvi = UtilsSysrec.groupByValue(invitaciones, 'estado');
+    const numRecibidas = groupInvi[CONST_SHARED.ESTADO_INVITACION_ENVIADA];
+    const numAceptadas = groupInvi[CONST_SHARED.ESTADO_INVITACION_ACEPTADA];
+    const numRechazadas = groupInvi[CONST_SHARED.ESTADO_INVITACION_RECHAZADA];
 
     const badgeRecibidas = document.getElementById('badgeRecibidas');
     const badgeAceptadas = document.getElementById('badgeAceptadas');
     const badgeRechazadas = document.getElementById('badgeRechazadas');
 
-    badgeRecibidas.innerHTML = groupInvi[CONST_SHARED.ESTADO_INVITACION_ENVIADA].length;
-    badgeAceptadas.innerHTML = groupInvi[CONST_SHARED.ESTADO_INVITACION_ACEPTADA].length;
-    badgeRechazadas.innerHTML = groupInvi[CONST_SHARED.ESTADO_INVITACION_RECHAZADA].length;
+    badgeRecibidas.innerHTML = numRecibidas ? numRecibidas.length : 0;
+    badgeAceptadas.innerHTML = numAceptadas ? numAceptadas.length : 0;
+    badgeRechazadas.innerHTML = numRechazadas ? numRechazadas.length : 0;
 }
 
 /**
@@ -163,18 +166,14 @@ function onRespoderInvitacion(idInvitacion) {
 
     // Se lanza Modal para responder una Invitacion.
     openModalResponder(invitacion)
-        .then(modalValues => console.log(modalValues))
-        // // Se hace la peticion al sevidor para registrar la Calificacion.
-        // .then(modalValues => UtilsSysrec.fetchPostAndCheckId(
-        //     API_URL.CONTROLLER_CALIFICACION, {
-        //         'idUsuario': idDesarrollador,
-        //         'idProyecto': idProyecto,
-        //         'idHabilidad': modalValues.idHabilidad,
-        //         'puntos': modalValues.puntos,
-        //         'comentario': modalValues.comentario,
-        //     }))
-        // // Si se registro correctamente la Invitacion.
-        // .then(invitacion => AlertSysrec.okSuccess(CONST_MSG_ALERT.SAVE_CALIFICACION.TITLE, CONST_MSG_ALERT.SAVE_CALIFICACION.TEXT))
+        // Se hace la peticion al sevidor para registrar la Calificacion.
+        .then(modalValues => APISysrec.fetchPutAndCheckRowsUpdate(
+            API_URL.CONTROLLER_INVITACION, {
+                'id': idInvitacion,
+                'estado': modalValues.respuesta
+            }))
+        // Si se registro correctamente la Invitacion.
+        .then(actualizados => AlertSysrec.okSuccessRedirect(CONST_MSG_ALERT.RESPONSE_INVITACTION.TITLE, CONST_MSG_ALERT.RESPONSE_INVITACTION.TEXT, WEB_URL.VIEW_INVITACIONES))
         // Si ocurrio una excepcion o error.
         .catch(error => ErrorSysrec.alert(error));
 }
@@ -191,7 +190,10 @@ function openModalResponder(invitacion) {
             textBtnConfirm: 'Enviar <i class="fas fa-reply ms-1" ></i>',
             textBtnCancel: 'Cancelar <i class="far fa-times-circle ms-1" ></i>',
             funPreConfirm: () => {
-                return { 'respuesta': document.getElementById('checkAceptar').checked };
+                return {
+                    'respuesta': document.getElementById('checkAceptar').checked ?
+                        CONST_SHARED.ESTADO_INVITACION_ACEPTADA : CONST_SHARED.ESTADO_INVITACION_RECHAZADA
+                };
             }
         })
         // Se valida la respuesta del Modal.

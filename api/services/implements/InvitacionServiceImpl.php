@@ -33,4 +33,9 @@ class InvitacionServiceImpl implements IInvitacionService
     {
         return $this->invitacionDAO->getByUsuario($idUsuario);
     }
+
+    public function updateEstado(int $id, string $estado)
+    {
+        return $this->invitacionDAO->updateEstado($id, $estado);
+    }
 }

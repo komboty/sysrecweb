@@ -11,6 +11,7 @@
 <script type="text/javascript" src="../../utils/UtilsSysrec.js"></script>
 <script type="text/javascript" src="../../utils/AlertSysrec.js"></script>
 <script type="text/javascript" src="../../utils/ModalSysrec.js"></script>
+<script type="text/javascript" src="../../utils/APISysrec.js"></script>
 
 
 <script type="text/javascript" src="../../models/Desarrollador.js"></script>

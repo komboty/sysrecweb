@@ -57,7 +57,7 @@ formRegistro.addEventListener('submit', (event) => {
         // Se realiza la peticion para registrar el Usuario.
         .then(file => {
             data.curriculum = file
-            return UtilsSysrec.fetchPostAndCheckId(API_URL.CONTROLLER_USUARIO, data);
+            return APISysrec.fetchPostAndCheckId(API_URL.CONTROLLER_USUARIO, data);
         })
         // Si se registro correctamente el Usuario, se redirige al Login.
         .then(usuario => AlertSysrec.okSuccessRedirect(CONST_MSG_ALERT.SAVE_USER.TITLE, CONST_MSG_ALERT.SAVE_USER.TEXT, WEB_URL.VIEW_LOGIN))

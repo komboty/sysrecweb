@@ -75,4 +75,19 @@ class InvitacionDAOImpl implements IInvitacionDAO
             ->get_result()
             ->fetch_all(MYSQLI_ASSOC);
     }
+
+    public function updateEstado(int $id, string $estado)
+    {
+        $this->connectionDB->connectDB();
+        $query = 'UPDATE Invitacion SET idEstadoInvitacion = (SELECT id FROM EstadoInvitacion WHERE nombre = ?)'
+            . ' WHERE id = ?';
+        $statement = $this->connectionDB->getPrepare($query);
+        $statement->bind_param('si', $estado, $id);
+        // Si se registro correctamente la Invitacion se regresa el id.
+        if ($statement->execute()) {
+            return $statement->affected_rows;
+        }
+        // Si no se registro la Invitacion en la base de datos.
+        return null;
+    }
 }

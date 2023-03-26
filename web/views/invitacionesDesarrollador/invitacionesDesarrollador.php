@@ -27,19 +27,19 @@
         <ul class="nav nav-tabs nav-justified mb-3 py-2" id="ex1" role="tablist">
             <li class="nav-item" role="presentation">
                 <a class="nav-link active" id="tab-recibidas" data-mdb-toggle="tab" href="#tabs-recibidas" role="tab" aria-controls="tabs-recibidas" aria-selected="true">
-                    <i class="fas fa-envelope-open-text fa-lg"></i> Recibidas
+                    <i class="fas fa-envelope-open-text fa-lg me-1"></i>Recibidas
                     <span class="badge bg-dark ms-1" id="badgeRecibidas"></span>
                 </a>
             </li>
             <li class="nav-item" role="presentation">
                 <a class="nav-link" id="tab-aceptadas" data-mdb-toggle="tab" href="#tabs-aceptadas" role="tab" aria-controls="tabs-aceptadas" aria-selected="false">
-                    <i class="fas fa-thumbs-up fa-lg"></i> Aceptadas
+                    <i class="fas fa-thumbs-up fa-lg me-1"></i>Aceptadas
                     <span class="badge bg-dark ms-1" id="badgeAceptadas"></span>
                 </a>
             </li>
             <li class="nav-item" role="presentation">
                 <a class="nav-link" id="tab-rechazadas" data-mdb-toggle="tab" href="#tabs-rechazadas" role="tab" aria-controls="tabs-rechazadas" aria-selected="false">
-                    <i class="fas fa-thumbs-down fa-lg"></i> Rechazadas
+                    <i class="fas fa-thumbs-down fa-lg me-1"></i>Rechazadas
                     <span class="badge bg-dark ms-1" id="badgeRechazadas"></span>
                 </a>
             </li>

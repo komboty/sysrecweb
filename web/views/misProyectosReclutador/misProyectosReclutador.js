@@ -17,7 +17,7 @@ let categoHabilidad = [];
 /**
  * Obtiene los Proyectos que tiene el Reclutador.
  */
-UtilsSysrec.fetchGet(API_URL_WHIT_PARAMS.MIS_PROYECTOS, CONST_MSG_ALERT.PROJECT_NOT_FOUND.CODE)
+APISysrec.fetchGet(API_URL_WHIT_PARAMS.MIS_PROYECTOS, CONST_MSG_ALERT.PROJECT_NOT_FOUND.CODE)
     // Se ponen los Proyectos en HTML.
     .then(misProyectos => {
         cleanScreen();
@@ -175,7 +175,7 @@ function onCalificar(idDesarrollador, idProyecto) {
     const invitacion = proyecto.getInvitacionesAceptadasByIdUser(idDesarrollador);
 
     // Se obtienen todas las Habilidades del servidor.
-    UtilsSysrec.fetchGet(API_URL_WHIT_PARAMS.HABILIDAD_ALL)
+    APISysrec.fetchGet(API_URL_WHIT_PARAMS.HABILIDAD_ALL)
         // Se lanza el Modal, si se da cancelar se manda a catch.
         .then(resHabilidades => {
             // habilidades = resHabilidades.map(habilidad => new Habilidad(habilidad));
@@ -183,7 +183,7 @@ function onCalificar(idDesarrollador, idProyecto) {
             return openModalCalificar(invitacion);
         })
         // Se hace la peticion al sevidor para registrar la Calificacion.
-        .then(modalValues => UtilsSysrec.fetchPostAndCheckId(
+        .then(modalValues => APISysrec.fetchPostAndCheckId(
             API_URL.CONTROLLER_CALIFICACION, {
                 'idUsuario': idDesarrollador,
                 'idProyecto': idProyecto,

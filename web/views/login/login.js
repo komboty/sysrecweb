@@ -22,7 +22,7 @@ formLogin.addEventListener('submit', (event) => {
     };
 
     // Se realiza la peticion al servidor para loguearse.
-    UtilsSysrec.fetchPost(API_URL.CONTROLLER_SESSION, data, CONST_MSG_ALERT.USER_NOT_FOUND.CODE)
+    APISysrec.fetchPost(API_URL.CONTROLLER_SESSION, data, CONST_MSG_ALERT.USER_NOT_FOUND.CODE)
         // Dependiendo del tipo del Usuario, se redirige a su home.
         .then(usuario => UtilsSysrec.redirectToHome(usuario.tipo))
         // Si ocurrio una excepcion o error.

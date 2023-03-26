@@ -17,9 +17,9 @@ formCrearProyecto.addEventListener('submit', (event) => {
     }
 
     // Primero se obtiene el id del Usuario que tiene sesion.
-    UtilsSysrec.fetchGet(API_URL_WHIT_PARAMS.SESSION_USER)
+    APISysrec.fetchGet(API_URL_WHIT_PARAMS.SESSION_USER)
         // Se manda la peticion para registrar un Proyecto.
-        .then(user => UtilsSysrec.fetchPostAndCheckId(
+        .then(user => APISysrec.fetchPostAndCheckId(
             API_URL.CONTROLLER_PROYECTO, {
                 'idFundador': user.id,
                 'nombre': inputNombre.value,

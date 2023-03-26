@@ -8,7 +8,7 @@ interface IGenericDAO
     /**
      * Hace un registro.
      * 
-     * @return registro.
+     * @return int Id del registro.
      */
     public function save($data);
 

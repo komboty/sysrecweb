@@ -20,4 +20,13 @@ interface IInvitacionService extends IGenericService
      * @return array Invitaciones encontradas.
      */
     public function getByUsuario(int $idUsuario): array;
+
+    /**
+     * Actualiza el estado de una Invitacion.
+     * 
+     * @param int $id Id del Invitacion.
+     * @return string $estado Nuevo estado de la Invitaciones.
+     * @return int Id del registro.
+     */
+    public function updateEstado(int $id, string $estado);
 }
