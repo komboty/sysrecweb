@@ -12,7 +12,7 @@ switch ($_SERVER['REQUEST_METHOD']) {
         /**
      * Si se quiere obtener todas las Invitaciones registradas en el sistema.
      * ?All, Sin valor.
-     * Respuesta: [{'id': ,'estado': ,'proyecto': ,'descripcion': ,'fundador': ,'correo': ,'telefono': }, ...]
+     * Respuesta: [{'id': ,'estado': ,'comentario' ,'proyecto': ,'descripcion': ,'fundador': ,'correo': ,'telefono': }, ...]
      */
     case 'GET':
         // Se verifica que el Usuario tenga una sesion activa, si no es asi, se termina el Script.

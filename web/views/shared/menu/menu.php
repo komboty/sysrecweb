@@ -68,15 +68,9 @@ require_once(dirname(__FILE__) . '/ConstsMenu.php');
                     <img src="../../sources/images/img_user.png" class="rounded-circle" height="22" alt="Portrait of a Woman" loading="lazy" />
                 </a>
                 <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                    <li>
-                        <a class="dropdown-item"><i class="fas fa-user-alt"></i> Mi Perfil</a>
-                    </li>
-                    <li>
-                        <a class="dropdown-item"><i class="fas fa-user-cog"></i> Configuración</a>
-                    </li>
-                    <li>
-                        <a class="dropdown-item" onclick="onCerrarSesion()"><i class="fas fa-sign-out-alt"></i> Salir</a>
-                    </li>
+                    <!-- <li><a class="dropdown-item"><i class="fas fa-user-alt"></i> Mi Perfil</a></li>
+                    <li><a class="dropdown-item"><i class="fas fa-user-cog"></i> Configuración</a></li> -->
+                    <li><a class="dropdown-item" onclick="onCerrarSesion()"><i class="fas fa-sign-out-alt"></i> Salir</a></li>
                 </ul>
             </div>
         </div>

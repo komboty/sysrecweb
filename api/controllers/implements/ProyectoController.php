@@ -12,7 +12,7 @@ switch ($_SERVER['REQUEST_METHOD']) {
         /**
      * Si se quiere obtener uno o varios Proyectos registrados en el sistema. 
      * ?MisProyectos, Sin valor ya que regresan los Proyectos del Usuario almacenado en la sesion.
-     * Respuesta: [{'id': ,'nombre': ,'descripcion': ,
+     * Respuesta: [{'id': ,'nombre': ,'descripcion': , 'fundador':, 'correo':, 'telefono':,
      *              'invitaciones':[{'id': ,'estado': ,'idUsuario': ,'nombre': ,'correo': ,'telefono': 
      *                              }, ...]
      *              }, ...]
