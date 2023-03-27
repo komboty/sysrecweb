@@ -19,17 +19,17 @@ require_once(dirname(__FILE__) . '/ConstsMenu.php');
             </a>
             <!-- Botones -->
             <ul class="navbar-nav me-auto mb-2 mb-lg-0" id="btnMenu">
-                <li class="nav-item" style="cursor: pointer;">
-                    <a class="nav-link" onclick="redirectToMisProyectos('<?php echo $_SESSION[Consts::SESSION_KEY_USER][Consts::USER_KEY_TIPO]; ?>')">
-                        <i class="fab fa-sketch fa-lg"></i>
-                        <span class="badge rounded-pill badge-notification bg-dark" id="badgeMisProyectos"></span>
-                        <?php echo ConstsMenu::TITLE_MIS_PROYECTO; ?>
-                    </a>
-                </li>
                 <?php
                 // Si el Usaurio es Reclutador
                 if ($_SESSION[Consts::SESSION_KEY_USER][Consts::USER_KEY_TIPO] == Consts::USER_TIPO_RECLUTADOR) {
                     echo '<li class="nav-item" style="cursor: pointer;">
+                            <a class="nav-link" onclick="redirectToMisProyectos(' . "'" . $_SESSION[Consts::SESSION_KEY_USER][Consts::USER_KEY_TIPO] . "'" . ')">
+                                <i class="fab fa-sketch fa-lg"></i>
+                                <span class="badge rounded-pill badge-notification bg-dark" id="badgeMisProyectos"></span>'
+                        . ConstsMenu::TITLE_MIS_PROYECTO_RECLUTADOR .
+                        '   </a>
+                        </li>
+                        <li class="nav-item" style="cursor: pointer;">
                             <a class="nav-link" onclick="redirectToInvitar()">
                                 <i class="fas fa-user-friends fa-lg"></i>
                                 <span class="badge rounded-pill badge-notification bg-dark" id="badgeInvitar"></span>'
@@ -45,10 +45,24 @@ require_once(dirname(__FILE__) . '/ConstsMenu.php');
                     // Si el Usaurio es Desarrollador
                 } elseif ($_SESSION[Consts::SESSION_KEY_USER][Consts::USER_KEY_TIPO] == Consts::USER_TIPO_DESARROLLADOR) {
                     echo '<li class="nav-item" style="cursor: pointer;">
+                            <a class="nav-link" onclick="redirectToMisProyectos(' . "'" . $_SESSION[Consts::SESSION_KEY_USER][Consts::USER_KEY_TIPO] . "'" . ')">
+                                <i class="fas fa-users fa-lg"></i>
+                                <span class="badge rounded-pill badge-notification bg-dark" id="badgeMisProyectos"></span>'
+                        . ConstsMenu::TITLE_MIS_PROYECTO_DESARROLLADOR .
+                        '   </a>
+                        </li>
+                        <li class="nav-item" style="cursor: pointer;">
                             <a class="nav-link" onclick="redirectToInvitaciones()">
                                 <i class="fas fa-envelope fa-lg"></i>
                                 <span class="badge rounded-pill badge-notification bg-dark" id="badgeInvitaciones"></span>'
                         . ConstsMenu::TITLE_INVITACIONES .
+                        '   </a>
+                        </li>
+                        <li class="nav-item" style="cursor: pointer;">
+                            <a class="nav-link" onclick="redirectToMisCalificaciones(' . "'" . $_SESSION[Consts::SESSION_KEY_USER][Consts::USER_KEY_TIPO] . "'" . ')">
+                                <i class="fas fa-star"></i>
+                                <span class="badge rounded-pill badge-notification bg-dark" id="badgeMisCalificaciones"></span>'
+                        . ConstsMenu::TITLE_MIS_CALIFICACIONES_DESARROLLADOR .
                         '   </a>
                         </li>';
                 }

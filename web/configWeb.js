@@ -19,6 +19,7 @@ const API_URL_WHIT_PARAMS = {
     'USER_TIPO': API_URL.CONTROLLER_USUARIO + '?tipo=',
     'HABILIDAD_ALL': API_URL.CONTROLLER_HABILIDAD + '?All',
     'INVITACION_ALL': API_URL.CONTROLLER_INVITACION + '?All',
+    'MIS_CALIFICACIONES': API_URL.CONTROLLER_CALIFICACION + '?MisCalificaciones',
 }
 
 const WEB_URL = {
@@ -31,6 +32,7 @@ const WEB_URL = {
     'VIEW_CREAR_PROYECTO': SERVER.HOST + SERVER.WEB_VIEWS + '/crearProyecto/crearProyecto.php',
     'VIEW_INVITAR_PROYECTO': SERVER.HOST + SERVER.WEB_VIEWS + '/invitarProyecto/invitarProyecto.php',
     'VIEW_INVITACIONES': SERVER.HOST + SERVER.WEB_VIEWS + '/invitacionesDesarrollador/invitacionesDesarrollador.php',
+    'VIEW_MIS_CALIFICACIONES_DESARROLLADOR': SERVER.HOST + SERVER.WEB_VIEWS + '/misCalificacionesDesarrollador/misCalificacionesDesarrollador.php',
 }
 
 const CONST_SHARED = {
@@ -52,6 +54,7 @@ const CONST_MSG_ALERT = {
     'PROJECT_NOT_FOUND': { 'CODE': 'PROJECT_NOT_FOUND', 'TITLE': 'Ups!', 'TEXT': 'No se encontro ningún Proyecto' },
     'DEVELOPERS_NOT_FOUND': { 'CODE': 'DEVELOPERS_NOT_FOUND', 'TITLE': 'Ups!', 'TEXT': 'No se encontro ningún Desarrollador' },
     'INVITATIONS_NOT_FOUND': { 'CODE': 'INVITATIONS_NOT_FOUND', 'TITLE': 'Ups!', 'TEXT': 'No tienes ninguna Invitación' },
+    'RATINGS_NOT_FOUND': { 'CODE': 'RATINGS_NOT_FOUND', 'TITLE': 'Ups!', 'TEXT': 'No se encontro ninguna Calificación' },
     'USER_NOT_SESSION': { 'CODE': 'USER_NOT_SESSION', 'TITLE': 'Tu sesión ha expirado', 'TEXT': 'Por favor, vuelve a iniciar sesión' },
     'ERROR_USER_INVITADO': { 'CODE': 'ERROR_USER_INVITADO', 'TITLE': 'Desarrollador invitado', 'TEXT': 'El desarrollador ya tiene una invitación a este Proyecto, aún no la responde' },
     'ERROR_USER_ACEPTADO': { 'CODE': 'ERROR_USER_ACEPTADO', 'TITLE': 'Desarrollador aceptado', 'TEXT': 'El desarrollador ya Acepto la invitacion a este Proyecto' },

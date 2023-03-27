@@ -75,4 +75,60 @@ class UtilsSysrec {
         }
         return group;
     }
+
+    /**
+     * Regresa el HTML de estrallas para la Calificacion.
+     * @param {float} value Numero de estrellas.
+     * @param {string} size Tamanio de las estrellas.
+     * @returns HTML.
+     */
+    static getHTMLStars(value, size = '') {
+        let html = '';
+        for (let index = 0; index < parseInt(value); index++) {
+            html += '<i class="fas fa-star ' + size + '"></i>';
+        }
+        if (value % 1 > 0) {
+            html += '<i class="fas fa-star-half-alt ' + size + '"></i>';
+        }
+        return html;
+    }
+
+    /**
+     * Obtiene un color segun el valor.
+     * @param {float} value Valor a obtener el color.
+     * @returns {string} Color.
+     */
+    static getColorByValue(value) {
+        let color = 'secondary';
+
+        if (value <= 5 && value > 3) {
+            color = 'success';
+        } else if (value <= 3 && value > 2) {
+            color = 'warning';
+        } else if (value <= 2 && value >= 1) {
+            color = 'danger';
+        }
+
+        return color;
+    }
+
+    /**
+     * Obtiene Rating segun el valor.
+     * @param {float} value Valor a obtener el Rating.
+     * @returns {string} Rating.
+     */
+    static getRating(value) {
+        return value ? UtilsSysrec.getHTMLStars(value, 'fa-lg') + ' ' + value : 'Sin calificaciones';
+    }
+
+    /**
+     * 
+     * @param {*} element 
+     * @param {*} animation 
+     */
+    static resetAnimation(element, animation) {
+        element.classList.remove(animation);
+        void element.offsetWidth;
+        element.classList.add(animation);
+    }
 }

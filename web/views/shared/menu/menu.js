@@ -32,6 +32,22 @@ function redirectToMisProyectos(tipoUsuario) {
 }
 
 /**
+ * Redirecciona a la pagina donde se muetran las Calificaciones que tiene el Usuario.
+ */
+function redirectToMisCalificaciones(tipoUsuario) {
+    switch (tipoUsuario) {
+        case CONST_SHARED.TIPO_DESARROLLADOR:
+            window.location.replace(WEB_URL.VIEW_MIS_CALIFICACIONES_DESARROLLADOR);
+            break;
+
+        case CONST_SHARED.TIPO_RECLUTADOR:
+            // window.location.replace(WEB_URL.VIEW_MIS_PROYECTOS_RECLUTADOR);
+            break;
+    }
+
+}
+
+/**
  * Redirecciona a la pagina para crear un Proyecto.
  */
 function redirectToCrearProyecto() {

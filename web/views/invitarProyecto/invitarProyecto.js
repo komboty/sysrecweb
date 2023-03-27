@@ -61,7 +61,7 @@ function getHTMLDesarrollador(desarrollador) {
         '          <p class="text-muted mb-0"><i class="fas fa-envelope fa-xs"></i> ' + desarrollador.correo + '</p>' +
         '          <p class="text-muted mb-0"><i class="fas fa-phone fa-xs"></i> ' + desarrollador.telefono + '</p>' +
         '          <p class="text-muted mb-0"><i class="fas fa-hiking fa-xs"></i> ' + (desarrollador.edad ? desarrollador.edad : '') + '</p>' +
-        '          <span class="badge rounded-pill badge-' + getColorByValue(desarrollador.promedioTotal) + '">' + getRating(desarrollador.promedioTotal) + '</span>' +
+        '          <span class="badge rounded-pill badge-' + UtilsSysrec.getColorByValue(desarrollador.promedioTotal) + '">' + UtilsSysrec.getRating(desarrollador.promedioTotal) + '</span>' +
         '        </div>' +
         '      </div>' +
         '    </div>' +
@@ -87,7 +87,7 @@ function getHTMLDetalles(desarrollador) {
         '  <h2 class="accordion-header" id="headingHabils' + desarrollador.id + '">' +
         '    <button class="accordion-button collapsed" type="button" data-mdb-toggle="collapse" data-mdb-target="#collapseHabils' + desarrollador.id + '" aria-expanded="false" aria-controls="collapseHabils' + desarrollador.id + '">' +
         '      <a href="#">' +
-        '        <i class="fas fa-clipboard-list fa-lg"></i>' +
+        '        <i class="fas fa-award fa-lg"></i>' +
         '        <span class="badge rounded-pill badge-notification bg-dark">' + UtilsSysrec.getLengthArray(desarrollador.habilidades) + '</span>' +
         '      </a>' +
         '      <div class="container">Habilidades</div>' +
@@ -101,10 +101,10 @@ function getHTMLDetalles(desarrollador) {
         '  <h2 class="accordion-header" id="headingParticipa' + desarrollador.id + '">' +
         '    <button class="accordion-button collapsed" type="button" data-mdb-toggle="collapse" data-mdb-target="#collapseParticipa' + desarrollador.id + '" aria-expanded="false" aria-controls="collapseParticipa' + desarrollador.id + '">' +
         '      <a href="#">' +
-        '        <i class="fas fa-certificate fa-lg"></i>' +
+        '        <i class="fas fa-users fa-lg"></i>' +
         '        <span class="badge rounded-pill badge-notification bg-dark">' + UtilsSysrec.getLengthArray(desarrollador.participaciones) + '</span>' +
         '      </a>' +
-        '      <div class="container">Participaciones</div>' +
+        '      <div class="container">Colaboraciones</div>' +
         '    </button>' +
         '  </h2>' +
         '  <div id="collapseParticipa' + desarrollador.id + '" class="accordion-collapse collapse" aria-labelledby="headingParticipa' + desarrollador.id + '">' +
@@ -125,8 +125,8 @@ function getHTMLHabilidades(habilidades) {
     for (const habilidad of habilidades) {
         // color = getColorByValue(habilidad.promedio);
         html += '<span class="badge badge-' + color + '">' +
-            habilidad.nombre + ': ' + habilidad.promedio + ' ' + getHTMLStars(habilidad.promedio, 'fa-xs') +
-            '</span>';
+            habilidad.nombre + ': ' + habilidad.promedio + ' ' + UtilsSysrec.getHTMLStars(habilidad.promedio, 'fa-xs') +
+            '</span> ';
     }
     return html;
 }
@@ -142,55 +142,10 @@ function getHTMLParticipaciones(participaciones) {
     for (const participacion of participaciones) {
         // color = getColorByValue(participacion.promedio);
         html += '<span class="badge badge-' + color + '">' +
-            participacion.proyecto + ': ' + participacion.promedio + ' ' + getHTMLStars(participacion.promedio, 'fa-xs') +
-            '</span>';
+            participacion.proyecto + ': ' + participacion.promedio + ' ' + UtilsSysrec.getHTMLStars(participacion.promedio, 'fa-xs') +
+            '</span> ';
     }
     return html;
-}
-
-/**
- * Regresa el HTML de estrallas para la Calificacion.
- * @param {float} value Numero de estrellas.
- * @param {string} size Tamanio de las estrellas.
- * @returns HTML.
- */
-function getHTMLStars(value, size = '') {
-    let html = '';
-    for (let index = 0; index < parseInt(value); index++) {
-        html += '<i class="fas fa-star ' + size + '"></i>';
-    }
-    if (value % 1 > 0) {
-        html += '<i class="fas fa-star-half-alt ' + size + '"></i>';
-    }
-    return html;
-}
-
-/**
- * Obtiene un color segun el valor.
- * @param {float} value Valor a obtener el color.
- * @returns {string} Color.
- */
-function getColorByValue(value) {
-    let color = 'secondary';
-
-    if (value <= 5 && value > 3) {
-        color = 'success';
-    } else if (value <= 3 && value > 2) {
-        color = 'warning';
-    } else if (value <= 2 && value >= 1) {
-        color = 'danger';
-    }
-
-    return color;
-}
-
-/**
- * Obtiene Rating segun el valor.
- * @param {float} value Valor a obtener el Rating.
- * @returns {string} Rating.
- */
-function getRating(value) {
-    return value ? getHTMLStars(value, 'fa-lg') + ' ' + value : 'Sin calificaciones';
 }
 
 /**
@@ -274,7 +229,7 @@ function getHTMLInvitar(proyectosReclutador, desarrollador) {
         '    <p class="text-muted mb-0"><i class="fas fa-envelope fa-xs"></i> ' + desarrollador.correo + '</p>' +
         '    <p class="text-muted mb-0"><i class="fas fa-phone fa-xs"></i> ' + desarrollador.telefono + '</p>' +
         '    <p class="text-muted mb-0"><i class="fas fa-hiking fa-xs"></i> ' + (desarrollador.edad ? desarrollador.edad : '') + '</p>' +
-        '    <span class="badge rounded-pill m-2 badge-' + getColorByValue(desarrollador.promedioTotal) + '">' + getRating(desarrollador.promedioTotal) + '</span>' +
+        '    <span class="badge rounded-pill m-2 badge-' + UtilsSysrec.getColorByValue(desarrollador.promedioTotal) + '">' + UtilsSysrec.getRating(desarrollador.promedioTotal) + '</span>' +
         '  </div>' +
         '</div>' +
         '<div class="container">' +

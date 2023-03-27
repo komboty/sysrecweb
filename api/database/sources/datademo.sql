@@ -31,15 +31,15 @@ INSERT INTO Invitacion (idEstadoInvitacion, idUsuario, idProyecto, comentario) V
     (2, 9, 4, 'Queremos invitarte a participar en nuestro Proyecto');
 
 INSERT INTO Calificacion (idUsuario, idProyecto, idHabilidad, puntos, comentario) VALUES
-    (4, 1, 1, 4, NULL),
-    (4, 1, 62, 4, NULL),
-    (4, 1, 64, 5, NULL),
-    (4, 3, 1, 4, NULL),
-    (4, 3, 67, 4, NULL),
-    (4, 3, 64, 5, NULL),
-    (5, 1, 1, 5, NULL),
-    (5, 1, 62, 3, NULL),
-    (5, 1, 64, 3, NULL),
-    (9, 4, 1, 2, NULL),
-    (9, 4, 62, 3, NULL),
-    (9, 4, 64, 1, NULL);
+    (4, 1, 1, 4, 'Buen programador'),
+    (4, 1, 62, 4, 'Comunicación asertiva'),
+    (4, 1, 64, 5, 'Muy inteligente'),
+    (4, 3, 1, 4, 'Buen estilo'),
+    (4, 3, 67, 4, 'Aprende rapido'),
+    (4, 3, 64, 5, 'Soluciones rapidas'),
+    (5, 1, 1, 5, 'Estilo único'),
+    (5, 1, 62, 3, 'Comunicativo'),
+    (5, 1, 64, 3, 'Le cuesta dar soluciones rapidas'),
+    (9, 4, 1, 2, 'Solo conoce HTML'),
+    (9, 4, 62, 3, 'Es poco comunicativo'),
+    (9, 4, 64, 1, 'Tarda mucho en entender');

@@ -30,6 +30,7 @@ class Consts
     const GET_MIS_PROYECTOS = 'MisProyectos';
     const GET_ALL_HABILIDADES = 'All';
     const GET_ALL_INVITACIONES = 'All';
+    const GET_MIS_CALIFICACIONES = 'MisCalificaciones';
 
 
     /**

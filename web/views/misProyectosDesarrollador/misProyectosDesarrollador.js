@@ -109,7 +109,7 @@ function getHTMLProyecto(proyecto) {
         '              <i class="fas fa-users fa-lg"></i>' +
         '              <span class="badge rounded-pill badge-notification bg-dark">' + UtilsSysrec.getLengthArray(proyecto.invitaciones) + '</span>' +
         '            </a>' +
-        '            <div class="container">Participantes</div>' +
+        '            <div class="container">Colaboradores</div>' +
         '          </button>' +
         '        </h2>' +
         '        <div id="collapse1Invi' + proyecto.id + '" class="accordion-collapse collapse" aria-labelledby="heading1Invi' + proyecto.id + '">' +

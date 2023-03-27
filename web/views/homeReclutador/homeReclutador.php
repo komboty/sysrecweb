@@ -26,8 +26,9 @@
         <div class="container py-3">
             <div class="card mb-3 shadow-3-strong">
                 <div class="card-body">
-                    <div class="text-center ms-3">
-                        <h3>¡Hola! <?php echo $_SESSION[Consts::SESSION_KEY_USER][Consts::USER_KEY_NOMBRE] ?></h3>
+                    <div class="text-center">
+                        <h3 class="py-2">¡Hola!</h3>
+                        <h3><?php echo $_SESSION[Consts::SESSION_KEY_USER][Consts::USER_KEY_NOMBRE] ?></h3>
                         <p class="text-muted mb-0"><i class="fas fa-envelope fa-xs"></i> <?php echo $_SESSION[Consts::SESSION_KEY_USER][Consts::USER_KEY_CORREO] ?></p>
                         <p class="text-muted mb-0"><i class="fas fa-phone fa-xs"></i> <?php echo $_SESSION[Consts::SESSION_KEY_USER][Consts::USER_KEY_TELEFONO] ?></p>
                     </div>

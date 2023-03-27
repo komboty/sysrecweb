@@ -19,7 +19,7 @@
 
     // Menu
     require_once(dirname(dirname(__FILE__)) . '/shared/menu/menu.php');
-    setBreadcrumb(ConstsMenu::TITLE_MIS_PROYECTO);
+    setBreadcrumb(ConstsMenu::TITLE_MIS_PROYECTO_DESARROLLADOR);
     ?>
 
     <section class="animaSlideFromRight">
