@@ -46,7 +46,7 @@ switch ($_SERVER['REQUEST_METHOD']) {
                 break;
         }
 
-        // Si no existen Proyectos en el sistema se manda error.
+        // Si no existen Calificaiones en el sistema se manda error.
         if (empty($calificaciones)) {
             header(Validacion::HEADER_STATUS_NOT_FOUND);
             return;

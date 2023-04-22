@@ -84,11 +84,16 @@ class UtilsSysrec {
      */
     static getHTMLStars(value, size = '') {
         let html = '';
-        for (let index = 0; index < parseInt(value); index++) {
+        let index;
+        for (index = 0; index < parseInt(value); index++) {
             html += '<i class="fas fa-star ' + size + '"></i>';
         }
         if (value % 1 > 0) {
+            index++;
             html += '<i class="fas fa-star-half-alt ' + size + '"></i>';
+        }
+        for (index; index < 5; index++) {
+            html += '<i class="far fa-star ' + size + '"></i>';
         }
         return html;
     }
@@ -122,9 +127,9 @@ class UtilsSysrec {
     }
 
     /**
-     * 
-     * @param {*} element 
-     * @param {*} animation 
+     * Ejecuta de nuevo la animacion en el elemnto proporcionado.
+     * @param {*} element Elemento que se quiere poner animacion.
+     * @param {*} animation Animacion a ejecutar de nuevo.
      */
     static resetAnimation(element, animation) {
         element.classList.remove(animation);
