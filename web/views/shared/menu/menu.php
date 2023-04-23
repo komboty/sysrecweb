@@ -95,9 +95,7 @@ require_once(dirname(__FILE__) . '/ConstsMenu.php');
 <?php
 function setBreadcrumb(string $url)
 {
-    if ($url != '') {
-        $itemBreadcrumb = '<li class="breadcrumb-item"><a><u>' . $url . '</u></a></li>';
-    }
+    $itemBreadcrumb = $url != '' ? '<li class="breadcrumb-item"><a><u>' . $url . '</u></a></li>' : '';
 
     echo '<nav class="navbar navbar-expand-lg navbar-light bg-white">
             <div class="container-fluid">

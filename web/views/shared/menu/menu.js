@@ -2,8 +2,8 @@
  * Elimina la sesion de un Usuario.
  */
 function onCerrarSesion() {
-    fetch(API_URL.CONTROLLER_SESSION, {
-            method: 'DELETE',
+    fetch(API_URL.CONTROLLER_SESSION_DELETE, {
+            method: 'POST',
         })
         // Si se la peticion es correcta se redirige al Login, de lo contrario manda a catch.
         .then(res => ErrorSysrec.isHTTPStatusOk(res, () => window.location.replace(WEB_URL.VIEW_LOGIN)))

@@ -37,24 +37,6 @@ class APISysrec {
     }
 
     /**
-     * Realiza una peticion PUT a la url.
-     * Si la peticion es correcta sigue el flujo, de lo contrario manda a errror.
-     * 
-     * @param {string} url URL de la peticion PUT.
-     * @param {object} data datos a mandar en la peticion.
-     * @param {string} code404 Codigo para del mensaje a mostrar para No autorizado.
-     * @returns {Promise} con resultado de la peticion en JSON.
-     */
-    static fetchPut(url, data, code404) {
-        return fetch(url, {
-                method: 'PUT',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(data)
-            })
-            .then(res => ErrorSysrec.isHTTPStatusOk(res, () => res.json(), code404))
-    }
-
-    /**
      * Realiza una peticion POST a la url.
      * Si la peticion es correcta y la respuesta tiene Id sigue el flujo, de lo contrario manda a errror.
      * 
@@ -84,8 +66,8 @@ class APISysrec {
      * @param {string} code404 Codigo para del mensaje a mostrar para No autorizado.
      * @returns {Promise} con resultado de la peticion en JSON.
      */
-    static fetchPutAndCheckRowsUpdate(url, data, code404) {
-        return APISysrec.fetchPut(url, data, code404)
+    static fetchPostAndCheckRowsUpdate(url, data, code404) {
+        return APISysrec.fetchPost(url, data, code404)
             .then(res => {
                 if (res.actualizados < 1) {
                     throw new ErrorSysrec(CONST_MSG_ALERT.ERROR.CODE);

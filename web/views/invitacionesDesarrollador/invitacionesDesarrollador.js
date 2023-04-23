@@ -169,8 +169,8 @@ function onRespoderInvitacion(idInvitacion) {
     // Se lanza Modal para responder una Invitacion.
     openModalResponder(invitacion)
         // Se hace la peticion al sevidor para registrar la Calificacion.
-        .then(modalValues => APISysrec.fetchPutAndCheckRowsUpdate(
-            API_URL.CONTROLLER_INVITACION, {
+        .then(modalValues => APISysrec.fetchPostAndCheckRowsUpdate(
+            API_URL.CONTROLLER_INVITACION_PUT, {
                 'id': idInvitacion,
                 'estado': modalValues.respuesta
             }))

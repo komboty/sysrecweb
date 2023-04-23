@@ -57,13 +57,4 @@ switch ($_SERVER['REQUEST_METHOD']) {
         $response = array(Consts::USER_KEY_TIPO => $usuario[Consts::USER_KEY_TIPO]);
         echo json_encode($response);
         break;
-
-
-        /**
-         * Si se quiere eliminar la sesion del servidor. (Sin parametros)
-         */
-    case 'DELETE':
-        session_start();
-        session_destroy();
-        break;
 }
