@@ -24,3 +24,10 @@ II. Resumen de Carta de inicio de proyecto (Project charter)
   - Usuario Reclutador: Funge como Usuario Reclutador: Ing. José Alberto Salvador Cruz
 
 1.4 Objetivo General del proyecto: Desarrollar una aplicación web (SYSREC) de reclutamiento de desarrolladores de Software a proyectos, en un plazo de 4 meses, utilizando buenas practica con PMI-PMBok, con un equipo de desarrollo y un administrador de proyecto y un presupuesto de $166,650.00, para mejorar las tasas de contratación y reducir tiempos en el proceso de reclutamiento.
+
+Pantalla para invitar desarrollador a proyecto
+![Pantalla para invitar desarrollador a proyecto](https://raw.githubusercontent.com/komboty/komboty.github.io/master/sysrec_invitar.png)
+
+Pantalla de proyectos registrados por un reclutador
+![Pantalla de proyectos registrados por un reclutador](https://raw.githubusercontent.com/komboty/komboty.github.io/master/sysrec_proyectos.png)
+
